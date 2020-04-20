@@ -1,9 +1,13 @@
 package org.ics.eao;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.ics.ejb.GymMember;
 import org.ics.ejb.TrainingSession;
@@ -40,6 +44,28 @@ public class TrainingSessionEAO implements TrainingSessionEAOLocal {
     	if(g!=null) {
     		em.remove(g);
     	}
+    }    
+    public List<TrainingSession> findAllTrainingSessions(){
+		TypedQuery<TrainingSession> query=
+				em.createNamedQuery("TrainingSession.findAllTrainingSessions",TrainingSession.class);
+		List<TrainingSession> results = query.getResultList();
+		return results;
     }
+    public boolean alreadyExists(String instructor, Date startTime){
+		TypedQuery<TrainingSession> query=
+				em.createNamedQuery("TrainingSession.alreadyExists",TrainingSession.class);
+		query.setParameter("instructor", instructor);
+		query.setParameter("startTime", startTime);
+		List<TrainingSession> results = query.getResultList();
+		for(TrainingSession t : results) {
+			System.out.println(t.getSessionId());
+		}
+		if(results.isEmpty()) {
+			return false;
+		}else {
+		return true;
+		}
+    }
+	
 
 }

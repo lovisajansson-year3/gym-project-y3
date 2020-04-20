@@ -1,0 +1,85 @@
+@charset "ISO-8859-1";
+body {
+  background-color: lightblue;
+  text-align:center;
+}
+header {
+  padding: 30px;
+  text-align: center;
+  background: lightblue;
+  color: white;
+  font-size: 15px;
+  border-bottom: 1px solid white;
+
+}
+
+/* Add a black background color to the top navigation */
+nav {
+  background-color: light blue;
+  text-align: center;
+  overflow: hidden;
+  float: center;
+}
+
+/* Style the links inside the navigation bar */
+nav a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 15px 15px ;
+  text-decoration: none;
+  font-size: 17px;
+
+
+}
+
+/* Change the color of links on hover */
+nav a:hover {
+  background-color: lightblue;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+nav a.active {
+    border-bottom: 1px solid white;
+
+}
+fieldset { 
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 2px;
+  padding-top: 0.35em;
+  padding-bottom: 0.625em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  border: 1px dotted white;
+  text-align: left;
+
+
+}
+section#main{
+padding:30px;
+
+}
+section#main p{
+color:white;
+border-bottom: 1px dotted white;
+
+}
+
+section#subsection{ 
+ display: inline-block;
+ margin-left: 10px;
+}
+table#memberList{
+margin:40px;
+}
+table{
+float:left;
+  font-size:10px;
+  border: 1px solid black;
+  padding:10px;
+  background:white;
+         
+
+}  

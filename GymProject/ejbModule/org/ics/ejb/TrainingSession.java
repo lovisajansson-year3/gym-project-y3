@@ -2,6 +2,7 @@ package org.ics.ejb;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -10,19 +11,28 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="TrainingSession.findAllTrainingSessions",
+			query="SELECT g FROM TrainingSession g"),
+	@NamedQuery(name="TrainingSession.alreadyExists",
+			query="SELECT g FROM TrainingSession g where g.instructor = :instructor and g.startTime = :startTime"),
+	})
+
 @Table(name="TrainingSession")
 @SequenceGenerator(name="ID_SEQ",allocationSize=1)
 public class TrainingSession implements Serializable{
 	
 	private long sessionId;
 	private String instructor;
-	private Time startTime;
+	private Date startTime;
 	private String type;
 	private Integer length; 
 	private String roomNumber;
@@ -45,10 +55,10 @@ public class TrainingSession implements Serializable{
 		this.instructor = instructor;
 	}
 	@Column(name="startTime")
-	public Time getStartTime() {
+	public Date getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Time startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 	@Column(name="type")
