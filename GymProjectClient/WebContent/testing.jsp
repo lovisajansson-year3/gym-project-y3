@@ -8,23 +8,11 @@
 <head>
 <meta charset="ISO-8859-1">
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script src="js.js"></script>
 <link rel="stylesheet" type="text/css" href="mystyle.css">
-<script type="text/javascript">
-$(document).ready(function () {
-	
-	$("#GymMemberRegistration").validate({	
-		
-           
-       });
-	$("#TrainingSessionRegistration").validate({		});
-	$("#BookingRegistration").validate({		});
 
-	});
-
-
-</script>
 </head>
 <body>
 	<header>
@@ -47,13 +35,17 @@ $(document).ready(function () {
 				>
 				<fieldset id="GymMemberFS">
 					<legend>Add Gym Member:</legend>
-					Full name:<br> <input type="text" name="name" id="name" required>
+					Full name:<br> <input type="text" name="name" id="name" >
 					<br> Email:<br> <input type="text" name="email"
-						id="email" required>
+						id="email" >
 					<br> Phone number:<br> <input
-						type="text" name="phoneNumber" id="phoneNumber" required> <br>
-					Address:<br> <input type="text" name="address" id="address" required>
+						type="text" name="phoneNumber" id="phoneNumber" > <br>
+					Address:<br> <input type="text" name="address" id="address" >
 					<br> <input type="submit" value="Create Gym Member" name="button_clicked">
+					<br><input type="text" name="memberId" id="memberId">
+					 <input type="submit" name="find"  id="find" value="find by memberId" />
+					 <input type="button" name="delete" id"dlt" value="delete by memberid" />
+					 
 				</fieldset>
 			</form>
 		</section>
@@ -106,7 +98,19 @@ $(document).ready(function () {
 		</form>
 		
 		</section>
-
+<form action="/MVCProject/MainServlet" method="post"> 
+<table  cellspacing="0" cellpadding="0" border="0" align="left"> 
+<tr>     
+<td><h2>Search person:</h2></td> 
+</tr> 
+<tr>    
+ <td> 
+  <input type="text" name="txtName" size="25"  maxlength="25"> 
+  <input type="submit" name="submit"  value="Skicka fråga" />    </td>     <td></td> 
+	</tr>
+	 </table>
+	  <input name="operation" value="showperson" type="hidden">
+	 </form> 
 		<section id="subsection">
 		<form name="BookingRegistration"
 				id="BookingRegistration"

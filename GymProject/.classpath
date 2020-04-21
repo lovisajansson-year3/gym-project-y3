@@ -9,5 +9,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/WildFly 18.0 Runtime"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/wildfly-18.0.1.Final/modules/system/layers/base/org/glassfish/javax/json/main/javax.json-1.0.4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -61,6 +61,7 @@ public class ControllerServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		boolean ajax = false;
 		String button_clicked = request.getParameter("button_clicked");
 		if (button_clicked==null) {
 			//no form submitted
