@@ -28,9 +28,7 @@ import javax.validation.constraints.NotNull;
 public class Booking implements Serializable{
 	
 	private long bookingId;
-	@NotNull
 	private GymMember gymMember;
-	@NotNull
 	private TrainingSession trainingSession;
 
 	
