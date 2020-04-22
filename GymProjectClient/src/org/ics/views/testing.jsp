@@ -43,8 +43,11 @@
 					Address:<br> <input type="text" name="address" id="address" >
 					<br> <input type="submit" value="Create Gym Member" name="button_clicked">
 					<br><input type="text" name="memberId" id="memberId">
-					 <input type="submit" name="find"  id="find" value="find by memberId" />
-					 <input type="button" name="delete" id"dlt" value="delete by memberid" />
+					 <br><input type="submit" name="find"  id="find" value="find by memberId" />
+					 <br><input type="submit" name="findAll"  id="findAll" value="find all" />
+					 <br><input type="button" name="delete" id"dlt" value="delete by memberid" />
+					<br><textarea id="show" rows="4" cols="50">
+					</textarea>
 					 
 				</fieldset>
 			</form>
@@ -98,19 +101,6 @@
 		</form>
 		
 		</section>
-<form action="/MVCProject/MainServlet" method="post"> 
-<table  cellspacing="0" cellpadding="0" border="0" align="left"> 
-<tr>     
-<td><h2>Search person:</h2></td> 
-</tr> 
-<tr>    
- <td> 
-  <input type="text" name="txtName" size="25"  maxlength="25"> 
-  <input type="submit" name="submit"  value="Skicka fråga" />    </td>     <td></td> 
-	</tr>
-	 </table>
-	  <input name="operation" value="showperson" type="hidden">
-	 </form> 
 		<section id="subsection">
 		<form name="BookingRegistration"
 				id="BookingRegistration"
@@ -185,7 +175,6 @@
     
   </tr>   
 	<c:forEach items="${allBookings}" var="Booking"> 
-	 
   <tr>
     <td>${Booking.bookingId}</td>
         <td>${Booking.gymMember.memberId}</td>

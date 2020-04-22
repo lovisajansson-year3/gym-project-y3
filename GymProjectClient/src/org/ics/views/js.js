@@ -4,11 +4,10 @@ $(document).ready(function () {
 	$("#BookingRegistration").validate({		});*/
 	$("#find").click( function() { 
 		var strValue = $("#memberId").val(); 
-		alert(strValue);
 		if (strValue != "") { 
 			$.ajax({       
 				method: "GET", 
-				url: "http://localhost:8080/GymProjectClient/CRUD/"+strValue,  
+				url: "http://localhost:8080/GymProjectClient/GymMemberServlet/"+strValue,  
 				error: ajaxFindReturnError,  
 				success: ajaxFindReturnSuccess 
 			})

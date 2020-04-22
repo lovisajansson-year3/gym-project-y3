@@ -21,8 +21,8 @@ import org.ics.facade.FacadeLocal;
 /**
  * Servlet implementation class CRUD
  */
-@WebServlet("/CRUD/*")
-public class CRUD extends HttpServlet {
+@WebServlet("/GymMemberServlet/*")
+public class GymMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	@EJB
@@ -30,7 +30,7 @@ public class CRUD extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CRUD() {
+    public GymMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
