@@ -20,8 +20,8 @@
 		<p>My supercool header</p>
 	</header>
 	<nav>
-		<a href="htmltest.html">Home</a> <a href="about.html">About</a> <a
-			class="active" href="test.html">Test</a>
+		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
+			class="active" href="testing.jsp">Test</a>
 
 	</nav>
 	<section id="main">
@@ -119,70 +119,6 @@
 			</form>
 		</section>
 	</section>
-<table id=memberlist>
-<label for="memberlist">Registered Gym members</label> 
-<tr>
-    <th>name</th>
-    <th>memberid</th> 
-    <th>address</th>
-        <th>email</th>
-    
-  </tr>   
-	<c:forEach items="${allMembers}" var="GymMember"> 
-	 
-  <tr>
-    <td>${GymMember.name}</td>
-        <td>${GymMember.memberId}</td>
-        <td>${GymMember.address}</td>
-        <td>${GymMember.email}</td>
-    
-  </tr>
-</c:forEach>
-</table>
-<table id=trainingSessionList>
-<label for="trainingSessionList">Registered Training sessions</label> 
-<tr>
-    <th>sessionId</th>
-    <th>instructor</th>
-    <th>startTime</th> 
-    <th>length</th>
-        <th>type</th>
-                <th>room</th>
-        
-    
-  </tr>   
-	<c:forEach items="${allTrainingSessions}" var="TrainingSession"> 
-	 
-  <tr>
-    <td>${TrainingSession.sessionId}</td>
-        <td>${TrainingSession.instructor}</td>
-        <td>${TrainingSession.startTime}</td>
-        <td>${TrainingSession.length}</td>
-                <td>${TrainingSession.type}</td>
-                        <td>${TrainingSession.roomNumber}</td>
-                
-        
-    
-  </tr>
-</c:forEach>
-</table><table id=bookingslist>
-<label for="bookingslist">Registered Bookings</label> 
-<tr>
-    <th>bookingid</th>
-    <th>member</th> 
-    <th>trainingsession</th>
-        
-    
-  </tr>   
-	<c:forEach items="${allBookings}" var="Booking"> 
-  <tr>
-    <td>${Booking.bookingId}</td>
-        <td>${Booking.gymMember.memberId}</td>
-        <td>${Booking.trainingSession.sessionId}</td>
 
-    
-  </tr>
-</c:forEach>
-</table>
 </body>
 </html>
