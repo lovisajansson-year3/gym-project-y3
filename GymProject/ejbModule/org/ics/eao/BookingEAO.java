@@ -1,6 +1,7 @@
 package org.ics.eao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -10,6 +11,7 @@ import javax.persistence.TypedQuery;
 
 import org.ics.ejb.Booking;
 import org.ics.ejb.GymMember;
+import org.ics.ejb.TrainingSession;
 
 /**
  * Session Bean implementation class BookingEAOImpl
@@ -52,8 +54,12 @@ public class BookingEAO implements BookingEAOLocal {
     		list = (ArrayList<Booking>) query.getResultList();
     	}
     	return list;
-    			
-    	
+    }
+    public List<Booking> findAllBookings(){
+		TypedQuery<Booking> query=
+				em.createNamedQuery("Booking.findAllBookings",Booking.class);
+		List<Booking> results = query.getResultList();
+		return results;
     }
 
 
