@@ -1,6 +1,7 @@
 package org.ics.facade;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -58,6 +59,9 @@ public class Facade implements FacadeLocal {
   	public void deleteTrainingSession(long sessionId) {
   		trainingSessionEAO.deleteTrainingSession(sessionId);
   	}
+    public boolean alreadyExists(String instructor, Date startTime){
+    	return trainingSessionEAO.alreadyExists(instructor, startTime);
+    }
 	@Override
 	public Booking createBooking(Booking g) {
 		// TODO Auto-generated method stub
@@ -94,5 +98,11 @@ public class Facade implements FacadeLocal {
     public ArrayList<GymMember> getAllGymMembersWithBookingsForTrainingSession(long sessionId) {
     	return gymMemberEAO.getAllGymMembersWithBookingsForTrainingSession(sessionId);
     }
-
+    public List<TrainingSession> findAllTrainingSessions() {
+		// TODO Auto-generated method stub
+		return trainingSessionEAO.findAllTrainingSessions();
+	}public List<Booking> findAllBookings() {
+		// TODO Auto-generated method stub
+		return bookingEAO.findAllBookings();
+	}
 }

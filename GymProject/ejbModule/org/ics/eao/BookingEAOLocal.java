@@ -1,6 +1,7 @@
 package org.ics.eao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Local;
 
@@ -15,5 +16,6 @@ public interface BookingEAOLocal {
     public Booking updateBooking(Booking g);
     public void deleteBooking(long bookingId);
     public ArrayList<Booking> findAllBookingsForGymMember(GymMember gymMember);
+    public List<Booking> findAllBookings();
 
 }

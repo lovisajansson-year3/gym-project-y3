@@ -21,6 +21,8 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({
 	@NamedQuery(name="Booking.findAllBookingsForGymMember",
 	query="SELECT b FROM Booking b WHERE b.gymMember.memberId = :memberId"),
+	@NamedQuery(name="Booking.findAllBookings",
+	query="SELECT g FROM Booking g"),
 })
 
 @Table(name="Booking")
@@ -28,9 +30,9 @@ import javax.validation.constraints.NotNull;
 public class Booking implements Serializable{
 	
 	private long bookingId;
-	//@NotNull
+
 	private GymMember gymMember;
-	//@NotNull
+
 	private TrainingSession trainingSession;
 
 	

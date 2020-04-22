@@ -1,6 +1,7 @@
 package org.ics.facade;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -22,6 +23,10 @@ public interface FacadeLocal {
 	    public TrainingSession createTrainingSession(TrainingSession g);
 	    public TrainingSession updateTrainingSession(TrainingSession g);
 	    public void deleteTrainingSession(long sessionId);
+	    public List<TrainingSession> findAllTrainingSessions();
+	    public boolean alreadyExists(String instructor, Date startTime);
+
+
 	    //Booking
 	    public Booking findByBookingId(long bookingId);
 	    public Booking createBooking(Booking g);
@@ -29,6 +34,8 @@ public interface FacadeLocal {
 	    public void deleteBooking(long bookingId);
 	    public ArrayList<Booking> findAllBookingsForGymMember(GymMember memberId);
 	    public ArrayList<GymMember> getAllGymMembersWithBookingsForTrainingSession(long sessionId);
+	    public List<Booking> findAllBookings();
+
 
 
 
