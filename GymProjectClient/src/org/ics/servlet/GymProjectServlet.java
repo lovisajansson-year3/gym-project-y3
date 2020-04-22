@@ -17,6 +17,7 @@ import org.ics.ejb.GymMember;
 import org.ics.ejb.TrainingSession;
 import org.ics.facade.FacadeLocal;
 
+
 /**
  * Servlet implementation class GymServlet
  */
@@ -38,7 +39,8 @@ public class GymProjectServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
+	/**
 		PrintWriter out = response.getWriter(); 
 		out.println("<!DOCTYPE html><html><head>"); 
 		out.println("<title>Gym</title>"); 
@@ -93,7 +95,8 @@ public class GymProjectServlet extends HttpServlet {
 				out.println(" name: "+ bbb.getName());
 				out.println("</h4>");
 			}
-		}
+		}**/
 	}
+	
 }
 
