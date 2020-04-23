@@ -24,7 +24,7 @@
 	</header>
 	<nav>
 		<a href="Home.jsp">Home</a> <a class="active"  href="About.jsp">About</a> <a
-			href="Crud">Test</a>
+			href="Crud">Crud</a><a href="Test.jsp">Test</a>
 
 	</nav>
 </body>
