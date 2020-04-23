@@ -21,7 +21,7 @@
 	</header>
 	<nav>
 		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
-			class="active" href="testing.jsp">Test</a>
+			class="active" href="Crud.jsp">Test</a>
 
 	</nav>
 	<section id="main">
@@ -30,8 +30,6 @@
 		<section id="subsection">
 			<form name="gymMemberRegistration"
 				id="GymMemberRegistration"
-				action="ControllerServlet"
-				method= POST
 				>
 				<fieldset id="GymMemberFS">
 					<legend>Add Gym Member:</legend>
@@ -41,18 +39,17 @@
 					<br> Phone number:<br> <input
 						type="text" name="phoneNumber" id="phoneNumber" > <br>
 					Address:<br> <input type="text" name="address" id="address" >
-					<br> <input type="submit" value="Create Gym Member" name="button_clicked">
-					<br><input type="text" name="memberId" id="memberId">
-					 <br><input type="submit" name="find"  id="find" value="find by memberId" />
-					 <br><input type="submit" name="findAll"  id="findAll" value="find all" />
-					 <br><input type="button" name="delete" id"dlt" value="delete by memberid" />
-					<br><textarea id="show" rows="4" cols="50">
-					</textarea>
-					 
 				</fieldset>
 			</form>
 		</section>
-
+		<br> <input type="button" value="Create Gym Member" name="createGymMember" id="CreateGymMember">
+			<br> <input type="button" value="Update Gym Member" name="UpdateGymMember" id="UpdateGymMember">
+			<br><input type="text" name="memberId" id="memberId">
+			<br><input type="button" name="find"  id="find" value="find by memberId" />
+			<br><input type="button" name="findAll"  id="findAll" value="find all" />
+		    <br><input type="button" name="deleteByMemberId" id"deleteByMemberId" value="delete by memberid" />
+		    <br><textarea id="show" rows="4" cols="50">
+					</textarea>
 		<section id="subsection">
 		<form name="trainingSessionRegistration"
 				id="TrainingSessionRegistration"
