@@ -3,6 +3,10 @@ package org.ics.servlet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -12,6 +16,7 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonReader;
+import javax.json.JsonValue;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,13 +24,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ics.ejb.GymMember;
+import org.ics.ejb.TrainingSession;
 import org.ics.facade.FacadeLocal;
 
 /**
  * Servlet implementation class CRUD
  */
-@WebServlet("/GymMemberServlet/*")
-public class GymMemberServlet extends HttpServlet {
+@WebServlet("/TrainingSessionServlet/*")
+public class TrainingSessionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	@EJB
@@ -33,7 +39,7 @@ public class GymMemberServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GymMemberServlet() {
+    public TrainingSessionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,11 +55,11 @@ public class GymMemberServlet extends HttpServlet {
 		if
 		(pathInfo==null||pathInfo.equals("/")) {
 			System.out.println("alla");
-			List<GymMember> members = facade.findAll(); 
-			sendAsJson(response, members); 
+			List<TrainingSession> sessions = facade.findAllTrainingSessions();
+			sendAsJson(response, sessions); 
 			System.out.println(pathInfo);
 			
-			return;
+			return; //FIXA FIND ALL METOD	
 		}
 		String[] splits = pathInfo.split("/");
 		if(splits.length!=2) {
@@ -62,8 +68,8 @@ public class GymMemberServlet extends HttpServlet {
 			return;
 		}
 		String id = splits[1];
-		GymMember member = facade.findByMemberId(Integer.parseInt(id));
-		sendAsJson(response,member);
+		TrainingSession session = facade.findBySessionId(Integer.parseInt(id));
+		sendAsJson(response,session);
 		
 	}
 
@@ -76,14 +82,14 @@ public class GymMemberServlet extends HttpServlet {
 		System.out.println(pathInfo);
 		if(pathInfo == null || pathInfo.equals("/")){ 
 			BufferedReader reader = request.getReader();
-			GymMember m = parseJsonGymMember(reader); 
+			TrainingSession t = parseJsonTrainingSession(reader); 
 			try { 
-				m = facade.createGymMember(m); 
-				System.out.println(m.getMemberId()+ " created");
+				t = facade.createTrainingSession(t); 
+				System.out.println(t.getSessionId()+ " created");
 			}catch(Exception e) {
 				System.out.println("duplicate key"); 
 				} 
-			sendAsJson(response, m); 
+			sendAsJson(response, t); 
 			}
 		}
 	
@@ -101,15 +107,16 @@ public class GymMemberServlet extends HttpServlet {
 		if(splits.length != 2) { 
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST); 
 			return; 
-			} String id = splits[1]; 
+			} 
+		String id = splits[1]; 
 		BufferedReader reader = request.getReader(); 
-		GymMember m = parseJsonGymMember(reader); 
+		TrainingSession t = parseJsonTrainingSession(reader); 
 		try { 
-			m = facade.updateGymMember(m); 
+			t = facade.updateTrainingSession(t); 
 		}catch(Exception e) { 
 			System.out.println("facade Update Error"); 
 			} 
-		sendAsJson(response, m); 
+		sendAsJson(response, t); 
 	}
 
 	/**
@@ -128,43 +135,47 @@ public class GymMemberServlet extends HttpServlet {
 			return; 
 			} 
 		String id = splits[1]; 
-		GymMember m = facade.findByMemberId(Integer.parseInt(id)); 
-		if (m != null) { 
-			facade.deleteGymMember(Integer.parseInt(id));      } 
-		sendAsJson(response, m); 
+		TrainingSession t = facade.findBySessionId(Integer.parseInt(id)); 
+		if (t != null) { 
+			facade.deleteTrainingSession(Integer.parseInt(id));      } 
+		sendAsJson(response, t); 
 	}
-	private void sendAsJson(HttpServletResponse response, GymMember m)throws IOException{
+	private void sendAsJson(HttpServletResponse response, TrainingSession t)throws IOException{
 		PrintWriter out = response.getWriter(); 
 		response.setContentType("application/json"); 
-		if (m != null) { 
+		if (t != null) { 
 		
-			out.print("{\"name\":"); 
-			out.print("\"" + m.getName() + "\"");
-			out.print(",\"address\":"); 
-			out.print("\"" +m.getAddress()+"\"");
-			out.print(",\"email\":"); 
-			out.print("\"" +m.getEmail()+"\"");
-			out.print(",\"memberId\":"); 
-			out.print("\"" +m.getMemberId()+"\"");
-			out.print(",\"phoneNumber\":"); 
-			out.print("\"" +m.getPhoneNumber()+"\"}"); 
+			out.print("{\"instructor\":"); 
+			out.print("\"" + t.getInstructor() + "\"");
+			out.print(",\"length\":"); 
+			out.print("\"" +t.getLength()+"\"");
+			out.print(",\"roomNumber\":"); 
+			out.print("\"" +t.getRoomNumber()+"\"");
+			out.print(",\"sessionId\":"); 
+			out.print("\"" +t.getSessionId()+"\"");
+			out.print(",\"startTime\":"); 
+			out.print("\"" +t.getStartTime()+"\"");
+			out.print(",\"type\":"); 
+			out.print("\"" +t.getType()+"\"}"); 
 			} else { 
 				out.print("[ ]"); 
 				} 
 		out.flush(); } 
-	private void sendAsJson(HttpServletResponse response, List<GymMember> members) throws IOException { 
+	private void sendAsJson(HttpServletResponse response, List<TrainingSession> sessions) throws IOException { 
 		
 		PrintWriter out = response.getWriter(); 
 		response.setContentType("application/json"); 
-		if (members != null) { 
+		if (sessions != null) { 
 			JsonArrayBuilder array = Json.createArrayBuilder(); 
-			for (GymMember m : members) { 
+			for (TrainingSession t : sessions) { 
 				JsonObjectBuilder o = Json.createObjectBuilder(); 
-				o.add("memberId", m.getMemberId()); 
-				o.add("name", m.getName()); 
-				o.add("address", m.getAddress()); 
-				o.add("phoneNumber", m.getPhoneNumber()); 
-				o.add("email", m.getEmail()); 
+				o.add("sessionId", t.getSessionId()); 
+				o.add("instructor", t.getInstructor()); 
+				o.add("roomNumber", t.getRoomNumber()); 
+				o.add("type", t.getType()); 
+				o.add("length", t.getLength()); 
+				System.out.println(t.getStartTime().toString());
+				o.add("startTime", t.getStartTime().toString()); 
 				array.add(o); 
 				} 
 			JsonArray jsonArray = array.build(); 
@@ -173,18 +184,27 @@ public class GymMemberServlet extends HttpServlet {
 				out.print("[]"); 
 				} 
 			out.flush(); } 
-	private GymMember parseJsonGymMember(BufferedReader br) { 
+	private TrainingSession parseJsonTrainingSession(BufferedReader br) { 
 		JsonReader jsonReader = null;    
 		JsonObject jsonRoot = null;    
 		jsonReader = Json.createReader(br);    
 		jsonRoot = jsonReader.readObject();    
-		GymMember gymMember = new GymMember();    
-		gymMember.setName(jsonRoot.getString("name")); 
-		gymMember.setAddress(jsonRoot.getString("address"));    
-		gymMember.setEmail(jsonRoot.getString("email"));    
-		gymMember.setPhoneNumber(jsonRoot.getString("phoneNumber"));    
-
-		return gymMember; 
+		TrainingSession t = new TrainingSession();    
+		t.setInstructor(jsonRoot.getString("instructor")); 
+		t.setType(jsonRoot.getString("type"));    
+		t.setRoomNumber(jsonRoot.getString("roomNumber"));    
+		t.setLength(Integer.parseInt(jsonRoot.getString("length")));   
+		String sDate = jsonRoot.getString("startTime");
+		DateFormat d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+		Date d2 = null;
+		try {
+			d2 = d.parse(sDate);
+		} catch (ParseException e) {
+			
+			
+		}
+		t.setStartTime(d2);
+		return t; 
 		} 
 	
 

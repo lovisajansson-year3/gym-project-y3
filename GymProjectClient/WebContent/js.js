@@ -1,7 +1,4 @@
 $(document).ready(function () {
-	$("#GymMemberRegistration").validate({});
-	$("#TrainingSessionRegistration").validate({		});
-	$("#BookingRegistration").validate({		});
 	$("#find").click( function() { 
 		var strValue = $("#memberId").val(); 
 		alert(strValue);
@@ -45,7 +42,7 @@ $(document).ready(function () {
 	
 	
 	})//btnclick 
-$("#DeleteByMemberId").click( function() {
+$("#deleteByMemberId").click( function() {
 	var strValue = $("#memberId").val();
 	if (strValue != "") { 
 		$.ajax({ 
@@ -61,40 +58,77 @@ $("#DeleteByMemberId").click( function() {
 				console.log("Ajax-find movie: "+status);
 				}
 			}
+	else{
+		$("#memberId").attr("placeholder","enter memberId of member you would like to delete");
+		
+	}
 	})//btnclick
-$("#CreateGymMember").click( function() {
-	alert("create clicked");
-	var strName = $("#name").val();
-	var strAddress = $("#address").val();
-	var strEmail = $("#email").val();
-	var strPhoneNumber = $("#phoneNumber").val();
-	var obj = { name: strName, address: strAddress, email: strEmail, phoneNumber: strPhoneNumber}; 
-	var jsonString = JSON.stringify(obj); 
 	
-		$.ajax({
-			type: "POST", 
-			url: "http://localhost:8080/GymProjectClient/GymMemberServlet/",  
-			data: jsonString, 
-			dataType:'json', 
-			error: ajaxAddReturnError,  
-			success: ajaxAddReturnSuccess 
-			}) 
-		function ajaxAddReturnSuccess(result, status, xhr) {
-			clearFields();
-			$("#name").attr("placeholder","GymMember added" ); 
-			} 
-		function ajaxAddReturnError(result, status, xhr) {
-			alert("Error Add"); 
-			console.log("Ajax-find movie: "+status); 
+		
+	
+	function  isGymMemberFormValid(){
+		alert(")");
+		var strName = $("#name").val();
+		var strAddress = $("#address").val();
+		var strEmail = $("#email").val();
+		var strPhoneNumber = $("#phoneNumber").val();
+		var b = true; 
+		
+		if (strName == null || strName == "") { //value blank?
+			
+			$("#name").attr("placeholder","Movie id, please." );
+			b=false;
 			}
-
-	})//btnclick
+		if (strAddress == null || strAddress == "") { //value blank?
+			$("#address").attr("placeholder","Movie id, please." );
+			b=false;
+			}
+		if (strEmail == null || strEmail == "") { //value blank?
+			$("#email").attr("placeholder","Movie id, please." );
+			b=false;
+			}
+		if (strPhoneNumber == null || strPhoneNumber == "") { //value blank?
+			$("#phoneNumber").attr("placeholder","phoneNumber, please." );
+			b=false;
+			 }
+		return b;
+	}
+	$("#CreateGymMember").click(    function(){     
+        var strName = $("#name").val();
+		var strAddress = $("#address").val();
+		var strEmail = $("#email").val();
+		var strPhoneNumber = $("#phoneNumber").val();
+		var obj = { name: strName, address: strAddress, email: strEmail, phoneNumber: strPhoneNumber}; 
+		var jsonString = JSON.stringify(obj); 
+		if(isGymMemberFormValid()==true){
+			$.ajax({
+				type: "POST", 
+				url: "http://localhost:8080/GymProjectClient/GymMemberServlet/",  
+				data: jsonString, 
+				dataType:'json', 
+				error: ajaxAddReturnError,  
+				success: ajaxAddReturnSuccess 
+				}); 
+			function ajaxAddReturnSuccess(result, status, xhr) {
+				clearFields();
+				$("#name").attr("placeholder","GymMember added" ); 
+				} 
+			function ajaxAddReturnError(result, status, xhr) {
+				alert("Error Add"); 
+				console.log("Ajax-find movie: "+status); 
+				}
+		}
+		
+    });
 	$("#UpdateGymMember").click( function() { 
 		var strMemberId = $("#memberId").val();
 		var strName = $("#name").val();
 		var strAddress = $("#address").val();
 		var strEmail = $("#email").val();
 		var strPhoneNumber = $("#phoneNumber").val();
+		if(strMemberId==null||strMemberId==""){
+			$("#memberId").attr("placeholder","enter memberId of member you'd like to update")
+		}else{
 		var obj = { name: strName, address: strAddress, email: strEmail, phoneNumber: strPhoneNumber}; 
 		var jsonString = JSON.stringify(obj); 
 		if (strMemberId != "") { 
@@ -108,13 +142,14 @@ $("#CreateGymMember").click( function() {
 				})
 			function ajaxUpdateReturnSuccess(result, status, xhr) { 
 				clearFields(); 
-				$("#name").attr("placeholder","GymMember updated" ); 
+				$("#memberId").attr("placeholder","GymMember updated" ); 
 				}
 			function ajaxUpdateReturnError(result, status, xhr) { 
 				alert("Error Update");  
 				console.log("Ajax-find movie: "+status); 
 				}
 			}
+		}
 		})//btnclick
 	
 });
