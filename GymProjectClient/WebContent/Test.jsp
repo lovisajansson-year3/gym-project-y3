@@ -23,8 +23,8 @@
 		<p>My supercool header</p>
 	</header>
 	<nav>
-		<a class="active" href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
-			href="Crud.jsp">Crud</a><a href="Test.jsp">Test</a>
+		<a href="Home.jsp">Home</a> <a  href="About.jsp">About</a> <a
+			href="Crud">Crud</a><a class="active" href="Test.jsp">Home</a>
 
 	</nav>
 </body>
