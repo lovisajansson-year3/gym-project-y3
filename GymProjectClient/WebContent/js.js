@@ -1,5 +1,6 @@
 $(document).ready(function () {
-	$("#find").click( function() { 
+	alert("laddat");
+	$("#FindByMemberId").click( function() { 
 		var strValue = $("#memberId").val(); 
 		alert(strValue);
 		if (strValue != "") { 
@@ -20,7 +21,7 @@ $(document).ready(function () {
 		}
 	
 	
-	})//btnclick 
+	});//btnclick 
 	$("#findAll").click( function() { 
 	
 			$.ajax({
@@ -41,8 +42,8 @@ $(document).ready(function () {
 		
 	
 	
-	})//btnclick 
-$("#deleteByMemberId").click( function() {
+	});//btnclick 
+$("#DeleteByMemberId").click( function() {
 	var strValue = $("#memberId").val();
 	if (strValue != "") { 
 		$.ajax({ 
@@ -62,37 +63,8 @@ $("#deleteByMemberId").click( function() {
 		$("#memberId").attr("placeholder","enter memberId of member you would like to delete");
 		
 	}
-	})//btnclick
+	});//btnclick
 	
-		
-	
-	function  isGymMemberFormValid(){
-		alert(")");
-		var strName = $("#name").val();
-		var strAddress = $("#address").val();
-		var strEmail = $("#email").val();
-		var strPhoneNumber = $("#phoneNumber").val();
-		var b = true; 
-		
-		if (strName == null || strName == "") { //value blank?
-			
-			$("#name").attr("placeholder","Movie id, please." );
-			b=false;
-			}
-		if (strAddress == null || strAddress == "") { //value blank?
-			$("#address").attr("placeholder","Movie id, please." );
-			b=false;
-			}
-		if (strEmail == null || strEmail == "") { //value blank?
-			$("#email").attr("placeholder","Movie id, please." );
-			b=false;
-			}
-		if (strPhoneNumber == null || strPhoneNumber == "") { //value blank?
-			$("#phoneNumber").attr("placeholder","phoneNumber, please." );
-			b=false;
-			 }
-		return b;
-	}
 	$("#CreateGymMember").click(    function(){     
         var strName = $("#name").val();
 		var strAddress = $("#address").val();
@@ -112,12 +84,14 @@ $("#deleteByMemberId").click( function() {
 			function ajaxAddReturnSuccess(result, status, xhr) {
 				clearFields();
 				$("#name").attr("placeholder","GymMember added" ); 
+				console.log("gymmember added");
 				} 
 			function ajaxAddReturnError(result, status, xhr) {
 				alert("Error Add"); 
 				console.log("Ajax-find movie: "+status); 
 				}
-		}
+		}console.log("add failed");
+		
 		
     });
 	$("#UpdateGymMember").click( function() { 
@@ -150,7 +124,7 @@ $("#deleteByMemberId").click( function() {
 				}
 			}
 		}
-		})//btnclick
+		});//btnclick
 	
 });
 function ParseJsonFileMovie(result) { 
@@ -172,4 +146,30 @@ function clearFields() {
 	$("#phoneNumber").val("");
 	$("#memberId").val("");
 } 
-
+function  isGymMemberFormValid(){
+	alert(")");
+	var strName = $("#name").val();
+	var strAddress = $("#address").val();
+	var strEmail = $("#email").val();
+	var strPhoneNumber = $("#phoneNumber").val();
+	var b = true; 
+	
+	if (strName == null || strName == "") { //value blank?
+		
+		$("#name").attr("placeholder","Movie id, please." );
+		b=false;
+		}
+	if (strAddress == null || strAddress == "") { //value blank?
+		$("#address").attr("placeholder","Movie id, please." );
+		b=false;
+		}
+	if (strEmail == null || strEmail == "") { //value blank?
+		$("#email").attr("placeholder","Movie id, please." );
+		b=false;
+		}
+	if (strPhoneNumber == null || strPhoneNumber == "") { //value blank?
+		$("#phoneNumber").attr("placeholder","phoneNumber, please." );
+		b=false;
+		 }
+	return b;
+}

@@ -8,8 +8,8 @@
 <meta charset="ISO-8859-1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> 
-<script src="js.js"></script>
-<script src="TrainingSessionJs.js"></script>
+<script type="text/javascript"  src="js.js"></script>
+<script type="text/javascript"  src="TrainingSessionJs.js"></script>
 <link rel="stylesheet" type="text/css" href="mystyle.css">
 
 </head>
@@ -43,12 +43,12 @@
 			</form>					
 
 		</section>					
-		<input type="button" value="Create Gym Member" name="createGymMember" id="CreateGymMember">
+		<input type="button" value="Create Gym Member" name="CreateGymMember" id="CreateGymMember">
 
 			<br> <input type="button" value="Update Gym Member" name="UpdateGymMember" id="UpdateGymMember">
 			<br><input type="text" name="memberId" id="memberId">
-			<br><input type="button" name="find"  id="find" value="find by memberId" />
-		    <br><input type="button" name="deleteByMemberId" id"deleteByMemberId" value="delete by memberid" />
+			<br><input type="button" name="FindByMemberId"  id="FindByMemberId" value="find by memberId" />
+		    <br><input type="button" name="DeleteByMemberId" id="DeleteByMemberId" value="delete by memberid" />
 		    <br><textarea id="show" rows="4" cols="50">
 					</textarea>
 		<section id="subsection">

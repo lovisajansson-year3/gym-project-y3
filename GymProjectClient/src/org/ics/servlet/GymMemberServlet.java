@@ -81,8 +81,8 @@ public class GymMemberServlet extends HttpServlet {
 				m = facade.createGymMember(m); 
 				System.out.println(m.getMemberId()+ " created");
 			}catch(Exception e) {
-				System.out.println("duplicate key"); 
-				} 
+
+			} 
 			sendAsJson(response, m); 
 			}
 		}
@@ -101,15 +101,21 @@ public class GymMemberServlet extends HttpServlet {
 		if(splits.length != 2) { 
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST); 
 			return; 
-			} String id = splits[1]; 
+			} 
+		String id = splits[1]; 
 		BufferedReader reader = request.getReader(); 
 		GymMember m = parseJsonGymMember(reader); 
-		try { 
-			m = facade.updateGymMember(m); 
-		}catch(Exception e) { 
-			System.out.println("facade Update Error"); 
+		if(facade.findByMemberId(Long.parseLong(id))!=null) {
+			try { 
+				m = facade.updateGymMember(m); 
+				sendAsJson(response, m); 
+			}catch(Exception e) { 
+				System.out.println("facade Update Error"); 
 			} 
-		sendAsJson(response, m); 
+		}else {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND, "member doesnrt exist");
+			return;
+		}
 	}
 
 	/**

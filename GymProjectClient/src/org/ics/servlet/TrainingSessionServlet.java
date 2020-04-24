@@ -69,7 +69,12 @@ public class TrainingSessionServlet extends HttpServlet {
 		}
 		String id = splits[1];
 		TrainingSession session = facade.findBySessionId(Integer.parseInt(id));
+		if(session==null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND, "session doesnt exist");
+			
+		}else {
 		sendAsJson(response,session);
+		}
 		
 	}
 
@@ -82,7 +87,11 @@ public class TrainingSessionServlet extends HttpServlet {
 		System.out.println(pathInfo);
 		if(pathInfo == null || pathInfo.equals("/")){ 
 			BufferedReader reader = request.getReader();
-			TrainingSession t = parseJsonTrainingSession(reader); 
+			TrainingSession t = parseJsonTrainingSession(reader);
+			if(facade.alreadyExists(t.getInstructor(), t.getStartTime())==true) {
+				response.sendError(HttpServletResponse.SC_CONFLICT); 
+				return;
+			}
 			try { 
 				t = facade.createTrainingSession(t); 
 				System.out.println(t.getSessionId()+ " created");
@@ -136,10 +145,23 @@ public class TrainingSessionServlet extends HttpServlet {
 			} 
 		String id = splits[1]; 
 		TrainingSession t = facade.findBySessionId(Integer.parseInt(id)); 
-		if (t != null) { 
-			facade.deleteTrainingSession(Integer.parseInt(id));      } 
-		sendAsJson(response, t); 
-	}
+		if (t == null) { 
+			response.sendError(HttpServletResponse.SC_NOT_FOUND ); 
+			return;
+		}else {
+			try {
+				facade.deleteTrainingSession(Integer.parseInt(id));   
+				sendAsJson(response, t); 
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+				response.sendError(HttpServletResponse.SC_CONFLICT ); 
+				return;
+			}
+			
+		}
+	} 
+		
+	
 	private void sendAsJson(HttpServletResponse response, TrainingSession t)throws IOException{
 		PrintWriter out = response.getWriter(); 
 		response.setContentType("application/json"); 
@@ -173,7 +195,6 @@ public class TrainingSessionServlet extends HttpServlet {
 				o.add("instructor", t.getInstructor()); 
 				o.add("roomNumber", t.getRoomNumber()); 
 				o.add("type", t.getType()); 
-				o.add("length", t.getLength()); 
 				System.out.println(t.getStartTime().toString());
 				o.add("startTime", t.getStartTime().toString()); 
 				array.add(o); 
@@ -193,8 +214,8 @@ public class TrainingSessionServlet extends HttpServlet {
 		t.setInstructor(jsonRoot.getString("instructor")); 
 		t.setType(jsonRoot.getString("type"));    
 		t.setRoomNumber(jsonRoot.getString("roomNumber"));    
-		t.setLength(Integer.parseInt(jsonRoot.getString("length")));   
 		String sDate = jsonRoot.getString("startTime");
+		sDate = sDate+":00.000";
 		DateFormat d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 		Date d2 = null;
 		try {
