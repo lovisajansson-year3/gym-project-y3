@@ -120,12 +120,18 @@ public class TrainingSessionServlet extends HttpServlet {
 		String id = splits[1]; 
 		BufferedReader reader = request.getReader(); 
 		TrainingSession t = parseJsonTrainingSession(reader); 
-		try { 
-			t = facade.updateTrainingSession(t); 
-		}catch(Exception e) { 
-			System.out.println("facade Update Error"); 
-			} 
-		sendAsJson(response, t); 
+		if(facade.findByMemberId(Long.parseLong(id))!=null) {
+			try { 
+				t = facade.updateTrainingSession(t); 
+				sendAsJson(response, t); 
+			}catch(Exception e) { 
+				System.out.println("facade Update Error"); 
+				} 
+		}else {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND, "member doesnrt exist");
+			return;
+			
+		}
 	}
 
 	/**

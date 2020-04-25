@@ -63,7 +63,11 @@ public class GymMemberServlet extends HttpServlet {
 		}
 		String id = splits[1];
 		GymMember member = facade.findByMemberId(Integer.parseInt(id));
-		sendAsJson(response,member);
+		if(member!=null) {
+			sendAsJson(response,member);
+		}else {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND, "member doesnt exist");
+		}
 		
 	}
 

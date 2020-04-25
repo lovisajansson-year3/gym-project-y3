@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	$("#FindTrainingSession").click( function() {
 		var strValue = $("#sessionId").val(); 
-		if (strValue != "") { 
+		if (strValue != ""&& strValue.isNumeric()) { 
 			$.ajax({
 				type: 'GET', 
 				url: "http://localhost:8080/GymProjectClient/TrainingSessionServlet/"+strValue,  
@@ -10,23 +10,29 @@ $(document).ready(function () {
 			})
 				
 		function ajaxFindReturnSuccess(result, status, xhr) {
+				console.log("session found")
 				ParseJsonFileTrainingSession(result); 
 			
 		} 
 		function ajaxFindReturnError(result, status, xhr) { 
 			$("#sessionId").val("");
 			if(result.status=="404"){
-				$("#sessionId").attr("placeholder","session doesnt exist" ); 
+				console.log("doesnt exist")
+				$("#sessionId").attr("placeholder","Session doesnt exist" ); 
 			}
 		}
+		}else if(!strValue.isNumeric()){
+			$("#sessionId").val("");
+			$("#sessionId").attr("placeholder","enter numeric sessionId" ); 
+		}else{
+			$("#sessionId").attr("placeholder","enter sessionId" ); 
 		}
+		
 	});//findbtn
 	$("#CreateTrainingSession").click( function() {
-		 var strInstructor = $("#instructor").val();
+		    var strInstructor = $("#instructor").val();
 			var strStartDate = $("#startDate").val();
-			
 			var strStartTime = $("#startTime").val();
-			console.log(strStartDate + strStartTime);
 			var strType = $("#type").val();
 			var strRoomNumber = $("#roomNumber").val();
 			var date = strStartDate+" "+strStartTime;
@@ -42,10 +48,12 @@ $(document).ready(function () {
 					success: ajaxAddReturnSuccess 
 					}); 
 				function ajaxAddReturnSuccess(result, status, xhr) {
-					clearFields();
+					clearTrainingSessionFields();
+					console.log("session created")
 					$("#sessionId").attr("placeholder","session added" ); 
 					} 
 				function ajaxAddReturnError(result, status, xhr) {
+					clearTrainingSessionFields();
 					if(result.status=="409"){
 					$("#sessionId").attr("placeholder","this instructor already has a trainingsession at this time" ); 
 					}else{
@@ -56,25 +64,27 @@ $(document).ready(function () {
 
 					}
 			}else{
+				$("#sessionId").val("");
 				$("#sessionId").attr("placeholder","fill in session details" ); 
 			}
 		
 	});//createbtn
 	$("#UpdateTrainingSession").click( function() {
-		var sessionId = $("#sessionId").val();
-		 var strInstructor = $("#instructor").val();
+		    var sessionId = $("#sessionId").val();
+		    var strInstructor = $("#instructor").val();
 			var strStartDate = $("#startDate").val();
 			console.log(strStartDate + strStartTime);
 			var strStartTime = $("#startTime").val();
 			var strType = $("#type").val();
 			var strRoomNumber = $("#roomNumber").val();
 			var date = strStartDate+strStartTime
-		if(sessionId==null||sessionId==""){
-			$("#sessionId").attr("placeholder","fill in sessionid" ); 
+		if(sessionId==null||sessionId==""||!sessionId.isNumeric()){
+			$("#sessionId").val("");
+			$("#sessionId").attr("placeholder","fill in a valid sessionid" ); 
 		}else{
 			var obj = { instructor: strInstructor, startTime: date, type: strType, roomNumber: strRoomNumber}; 
 		var jsonString = JSON.stringify(obj); 
-		if (sessionId != "") { 
+		
 			$.ajax({  
 				type: "PUT", 
 				url: "http://localhost:8080/GymProjectClient/GymMemberServlet/"+strSessionId,   
@@ -84,19 +94,27 @@ $(document).ready(function () {
 				success: ajaxUpdateReturnSuccess      
 				})
 			function ajaxUpdateReturnSuccess(result, status, xhr) { 
-				clearFields(); 
+				clearTrainingSessionFields(); 
 				$("#sessionId").attr("placeholder","session updated" ); 
 				}
 			function ajaxUpdateReturnError(result, status, xhr) { 
-				alert("Error Update");  
-				console.log("Ajax-find movie: "+status); 
+				if(result.status=="404"){
+					$("#sessionId").val("");
+					$("#sessionId").attr("placeholder","session doesnt exist" ); 
+				}else{
+					alert("Error updating"); 
+					console.log(result.status);
 				}
+				
 		}
 		}
 	})//updatebtn
 	$("#DeleteTrainingSession").click( function() {
 		var strValue = $("#sessionId").val();
-		if (strValue != "") { 
+		if(sessionId==null||sessionId==""||!sessionId.isNumeric()){
+			$("#sessionId").val("");
+			$("#sessionId").attr("placeholder","fill in a valid sessionid" ); 
+		}else{
 			$.ajax({ 
 				method: "DELETE",   
 				url: "http://localhost:8080/GymProjectClient/TrainingSessionServlet/"+strValue,  
@@ -104,33 +122,28 @@ $(document).ready(function () {
 				success: ajaxDelReturnSuccess         
 				})
 				function ajaxDelReturnSuccess(result, status, xhr) { 
-				$("#sessionId").val("");
+					$("#sessionId").val("");
 					$("#sessionId").attr("placeholder","Session deleted" );           
-				} function ajaxDelReturnError(result, status, xhr) { 
+				} 
+				function ajaxDelReturnError(result, status, xhr) { 
 					if(result.status=="404"){
 						$("#sessionId").attr("placeholder","Session doesnt exist" );   
-						console.log(status.message);
+						console.log(result.status);
 
 					}else if(result.status="409"){
 						$("#sessionId").attr("placeholder","cannot delete sessions that has bookings" );
-						console.log(status.message);
+						console.log(result.status);
 
 					}else{
 					alert("Error"); 
-					console.log(status);
+					console.log(result.status);
 					}
 					}
-				}
-		else{
-			$("#sessionId").attr("placeholder","enter sessionId of session you would like to delete");
-			
-		}
-		
-
+				}	
 	});//dltbtn
 		$("#FindByMemberId").click( function() { 
 			var strValue = $("#memberId").val(); 
-			if (strValue != "") { 
+			if (strValue != ""&&strValue.isNumeric()) { 
 				$.ajax({
 					type: 'GET', 
 					url: "http://localhost:8080/GymProjectClient/GymMemberServlet/"+strValue,  
@@ -143,11 +156,17 @@ $(document).ready(function () {
 					
 			function ajaxFindReturnSuccess(result, status, xhr) {
 				ParseJsonFileMovie(result); 
+				console.log("member found");
 			} 
 			function ajaxFindReturnError(result, status, xhr) { 
-				alert("Error"); 
-				console.log("Ajax-find movie: "+status); 
+				if(result.status=="404"){
+					clearFields();
+					$("#memberId").attr("placeholder","member doesnt exist")
+				}else{
+					alert("Error"); 
+					console.log(result.status); 
 				}
+			}
 			
 
 		
@@ -270,6 +289,13 @@ $(document).ready(function () {
 
 		
 
+	}
+	function clearTrainingSessionFields(){
+		$("#instructor").val("");
+		$("#startDate").val("");
+		$("#startTime").val("");
+		$("#type").val("");
+		$("#roomNumber").val("");
 	}
 	function clearFields() { 
 		$("#name").val(""); 
