@@ -24,7 +24,7 @@ $(document).ready(function () {
 		}else if(!strValue.isNumeric()){
 			$("#sessionId").val("");
 			$("#sessionId").attr("placeholder","enter numeric sessionId" ); 
-		}else{
+		}else{Boo
 			$("#sessionId").attr("placeholder","enter sessionId" ); 
 		}
 		
@@ -110,7 +110,7 @@ $(document).ready(function () {
 		}
 	})//updatebtn
 	$("#DeleteTrainingSession").click( function() {
-		var strValue = $("#sessionId").val();
+		var sessionId = $("#sessionId").val();
 		if(sessionId==null||sessionId==""||!sessionId.isNumeric()){
 			$("#sessionId").val("");
 			$("#sessionId").attr("placeholder","fill in a valid sessionid" ); 
@@ -194,7 +194,7 @@ $(document).ready(function () {
 		});//btnclick 
 	$("#DeleteByMemberId").click( function() {
 		var strValue = $("#memberId").val();
-		if (strValue != "") { 
+		if (strValue != ""||strValue!=null||strValue.isNumeric()) { 
 			$.ajax({ 
 				method: "DELETE",   
 				url: "http://localhost:8080/GymProjectClient/GymMemberServlet/"+strValue,  
@@ -203,13 +203,27 @@ $(document).ready(function () {
 				})
 				function ajaxDelReturnSuccess(result, status, xhr) { 
 					$("#memberId").attr("placeholder","Movie deleted" );           
-				} function ajaxDelReturnError(result, status, xhr) { 
+				} 
+				function ajaxDelReturnError(result, status, xhr) { 
+					if(result.status=="404"){
+						clearFields();
+						$("#memberId").attr("placeholder","member doesnt exist" );   
+						console.log(result.status);
+
+					}else if(result.status="409"){
+						clearFields();
+						$("#memberId").attr("placeholder","cannot delete member that has bookings" );
+						console.log(result.status);
+
+					}else{
+						clearFields();
 					alert("Error"); 
-					console.log("Ajax-find movie: "+status);
+					console.log(result.status);
 					}
-				}
+					}
+				}	
 		else{
-			$("#memberId").attr("placeholder","enter memberId of member you would like to delete");
+			$("#memberId").attr("placeholder","enter valid numeric memberId of member you would like to delete");
 			
 		}
 		});//btnclick
@@ -277,6 +291,113 @@ $(document).ready(function () {
 				}
 			}
 			});//btnclick
+		$("#FindBooking").click( function() {
+			var strValue = $("#bookingId").val(); 
+			if (strValue != ""&& strValue.isNumeric()) { 
+				$.ajax({
+					type: 'GET', 
+					url: "http://localhost:8080/GymProjectClient/BookingServlet/"+strValue,  
+					error: ajaxFindReturnError,  
+					success: ajaxFindReturnSuccess 
+				})
+					
+			function ajaxFindReturnSuccess(result, status, xhr) {
+					console.log("booking found")
+					ParseJsonFileBooking(result); 
+				
+			} 
+				function ajaxFindReturnError(result, status, xhr) { 
+					$("#bookingId").val("");
+					if(result.status=="404"){
+						console.log("doesnt exist")
+						$("#sessionId").attr("placeholder","booking doesnt exist" ); 
+					}
+				}
+				}else if(!strValue.isNumeric()){
+					$("#bookingId").val("");
+					$("#bookingId").attr("placeholder","enter numeric bookingId" ); 
+				}else{
+					$("#bookingId").val("");
+					$("#bookingId").attr("placeholder","enter bookingId" ); 
+				}
+				
+			});//findbtn	
+
+	$("#CreateBooking").click( function() {
+	    var strBookingSessionId = $("#bookingSessionId").val();
+		var strBookingMemberId = $("#bookingMemberId").val();
+		var obj = { sessionId: strBookingSessionId, memberId: strBookingMemberId}; 
+		var jsonString = JSON.stringify(obj); 
+		if($("#bookingSessionId").val()!=""&&$("#bookingMemberId").val()!=""
+			&&$("#bookingSessionId").val().isNumeric()&&$("#bookingMemberId").val().isNumeric()){
+			$.ajax({
+				type: "POST", 
+				url: "http://localhost:8080/GymProjectClient/BookingServlet/",  
+				data: jsonString, 
+				dataType:'json', 
+				error: ajaxAddReturnError,  
+				success: ajaxAddReturnSuccess 
+				}); 
+			function ajaxAddReturnSuccess(result, status, xhr) {
+				$("#bookingSessionId").val("");
+				$("#bookingMemberId").val("");
+				$("#bookingId").val("");
+				console.log("booking created")
+				$("#bookingId").attr("placeholder","booking added" ); 
+				} 
+			function ajaxAddReturnError(result, status, xhr) {
+				$("#bookingSessionId").val("");
+				$("#bookingMemberId").val("");
+				$("#bookingId").val("");
+				if(result.status=="404"){
+					$("#bookingId").attr("placeholder","instructor or memberId doesnt exist" ); 
+					console.log("member or session doesnt exist")
+				}else{
+					alert("Error post");  
+					console.log("Ajax-createsession: "+status); 
+				}
+				
+
+				}
+		}else{
+			$("#bookingId").val("");
+			$("#bookingIs").attr("placeholder","fill in session details" ); 
+		}
+
+	});//createbtn
+	$("#DeleteBooking").click( function() {
+		var bookingId = $("#bookingId").val();
+		if(bookingId==null||bookingId==""||!bookingId.isNumeric()){
+			$("#bookingId").val("");
+			$("#bookingId").attr("placeholder","fill in a valid bookingId" ); 
+		}else{
+			$.ajax({ 
+				method: "DELETE",   
+				url: "http://localhost:8080/GymProjectClient/BookingServlet/"+strValue,  
+				error: ajaxDelReturnError,  
+				success: ajaxDelReturnSuccess         
+				})
+				function ajaxDelReturnSuccess(result, status, xhr) { 
+					$("#bookingId").val("");
+					$("#bookingId").attr("placeholder","Session deleted" );           
+				} 
+				function ajaxDelReturnError(result, status, xhr) { 
+					if(result.status=="404"){
+						$("#bookingId").attr("placeholder","Session doesnt exist" );   
+						console.log(result.status);
+
+					}else if(result.status="409"){
+						$("#bookingId").attr("placeholder","cannot delete sessions that has bookings" );
+						console.log(result.status);
+
+					}else{
+					alert("Error"); 
+					console.log(result.status);
+					}
+					}
+				}	
+	});//dltbtn
+		
 });
 	function ParseJsonFileMovie(result) { 
 		$("#name").val(result.name); 
@@ -284,10 +405,7 @@ $(document).ready(function () {
 		$("#email").val(result.email); 
 		$("#phoneNumber").val(result.phoneNumber);
 		$("#memberId").val(result.memberId);
-			   
-			
 
-		
 
 	}
 	function clearTrainingSessionFields(){
@@ -372,9 +490,8 @@ function ParseJsonFileTrainingSession(result) {
 	$("#type").val(result.type);
 	$("#roomNumber").val(result.roomNumber);
 
-		   
-		
-
-	
-
+}
+function ParseJsonFileBooking(result) { 
+	$("#bookingSessionId").val(result.sessionId);
+	$("#bookingMemberId").val(result.memberId);
 }

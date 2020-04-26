@@ -107,15 +107,14 @@
 				>
 			<fieldset id="BookingFS">
 				<legend>Add Booking:</legend>
-				MemberId:<br> <input type="text" name="BookingMemberId" id="BookingMemberId" >
+				MemberId:<br> <input type="text" name="bookingMemberId" id="bookingMemberId" >
 				<br> TrainingSessionId number:<br> <input type="text"
-					name="TrainingSessionId" id="TrainingSessionId" > <br> 
+					name="bookingSessionId" id="bookingSessionId" > <br> 
 			</fieldset>
 			</form>
 <input type="button" id="CreateBooking" name="CreateBooking"value="Create Booking" >
 <br><input type="text" name="bookingId" id="bookingId">
 <br> <input type="button" value="Find Booking" name="FindBooking" id="FindBooking">
-<br> <input type="button" value="Update Booking" name="UpdateBooking" id="UpdateBooking">
 <br> <input type="button" value="Delete Booking" name="DeleteBooking" id="DeleteBooking">
 
 </section>
