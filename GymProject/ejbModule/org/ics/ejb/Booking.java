@@ -26,14 +26,19 @@ import javax.validation.constraints.NotNull;
 })
 
 @Table(name="Booking")
-@SequenceGenerator(name="BID_SEQ",allocationSize=1)
+//@SequenceGenerator(name="BID_SEQ",allocationSize=1)
 public class Booking implements Serializable{
 	
 	private long bookingId;
 	private GymMember gymMember;
 	private TrainingSession trainingSession;
 
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="bookingId")
+	public long getBookingId() {
+		return bookingId;
+	}
 	
 	@ManyToOne
 	@JoinColumn(name="mId", referencedColumnName="memberId")
@@ -45,7 +50,7 @@ public class Booking implements Serializable{
 	}
 	
 	@ManyToOne
-	@JoinColumn(name="tId", referencedColumnName="sessionId",foreignKey=@ForeignKey(name = "Fk_userdetails_vehicle"))
+	@JoinColumn(name="tId", referencedColumnName="sessionId")
 	public TrainingSession getTrainingSession() {
 		return trainingSession;
 	}
@@ -53,12 +58,7 @@ public class Booking implements Serializable{
 		this.trainingSession = trainingSession;
 	}
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="bookingId")
-	public long getBookingId() {
-		return bookingId;
-	}
+
 	public void setBookingId(long bookingId) {
 		this.bookingId = bookingId;
 	}
