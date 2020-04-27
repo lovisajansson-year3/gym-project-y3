@@ -31,8 +31,8 @@ public class GymMemberTest extends TestCase {
 		expectedAddress="Lisagatan 2";
 		expectedBookings=null;
 		
-		member1 = new GymMember();//expectedMemberId, expectedName, expectedEmail, expectedPhoneNumber, expectedAddress);
-		member2 = new GymMember();//(4567, "Lena", "lena@lena.com", "0704567", "Lenagatan 1");
+		member1 = new GymMember(expectedMemberId, expectedName, expectedEmail, expectedPhoneNumber, expectedAddress, expectedBookings);
+		member2 = new GymMember(4567, "Lena", "lena@lena.com", "0704567", "Lenagatan 1", null);
 	}
 
 	protected void tearDown() throws Exception {
@@ -103,5 +103,12 @@ public class GymMemberTest extends TestCase {
 		member1.setBookings(expectedBookings2);
 		assertEquals(expectedBookings2, member1.getBookings());
 	}
+	
+	public void testEquals() {
+		assertTrue(!member1.equals(null));
+		assertEquals(member1, member1);
+		assertEquals(member1, new GymMember(expectedMemberId, expectedName, expectedEmail, expectedPhoneNumber, expectedAddress, expectedBookings));      
+		assertTrue(!member1.equals(member2));   }
+	}
 
-}
+

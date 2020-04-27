@@ -28,7 +28,7 @@ public class TrainingSessionTest extends TestCase {
 		super.setUp();
 		expectedSessionId = 1111;
 		expectedInstructor = "Tove";
-		//expectedStartTime = 2020-03-12;
+		//expectedStartTime = 2020-02-03;
 		expectedType = "Spinning";
 		expectedLength = 1; 
 		expectedRoomNumber ="Room 1";
@@ -45,59 +45,78 @@ public class TrainingSessionTest extends TestCase {
 	}
 
 	public void testGetSessionId() {
-		fail("Not yet implemented");
+		assertNotNull(session1);
+		assertEquals(expectedSessionId, session1.getSessionId());
 	}
 
 	public void testSetSessionId() {
-		fail("Not yet implemented");
+		long expectedSessionId2 = 22;
+		session1.setSessionId(expectedSessionId2);
+		assertEquals(expectedSessionId2, session2.getSessionId());
 	}
 
 	public void testGetInstructor() {
-		fail("Not yet implemented");
+		assertEquals(expectedInstructor, session1.getInstructor());
 	}
 
 	public void testSetInstructor() {
-		fail("Not yet implemented");
+		String expectedInstructor2 = "Björn";
+		session1.setInstructor(expectedInstructor2);
+		assertEquals(expectedInstructor2, session2.getInstructor());
 	}
 
 	public void testGetStartTime() {
-		fail("Not yet implemented");
+		assertEquals(expectedStartTime, session1.getStartTime());
 	}
 
 	public void testSetStartTime() {
-		fail("Not yet implemented");
+		Date expectedStartTime2 = 
+		session1.setStartTime(expectedStartTime2);
+		assertEquals(expectedStartTime, session1.getStartTime());
 	}
 
 	public void testGetType() {
-		fail("Not yet implemented");
+		assertEquals(expectedType, session1.getType());
 	}
 
 	public void testSetType() {
-		fail("Not yet implemented");
+		String expectedType2 = "Running";
+		session1.setType(expectedType2);
+		assertEquals(expectedType, session1.getType());
 	}
 
 	public void testGetLength() {
-		fail("Not yet implemented");
+		assertEquals(expectedLength, session1.getLength());
 	}
 
 	public void testSetLength() {
-		fail("Not yet implemented");
+		Integer expectedLength2 = 20;
+		session1.setLength(expectedLength2);
+		assertEquals(expectedLength, session1.getLength());
 	}
 
 	public void testGetRoomNumber() {
-		fail("Not yet implemented");
+		assertEquals(expectedRoomNumber, session1.getRoomNumber());
 	}
 
 	public void testSetRoomNumber() {
-		fail("Not yet implemented");
+		String expectedRoomNumber2 = "20";
+		session1.setRoomNumber(expectedRoomNumber2);
+		assertEquals(expectedRoomNumber, session1.getRoomNumber());
 	}
 
 	public void testGetBookings() {
-		fail("Not yet implemented");
+		assertEquals(expectedBookings, session1.getBookings());
 	}
 
 	public void testSetBookings() {
-		fail("Not yet implemented");
+		Set<Booking> expectedBookings2 = s1(200, "Lina", "lina@gmail.com", 07220, "Linagatan 2", "Spinning");
+		session1.setBookings(expectedBookings2);
+		assertEquals(expectedBookings, session1.getBookings());
 	}
 
+	private Set<Booking> s1(int i, String string, String string2, int j, String string3, String string4) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
