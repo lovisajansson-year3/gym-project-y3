@@ -2,7 +2,6 @@
     pageEncoding="ISO-8859-1"%>
     <%@page import="org.ics.ejb.GymMember"%>
 <%@page import="java.util.ArrayList"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
 <head>
