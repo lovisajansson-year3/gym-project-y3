@@ -8,12 +8,13 @@
 <meta charset="ISO-8859-1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> 
-<script type="text/javascript"  src="js.js"></script>
-<script type="text/javascript"  src="TrainingSessionJs.js"></script>
+<script src="TrainingSessionJs.js"></script>
 <link rel="stylesheet" type="text/css" href="mystyle.css">
 
 </head>
 <body>
+<script src="TrainingSessionJs.js"></script>
+
 	<header>
 		<h1>Header</h1>
 		<p>My supercool header</p>
