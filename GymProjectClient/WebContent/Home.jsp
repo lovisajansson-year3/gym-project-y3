@@ -11,6 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 <script src="js.js"></script>
+<script src="Javascript.js"></script>
 <link rel="stylesheet" type="text/css" href="mystyle.css">
 
 <head>
@@ -25,7 +26,20 @@
 	<nav>
 		<a class="active" href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
 			href="Crud.jsp">Crud</a><a href="Test.jsp">Test</a>
-
-	</nav>
+</nav>	
+<body> 
+<aside>
+<table id="asideTable">
+<tr>
+<th><span id="city"></span></th> <th><span></span></th> <th><span></span></th>
+<th><span id="ipNbr"></span></th>
+</tr> <tr>
+<td><span id="degree"></span></td> <td><span id="weather"></span></td> <td><span></span></td> <td><span></span></td>
+</tr> <tr>
+<td colspan="4"><span id="sunrise"></span></td> </tr>
+<tr>
+<td colspan="4"><span id="sunset"></span></td>
+</tr>
+</table> </aside>
 </body>
 </html>

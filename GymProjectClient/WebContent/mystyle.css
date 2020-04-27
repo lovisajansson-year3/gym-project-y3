@@ -102,6 +102,9 @@ float:left;
   border: 1px solid black;
   padding:10px;
   background:white;
-         
-
 }  
+
+aside {
+float: right;
+width: 30%; background-color: #f1f1f1;
+}
