@@ -38,6 +38,16 @@ public class TrainingSession implements Serializable{
 	private String roomNumber;
 	private Set<Booking> bookings;
 	
+	public TrainingSession(long sessionId, String instructor, Date startTime, String type, Integer length, String roomNumber, Set<Booking> bookings) {
+		this.sessionId = sessionId;
+		this.instructor = instructor;
+		this.startTime = startTime;
+		this.type = type;
+		this.length = length;
+		this.roomNumber = roomNumber;
+		this.bookings = bookings;
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="sessionId")

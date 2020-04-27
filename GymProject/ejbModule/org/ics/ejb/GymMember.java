@@ -36,6 +36,15 @@ public class GymMember implements Serializable{
 	private String address;
 	private Set<Booking> bookings;
 	
+	public GymMember(long memberId, String name, String email, String phonenumber, String address, Set<Booking> bookings) {
+		this.memberId = memberId;
+		this.name = name;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.bookings = bookings;
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="memberId")
