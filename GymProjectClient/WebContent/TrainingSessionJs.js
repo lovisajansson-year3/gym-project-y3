@@ -1,7 +1,46 @@
 $(document).ready(function () {
+        
+	$.ajax({
+        	type: 'GET', 
+			url: "http://localhost:8080/GymProjectClient/GymMemberServlet/",  
+			error: ajaxFindReturnError,  
+			success: ajaxFindReturnSuccess 
+		})
+			
+		function ajaxFindReturnSuccess(result, status, xhr) {
+			  console.log("members found")
+			  var len = result.length;
+              $("#memberId").empty();
+              for( var i = 0; i<len; i++){
+                    var id = result[i].memberId;
+                    console.log(id+name);
+                $("#memberId").append("<option value='"+id+"'>"+id+"</option>");
+             }
+         } 
+	function ajaxFindReturnError(result, status, xhr) { 
+		console.log("couldn't load members");
+	} 	
+	
+	
+	const inputs = document.querySelectorAll('input, select, textarea');
+	for(let input of inputs) {
+	  // Just before submit, the invalid event will fire, let's apply our class there.
+	  input.addEventListener('invalid', (event) => {
+	    input.classList.add('error');    
+	  }, false);
+	  input.addEventListener('change', (event) => {
+		    input.classList.add('valid');    
+		  }, false);
+	  
+	  // Optional: Check validity onblur
+	  input.addEventListener('blur', (event) => {
+	    input.checkValidity();
+	  })
+
+	}
 	$("#FindTrainingSession").click( function() {
 		var strValue = $("#sessionId").val(); 
-		if (strValue == ""|| strValue.isNaN()||strValue==null) { 
+		if (strValue == ""|| isNaN(strValue)||strValue==null) { 
 			$("#sessionId").attr("placeholder","enter valid sessionId" ); 
 		}else{
 			$.ajax({
@@ -30,7 +69,7 @@ $(document).ready(function () {
 		    var strInstructor = $("#instructor").val();
 			var strStartDate = $("#startDate").val();
 			var strStartTime = $("#startTime").val();
-			var strType = $("#type").val();
+			var	strType = $("#type").val();
 			var strRoomNumber = $("#roomNumber").val();
 			var date = strStartDate+" "+strStartTime;
 			var obj = { instructor: strInstructor, startTime: date, type: strType, roomNumber: strRoomNumber}; 
@@ -75,7 +114,7 @@ $(document).ready(function () {
 			var strType = $("#type").val();
 			var strRoomNumber = $("#roomNumber").val();
 			var date = strStartDate+strStartTime
-		if(sessionId==null||sessionId==""||sessionId.isNaN()){
+		if(sessionId==null||sessionId==""||isNaN(sessionId)){
 			$("#sessionId").val("");
 			$("#sessionId").attr("placeholder","fill in a valid sessionid" ); 
 		}else{
@@ -108,7 +147,7 @@ $(document).ready(function () {
 	})//updatebtn
 	$("#DeleteTrainingSession").click( function() {
 		var sessionId = $("#sessionId").val();
-		if(sessionId==null||sessionId==""||sessionId.isNaN()){
+		if(sessionId==null||sessionId==""||isNaN(sessionId)){
 			$("#sessionId").val("");
 			$("#sessionId").attr("placeholder","fill in a valid sessionid" ); 
 		}else{
@@ -140,8 +179,8 @@ $(document).ready(function () {
 	});//dltbtn
 		$("#FindByMemberId").click( function() { 
 			var strValue = $("#memberId").val(); 
-			if (strValue == ""||strValue.isNaN()) { 
-				$("#memberId").attr("placeholder","enter memberid"); 	
+			if (strValue == ""||isNaN(strValue)) { 
+				$("#memberId").attr("placeholder","enter valid memberid"); 	
 
 			}else{
 				$.ajax({
@@ -194,7 +233,7 @@ $(document).ready(function () {
 		alert("hej");
 		var strValue = $("#memberId").val();
 		alert(strValue);
-		if (strValue ==""||strValue==null||strValue.isNaN()) { 
+		if (strValue ==""||strValue==null||isNaN(strValue)) { 
 			$("#memberId").attr("placeholder","enter valid numeric memberId of member you would like to delete");
 
 		}else{
@@ -262,14 +301,14 @@ $(document).ready(function () {
 			var strAddress = $("#address").val();
 			var strEmail = $("#email").val();
 			var strPhoneNumber = $("#phoneNumber").val();
+			console.log(strMemberId);
 			if(strMemberId==null||strMemberId==""){
 				$("#memberId").attr("placeholder","enter memberId of member you'd like to update")
 			}else{
-			var obj = { name: strName, address: strAddress, email: strEmail, phoneNumber: strPhoneNumber}; 
+			var obj = { memberId: strMemberId ,name: strName, address: strAddress, email: strEmail, phoneNumber: strPhoneNumber}; 
 			var jsonString = JSON.stringify(obj); 
-			if (strMemberId != "") { 
 				$.ajax({  
-					type: "PUT", 
+					type: 'PUT', 
 					url: "http://localhost:8080/GymProjectClient/GymMemberServlet/"+strMemberId,   
 					data: jsonString,  
 					dataType:'json',  
@@ -285,14 +324,14 @@ $(document).ready(function () {
 					if(result.status=="404"){
 					$("#memberId").attr("placeholder","GymMember doesnt exist" ); 
 
-					}
+					
 				}
 				}
 			}
 			});//btnclick
 		$("#FindBooking").click( function() {
 			var strValue = $("#bookingId").val(); 
-			if (strValue == ""||strValue==null||strValue.isNaN()) { 
+			if (strValue == ""||strValue==null||isNaN(strValue)) { 
 				clearBookingFields();
 				$("#bookingId").attr("placeholder","enter numeric bookingId" ); 
 			}else{
@@ -322,7 +361,6 @@ $(document).ready(function () {
 			});//findbtn	
 
 	$("#CreateBooking").click( function() {
-		alert("create booking");
 	    var strBookingSessionId = $("#bookingSessionId").val();
 		var strBookingMemberId = $("#bookingMemberId").val();
 		var obj = { sessionId: strBookingSessionId, memberId: strBookingMemberId}; 
@@ -362,7 +400,7 @@ $(document).ready(function () {
 	});//createbtn
 	$("#DeleteBooking").click( function() {
 		var bookingId = $("#bookingId").val();
-		if(bookingId==null||bookingId==""||!bookingId.isNaN()){
+		if(bookingId==null||bookingId==""||isNaN(bookingId)){
 			clearBookingFields();
 			$("#bookingId").attr("placeholder","fill in a valid bookingId" ); 
 		}else{
@@ -425,6 +463,23 @@ $(document).ready(function () {
 		$("#phoneNumber").val("");
 		$("#memberId").val("");
 	} 
+
+	function  isBookingFormValid(){
+		var strBookingMemberId = document.getElementById("bookingMemberId");
+		var strBookingSessionId = document.getElementById("bookingSessionId");
+		var b = true; 
+		if (!strBookingMemberId.checkValidity()) { //value blank?
+			strBookingMemberId.placeholder=strBookingMemberId.validationMessage;
+			b=false;
+			}
+		if (!strBookingSessionId.checkValidity()) { //value blank?
+			strBookingSessionId.placeholder=strBookingSessionId.validationMessage;
+			b=false;
+		}
+		return b;
+		
+	}
+
 	function  isGymMemberFormValid(){
 		alert(")");
 		var strName = $("#name").val();

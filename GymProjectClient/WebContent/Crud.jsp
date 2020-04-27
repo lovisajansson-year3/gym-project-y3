@@ -47,7 +47,7 @@
 		<input type="button" value="Create Gym Member" name="CreateGymMember" id="CreateGymMember">
 
 			<br> <input type="button" value="Update Gym Member" name="UpdateGymMember" id="UpdateGymMember">
-			<br><input type="text" name="memberId" id="memberId">
+			<br><select name="memberId" id="memberId"></select>
 			<br><input type="button" name="FindByMemberId"  id="FindByMemberId" value="find by memberId" />
 		    <br><input type="button" name="DeleteByMemberId" id="DeleteByMemberId" value="delete by memberid" />
 		    <br><textarea id="show" rows="4" cols="50">
