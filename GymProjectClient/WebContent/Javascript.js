@@ -1,4 +1,20 @@
 $(document).ready(function () {
+	const inputs = document.querySelectorAll('input, select, textarea');
+	for(let input of inputs) {
+	  // Just before submit, the invalid event will fire, let's apply our class there.
+	  input.addEventListener('invalid', (event) => {
+	    input.classList.add('error');    
+	  }, false);
+	  input.addEventListener('change', (event) => {
+		    input.classList.add('valid');    
+		  }, false);
+	  
+	  // Optional: Check validity onblur
+	  input.addEventListener('blur', (event) => {
+	    input.checkValidity();
+	  })
+
+	}
 	$("#FindTrainingSession").click( function() {
 		var strValue = $("#sessionId").val(); 
 		if (strValue == ""|| strValue.isNaN()||strValue==null) { 
@@ -35,7 +51,7 @@ $(document).ready(function () {
 			var date = strStartDate+" "+strStartTime;
 			var obj = { instructor: strInstructor, startTime: date, type: strType, roomNumber: strRoomNumber}; 
 			var jsonString = JSON.stringify(obj); 
-			if(isTrainingSessionFormValid()==true){
+			if(isTrainingSessionFormValid()){
 				$.ajax({
 					type: "POST", 
 					url: "http://localhost:8080/GymProjectClient/TrainingSessionServlet/",  
@@ -60,9 +76,6 @@ $(document).ready(function () {
 					
 
 					}
-			}else{
-				$("#sessionId").val("");
-				$("#sessionId").attr("placeholder","fill in session details" ); 
 			}
 		
 	});//createbtn
@@ -234,7 +247,7 @@ $(document).ready(function () {
 			var strPhoneNumber = $("#phoneNumber").val();
 			var obj = { name: strName, address: strAddress, email: strEmail, phoneNumber: strPhoneNumber}; 
 			var jsonString = JSON.stringify(obj); 
-			if(isGymMemberFormValid()==true){
+			if(isGymMemberFormValid()){
 				$.ajax({
 					type: "POST", 
 					url: "http://localhost:8080/GymProjectClient/GymMemberServlet/",  
@@ -327,14 +340,7 @@ $(document).ready(function () {
 		var strBookingMemberId = $("#bookingMemberId").val();
 		var obj = { sessionId: strBookingSessionId, memberId: strBookingMemberId}; 
 		var jsonString = JSON.stringify(obj); 
-		if($("#bookingSessionId").val()==""||$("#bookingMemberId").val()==""
-			||$("#bookingSessionId").val().isNaN()||$("#bookingMemberId").val().isNaN()
-			 ||$("#bookingSessionId").val()==null||$("#bookingMemberId").val()==null){
-			clearBookingFields();
-			$("#bookingMemberId").attr("placeholder","fill in details" ); 
-			$("#bookingSessionId").attr("placeholder","fill in details" ); 
-
-		}else{
+		if(isBookingFormValid()){
 			$.ajax({
 				type: "POST", 
 				url: "http://localhost:8080/GymProjectClient/BookingServlet/",  
@@ -425,29 +431,43 @@ $(document).ready(function () {
 		$("#phoneNumber").val("");
 		$("#memberId").val("");
 	} 
+	function  isBookingFormValid(){
+		var strBookingMemberId = document.getElementById("bookingMemberId");
+		var strBookingSessionId = document.getElementById("bookingSessionId");
+		var b = true; 
+		if (!strBookingMemberId.checkValidity()) { //value blank?
+			strBookingMemberId.placeholder=strBookingMemberId.validationMessage;
+			b=false;
+			}
+		if (!strBookingSessionId.checkValidity()) { //value blank?
+			strBookingSessionId.placeholder=strBookingSessionId.validationMessage;
+			b=false;
+		}
+		
+	}
+
 	function  isGymMemberFormValid(){
-		alert(")");
-		var strName = $("#name").val();
-		var strAddress = $("#address").val();
-		var strEmail = $("#email").val();
-		var strPhoneNumber = $("#phoneNumber").val();
+		var strName = document.getElementById("name");
+		var strAddress = document.getElementById("address");
+		var strEmail = document.getElementById("email");
+		var strPhoneNumber = document.getElementById("phoneNumber");
 		var b = true; 
 		
-		if (strName == null || strName == "") { //value blank?
-			
-			$("#name").attr("placeholder","Movie id, please." );
+		if (!strName.checkValidity()) { //value blank?
+			strName.placeholder=strName.validationMessage;
 			b=false;
 			}
-		if (strAddress == null || strAddress == "") { //value blank?
-			$("#address").attr("placeholder","Movie id, please." );
+		if (!strAddress.checkValidity()) { //value blank?
+			strAddress.placeholder=strAddress.validationMessage;
 			b=false;
 			}
-		if (strEmail == null || strEmail == "") { //value blank?
-			$("#email").attr("placeholder","Movie id, please." );
+		if (!strEmail.checkValidity()) { //value blank?
+			strEmail.placeholder=strEmail.validationMessage;
 			b=false;
 			}
-		if (strPhoneNumber == null || strPhoneNumber == "") { //value blank?
-			$("#phoneNumber").attr("placeholder","phoneNumber, please." );
+		if (!strPhoneNumber.checkValidity()) { //value blank?
+			strPhoneNumber.value="";
+			strPhoneNumber.placeholder=strPhoneNumber.validationMessage;
 			b=false;
 			 }
 		return b;
