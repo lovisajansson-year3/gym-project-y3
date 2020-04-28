@@ -33,6 +33,7 @@ public class Booking implements Serializable{
 	private GymMember gymMember;
 	private TrainingSession trainingSession;
 
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="bookingId")

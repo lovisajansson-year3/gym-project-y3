@@ -85,7 +85,7 @@ public class TrainingSessionTest extends TestCase {
 	}
 
 	public void testSetStartTime() {
-		Date expectedStartTime2 = 
+		Date expectedStartTime2 = expectedStartTime;
 		session1.setStartTime(expectedStartTime);
 		assertEquals(expectedStartTime, session1.getStartTime());
 	}
