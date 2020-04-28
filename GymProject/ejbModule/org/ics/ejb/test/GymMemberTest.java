@@ -31,8 +31,8 @@ public class GymMemberTest extends TestCase {
 		expectedAddress="Lisagatan 2";
 		expectedBookings=null;
 		
-		member1 = new GymMember();//expectedMemberId, expectedName, expectedEmail, expectedPhoneNumber, expectedAddress);
-		member2 = new GymMember();//(4567, "Lena", "lena@lena.com", "0704567", "Lenagatan 1");
+		member1 = new GymMember(expectedMemberId, expectedName, expectedEmail, expectedPhoneNumber, expectedAddress, expectedBookings);
+		member2 = new GymMember(4567, "Lena", "lena@lena.com", "0704567", "Lenagatan 1", null);
 	}
 
 	protected void tearDown() throws Exception {

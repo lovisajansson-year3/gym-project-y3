@@ -16,8 +16,8 @@ public class BookingTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		long expectedBookingId = 122;
-		GymMember expectedGymMember = (2323, "Lena", "lena@gmail.com", 070, "Lenagatan 2", "Spinning");
+		expectedBookingId = 122;
+		expectedGymMember = (2323, "Lena", "lena@gmail.com", 070, "Lenagatan 2", "Spinning");
 		TrainingSession expectedTrainingSession;
 	}
 
