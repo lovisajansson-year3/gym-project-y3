@@ -8,12 +8,15 @@
 <meta charset="ISO-8859-1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> 
-<script src="TrainingSessionJs.js"></script>
+<script src="Javascript.js"></script>
 <link rel="stylesheet" type="text/css" href="mystyle.css">
+<script>
 
+
+</script>
 </head>
 <body>
-<script src="TrainingSessionJs.js"></script>
+<script src="Javascript.js"></script>
 
 	<header>
 		<h1>Header</h1>
@@ -33,12 +36,12 @@
 				>
 				<fieldset id="GymMemberFS">
 					<legend>Add Gym Member:</legend>
-					Full name:<br> <input type="text" name="name" id="name" required >
+					Full name:<br> <input type="text" name="name" id="name" required onblur="this.checkValidity();" >
 					<br> Email:<br> <input type="text" name="email"
-						id="email" >
+						id="email" required>
 					<br> Phone number:<br> <input
-						type="text" name="phoneNumber" id="phoneNumber" > <br>
-					Address:<br> <input type="text" name="address" id="address" >
+						type="number" name="phoneNumber" id="phoneNumber" required> <br>
+					Address:<br> <input type="text" name="address" id="address" required>
 					
 				</fieldset>
 			</form>					
@@ -47,7 +50,9 @@
 		<input type="button" value="Create Gym Member" name="CreateGymMember" id="CreateGymMember">
 
 			<br> <input type="button" value="Update Gym Member" name="UpdateGymMember" id="UpdateGymMember">
+
 			<br><select name="memberId" id="memberId"></select>
+
 			<br><input type="button" name="FindByMemberId"  id="FindByMemberId" value="find by memberId" />
 		    <br><input type="button" name="DeleteByMemberId" id="DeleteByMemberId" value="delete by memberid" />
 		    <br><textarea id="show" rows="4" cols="50">
@@ -108,9 +113,9 @@
 				>
 			<fieldset id="BookingFS">
 				<legend>Add Booking:</legend>
-				MemberId:<br> <input type="text" name="bookingMemberId" id="bookingMemberId" >
-				<br> TrainingSessionId number:<br> <input type="text"
-					name="bookingSessionId" id="bookingSessionId" > <br> 
+				MemberId:<br> <input type="number" name="bookingMemberId" id="bookingMemberId" required >
+				<br> TrainingSessionId number:<br> <input type="number"
+					name="bookingSessionId" id="bookingSessionId" required> <br> 
 			</fieldset>
 			</form>
 <input type="button" id="CreateBooking" name="CreateBooking"value="Create Booking" >

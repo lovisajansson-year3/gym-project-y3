@@ -38,6 +38,44 @@ $(document).ready(function () {
 	  })
 
 	}
+
+	$.ajax({
+		method: "GET",
+		url: "http://api.ipstack.com/194.47.249.17?access_key=d88d508efc896b6eb4b24f06724b8930", error: ajaxReturn_Error,
+		success: ajaxReturn_Success
+		})
+		function ajaxReturn_Success(result, status, xhr) { ParseJsonFileWeather(result); }
+		function ajaxReturn_Error(result, status, xhr) { console.log("Find ip-address: "+status);
+		}
+		});
+
+		function ParseJsonFile(result) { 
+		var lat = result.latitude;
+		var long = result.longitude; 
+		var city = result.city;
+		var ipNbr = result.ip
+		$("#city").text(city);
+		$("#ipNbr").text(ipNbr);
+		 }
+
+		$.ajax({
+		method: "GET", 
+		url: "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&units= metric"+ "&APPID=f6acadbe8101f56f69b6f616a99403fa",
+		error: ajaxWeatherReturn_Error,
+		success: ajaxWeatherReturn_Success })
+		function ajaxWeatherReturn_Success(result, status, xhr) { 
+		var sunrise = result.sys.sunrise;
+		var sunset = result.sys.sunset;
+		var sunriseDate = new Date(sunrise*1000);
+		var timeStrSunrise = sunriseDate.toLocaleTimeString(); 
+		var sunsetDate = new Date(sunset*1000);
+		var timeStrSunset = sunsetDate.toLocaleTimeString();
+		$("#sunrise").text("Sunrise: "+timeStrSunrise); $("#sunset").text("Sunset: "+timeStrSunset);
+		$("#weather").text(result.weather[0].main);
+		$("#degree").text(result.main.temp+" \u2103"); }
+		function ajaxWeatherReturn_Error(result, status, xhr) { alert("Error i OpenWeaterMap Ajax"); console.log("Ajax-find movie: "+status);
+		}
+		 
 	$("#FindTrainingSession").click( function() {
 		var strValue = $("#sessionId").val(); 
 		if (strValue == ""|| isNaN(strValue)||strValue==null) { 
@@ -74,7 +112,7 @@ $(document).ready(function () {
 			var date = strStartDate+" "+strStartTime;
 			var obj = { instructor: strInstructor, startTime: date, type: strType, roomNumber: strRoomNumber}; 
 			var jsonString = JSON.stringify(obj); 
-			if(isTrainingSessionFormValid()==true){
+			if(isTrainingSessionFormValid()){
 				$.ajax({
 					type: "POST", 
 					url: "http://localhost:8080/GymProjectClient/TrainingSessionServlet/",  
@@ -99,9 +137,6 @@ $(document).ready(function () {
 					
 
 					}
-			}else{
-				$("#sessionId").val("");
-				$("#sessionId").attr("placeholder","fill in session details" ); 
 			}
 		
 	});//createbtn
@@ -273,7 +308,7 @@ $(document).ready(function () {
 			var strPhoneNumber = $("#phoneNumber").val();
 			var obj = { name: strName, address: strAddress, email: strEmail, phoneNumber: strPhoneNumber}; 
 			var jsonString = JSON.stringify(obj); 
-			if(isGymMemberFormValid()==true){
+			if(isGymMemberFormValid()){
 				$.ajax({
 					type: "POST", 
 					url: "http://localhost:8080/GymProjectClient/GymMemberServlet/",  
@@ -365,14 +400,7 @@ $(document).ready(function () {
 		var strBookingMemberId = $("#bookingMemberId").val();
 		var obj = { sessionId: strBookingSessionId, memberId: strBookingMemberId}; 
 		var jsonString = JSON.stringify(obj); 
-		if($("#bookingSessionId").val()==""||$("#bookingMemberId").val()==""
-			||$("#bookingSessionId").val().isNaN()||$("#bookingMemberId").val().isNaN()
-			 ||$("#bookingSessionId").val()==null||$("#bookingMemberId").val()==null){
-			clearBookingFields();
-			$("#bookingMemberId").attr("placeholder","fill in details" ); 
-			$("#bookingSessionId").attr("placeholder","fill in details" ); 
-
-		}else{
+		if(isBookingFormValid()){
 			$.ajax({
 				type: "POST", 
 				url: "http://localhost:8080/GymProjectClient/BookingServlet/",  
@@ -432,8 +460,6 @@ $(document).ready(function () {
 					}
 				}	
 	});//dltbtn
-		
-});
 	function ParseJsonFileMovie(result) { 
 		$("#name").val(result.name); 
 		$("#address").val(result.address);
@@ -463,7 +489,6 @@ $(document).ready(function () {
 		$("#phoneNumber").val("");
 		$("#memberId").val("");
 	} 
-
 	function  isBookingFormValid(){
 		var strBookingMemberId = document.getElementById("bookingMemberId");
 		var strBookingSessionId = document.getElementById("bookingSessionId");
@@ -481,28 +506,27 @@ $(document).ready(function () {
 	}
 
 	function  isGymMemberFormValid(){
-		alert(")");
-		var strName = $("#name").val();
-		var strAddress = $("#address").val();
-		var strEmail = $("#email").val();
-		var strPhoneNumber = $("#phoneNumber").val();
+		var strName = document.getElementById("name");
+		var strAddress = document.getElementById("address");
+		var strEmail = document.getElementById("email");
+		var strPhoneNumber = document.getElementById("phoneNumber");
 		var b = true; 
 		
-		if (strName == null || strName == "") { //value blank?
-			
-			$("#name").attr("placeholder","Movie id, please." );
+		if (!strName.checkValidity()) { //value blank?
+			strName.placeholder=strName.validationMessage;
 			b=false;
 			}
-		if (strAddress == null || strAddress == "") { //value blank?
-			$("#address").attr("placeholder","Movie id, please." );
+		if (!strAddress.checkValidity()) { //value blank?
+			strAddress.placeholder=strAddress.validationMessage;
 			b=false;
 			}
-		if (strEmail == null || strEmail == "") { //value blank?
-			$("#email").attr("placeholder","Movie id, please." );
+		if (!strEmail.checkValidity()) { //value blank?
+			strEmail.placeholder=strEmail.validationMessage;
 			b=false;
 			}
-		if (strPhoneNumber == null || strPhoneNumber == "") { //value blank?
-			$("#phoneNumber").attr("placeholder","phoneNumber, please." );
+		if (!strPhoneNumber.checkValidity()) { //value blank?
+			strPhoneNumber.value="";
+			strPhoneNumber.placeholder=strPhoneNumber.validationMessage;
 			b=false;
 			 }
 		return b;
