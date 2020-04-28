@@ -61,27 +61,32 @@ public class TrainingSessionTest extends TestCase {
 
 	public void testGetSessionId() {
 		assertNotNull(session1);
-//		assertEquals(expectedSessionId, session1.getSessionId());
+
+		//assertEquals(expectedSessionId, session1.getSessionId());
+
 	}
 
 	public void testSetSessionId() {
 		long expectedSessionId2 = 22;
 		session1.setSessionId(expectedSessionId2);
-	//	assertEquals(expectedSessionId2, session2.getSessionId());
+
+		//assertEquals(expectedSessionId2, session2.getSessionId());
 	}
 
 	public void testGetInstructor() {
-//		assertEquals(expectedInstructor, session1.getInstructor());
+		//assertEquals(expectedInstructor, session1.getInstructor());
+
 	}
 
 	public void testSetInstructor() {
 		String expectedInstructor2 = "Björn";
 		session1.setInstructor(expectedInstructor2);
-//		assertEquals(expectedInstructor2, session2.getInstructor());
+
+		//assertEquals(expectedInstructor2, session2.getInstructor());
 	}
 
 	public void testGetStartTime() {
-//		assertEquals(expectedStartTime, session1.getStartTime());
+		//assertEquals(expectedStartTime, session1.getStartTime());
 	}
 
 	public void testSetStartTime() {
@@ -91,13 +96,17 @@ public class TrainingSessionTest extends TestCase {
 	}
 
 	public void testGetType() {
-//		assertEquals(expectedType, session1.getType());
+
+		//assertEquals(expectedType, session1.getType());
+
 	}
 
 	public void testSetType() {
 		String expectedType2 = "Running";
 		session1.setType(expectedType2);
-//		assertEquals(expectedType, session1.getType());
+
+		//assertEquals(expectedType, session1.getType());
+
 	}
 
 	public void testGetLength() {
@@ -107,17 +116,21 @@ public class TrainingSessionTest extends TestCase {
 	public void testSetLength() {
 		Integer expectedLength2 = 20;
 		session1.setLength(expectedLength2);
-//		assertEquals(expectedLength, session1.getLength());
+
+		//assertEquals(expectedLength, session1.getLength());
 	}
 
 	public void testGetRoomNumber() {
-//		assertEquals(expectedRoomNumber, session1.getRoomNumber());
+		//assertEquals(expectedRoomNumber, session1.getRoomNumber());
+
 	}
 
 	public void testSetRoomNumber() {
 		String expectedRoomNumber2 = "20";
 		session1.setRoomNumber(expectedRoomNumber2);
-//		assertEquals(expectedRoomNumber, session1.getRoomNumber());
+
+		//assertEquals(expectedRoomNumber, session1.getRoomNumber());
+
 	}
 
 	public void testGetBookings() {
