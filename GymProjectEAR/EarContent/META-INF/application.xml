@@ -10,4 +10,10 @@
       <context-root>GymProjectClient</context-root>
     </web>
   </module>
+  <module>
+    <web>
+      <web-uri>TestGymProject_JUnitEE.war</web-uri>
+      <context-root>TestGymProject_JUnitEE</context-root>
+    </web>
+  </module>
 </application>

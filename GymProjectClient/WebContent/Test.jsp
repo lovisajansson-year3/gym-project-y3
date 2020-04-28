@@ -26,5 +26,14 @@
 			href="Crud">Crud</a><a class="active" href="Test.jsp">Home</a>
 
 	</nav>
+	<section id="test">
+		<p>Här kan du välja en eller flera av följande test:</p>
+		<form action="TestServlet"method="get"name="youPickItForm">
+			<select name="suite"size="2"multiple>
+				<option value="ics.junit.ejb.GymMemberBeanTest">ics.junit.ejb.GymMemberBeanTest</option>
+				<option value="ics.junit.ejb.TrainingSessionBeanTest">ics.junit.ejb.TrainingSessionBeanTest</option>
+				<option value=ics.junit.ejb.BookingBeanTest">ics.junit.ejb.BookingBeanTest</option>
+			</select>
+			<input type="submit"value="Run"/></form>
 </body>
 </html>

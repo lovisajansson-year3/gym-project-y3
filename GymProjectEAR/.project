@@ -5,6 +5,7 @@
 	<projects>
 		<project>GymProject</project>
 		<project>GymProjectClient</project>
+		<project>TestGymProject_JUnitEE</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
