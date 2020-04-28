@@ -1,4 +1,26 @@
 @charset "ISO-8859-1";
+input.error,
+select.error,
+textarea.error {
+  outline: none;
+  border-color: red;
+  border-width: 1px;
+  border-style: solid;
+  
+  // Use CSS to visually restore valid fields
+  }
+
+input.valid,
+select.valid,
+textarea.valid {
+  outline: none;
+  border-color: green;
+  border-width: 1px;
+  border-style: solid;
+  
+  // Use CSS to visually restore valid fields
+  }
+
 body {
   background-color: lightblue;
   text-align:center;
@@ -80,6 +102,9 @@ float:left;
   border: 1px solid black;
   padding:10px;
   background:white;
-         
-
 }  
+
+aside {
+float: right;
+width: 30%; background-color: #f1f1f1;
+}

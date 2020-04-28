@@ -34,7 +34,7 @@ public class TrainingSession implements Serializable{
 	private String instructor;
 	private Date startTime;
 	private String type;
-	private Integer length; 
+	private Integer length=1; 
 	private String roomNumber;
 	private Set<Booking> bookings;
 	

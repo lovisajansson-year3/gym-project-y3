@@ -8,12 +8,16 @@
 <meta charset="ISO-8859-1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-<script src="js.js"></script>
+<script src="Javascript.js"></script>
 <link rel="stylesheet" type="text/css" href="mystyle.css">
+<script>
 
+
+</script>
 </head>
 <body>
+<script src="Javascript.js"></script>
+
 	<header>
 		<h1>Header</h1>
 		<p>My supercool header</p>
@@ -27,33 +31,33 @@
 		<p>Create, Read, Update or Delete</p>
 
 		<section id="subsection">
-			<form name="gymMemberRegistration"
+			<form name="GymMemberRegistration"
 				id="GymMemberRegistration"
 				>
 				<fieldset id="GymMemberFS">
 					<legend>Add Gym Member:</legend>
-					Full name:<br> <input type="text" name="name" id="name" >
+					Full name:<br> <input type="text" name="name" id="name" required onblur="this.checkValidity();" >
 					<br> Email:<br> <input type="text" name="email"
-						id="email" >
+						id="email" required>
 					<br> Phone number:<br> <input
-						type="text" name="phoneNumber" id="phoneNumber" > <br>
-					Address:<br> <input type="text" name="address" id="address" >
+						type="number" name="phoneNumber" id="phoneNumber" required> <br>
+					Address:<br> <input type="text" name="address" id="address" required>
+					
 				</fieldset>
-			</form>
-		</section>
-		<br> <input type="button" value="Create Gym Member" name="createGymMember" id="CreateGymMember">
+			</form>					
+
+		</section>					
+		<input type="button" value="Create Gym Member" name="CreateGymMember" id="CreateGymMember">
+
 			<br> <input type="button" value="Update Gym Member" name="UpdateGymMember" id="UpdateGymMember">
-			<br><input type="text" name="memberId" id="memberId">
-			<br><input type="button" name="find"  id="find" value="find by memberId" />
-			<br><input type="button" name="findAll"  id="findAll" value="find all" />
-		    <br><input type="button" name="deleteByMemberId" id"deleteByMemberId" value="delete by memberid" />
+			<br><input type="number" name="memberId" id="memberId">
+			<br><input type="button" name="FindByMemberId"  id="FindByMemberId" value="find by memberId" />
+		    <br><input type="button" name="DeleteByMemberId" id="DeleteByMemberId" value="delete by memberid" />
 		    <br><textarea id="show" rows="4" cols="50">
 					</textarea>
 		<section id="subsection">
 		<form name="trainingSessionRegistration"
 				id="TrainingSessionRegistration"
-				action="ControllerServlet"
-				method= POST
 				>
 			<fieldset id="TrainingSessionFS">
 				<legend>Add TrainingSession:</legend>
@@ -90,30 +94,34 @@
 					<option value="EC01">EC01</option>
 					<option value="EC101">EC101</option>
 				</select><br>
-				<br> <input type="submit" value="Create Training Session" name="button_clicked">
 				<%! String s1 = ""; %>
     <span class="error">${messages.alreadyExists}</span>
 		</fieldset>
 		</form>
-		
 		</section>
+<br> <input type="button" value="Create Training Session" name="CreateTrainingSession" id="CreateTrainingSession">
+<br><input type="text" name="sessionId" id="sessionId">
+<br> <input type="button" value="Find Training Session" name="FindTrainingSession" id="FindTrainingSession">
+<br> <input type="button" value="Update Training Session" name="UpdateTrainingSession" id="UpdateTrainingSession">
+<br> <input type="button" value="Delete Training Session" name="DeleteTrainingSession" id="DeleteTrainingSession">
+		
 		<section id="subsection">
 		<form name="BookingRegistration"
 				id="BookingRegistration"
-				action="ControllerServlet"
-				method= POST
 				>
 			<fieldset id="BookingFS">
-				<legend>Add Gym Member:</legend>
-				Full name:<br> <input type="text" name="name" id="name" required>
-				<br> Email:<br> <input type="text" name="email" id="email" required>
-				<br> Phone number:<br> <input type="text"
-					name="phoneNumber" id="phoneNumber" required> <br> Address:<br>
-				<input type="text" name="address" id="address" required> <br> <input
-					type="submit" value="Create Gym Member">
+				<legend>Add Booking:</legend>
+				MemberId:<br> <input type="number" name="bookingMemberId" id="bookingMemberId" required >
+				<br> TrainingSessionId number:<br> <input type="number"
+					name="bookingSessionId" id="bookingSessionId" required> <br> 
 			</fieldset>
 			</form>
-		</section>
+<input type="button" id="CreateBooking" name="CreateBooking"value="Create Booking" >
+<br><input type="text" name="bookingId" id="bookingId">
+<br> <input type="button" value="Find Booking" name="FindBooking" id="FindBooking">
+<br> <input type="button" value="Delete Booking" name="DeleteBooking" id="DeleteBooking">
+
+</section>
 	</section>
 
 </body>

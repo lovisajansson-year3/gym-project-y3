@@ -3,6 +3,10 @@ package org.ics.servlet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -18,14 +22,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ics.ejb.Booking;
 import org.ics.ejb.GymMember;
+import org.ics.ejb.TrainingSession;
 import org.ics.facade.FacadeLocal;
 
 /**
- * Servlet implementation class CRUD
+ * Servlet implementation class BookingServlet
  */
-@WebServlet("/GymMemberServlet/*")
-public class GymMemberServlet extends HttpServlet {
+@WebServlet("/BookingServlet")
+public class BookingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	@EJB
@@ -33,7 +39,7 @@ public class GymMemberServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GymMemberServlet() {
+    public BookingServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,89 +49,64 @@ public class GymMemberServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
 		String pathInfo = request.getPathInfo();
 		System.out.println(pathInfo);
 		if
 		(pathInfo==null||pathInfo.equals("/")) {
-			System.out.println("alla");
-			List<GymMember> members = facade.findAll(); 
-			sendAsJson(response, members); 
+			List<Booking> bookings = facade.findAllBookings();
+			sendAsJson(response, bookings); 
 			System.out.println(pathInfo);
 			
-			return;
+			return; //FIXA FIND ALL METOD	
 		}
 		String[] splits = pathInfo.split("/");
 		if(splits.length!=2) {
-			System.out.println("alla2");
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
 		String id = splits[1];
-		GymMember member = facade.findByMemberId(Integer.parseInt(id));
-		if(member!=null) {
-			sendAsJson(response,member);
+		Booking booking = facade.findByBookingId(Integer.parseInt(id));
+		if(booking==null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND, "session doesnt exist");
+			
 		}else {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND, "member doesnt exist");
-		}
-		
-	}
+		sendAsJson(response,booking);
+		}	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String pathInfo = request.getPathInfo(); 
 		System.out.println(pathInfo);
 		if(pathInfo == null || pathInfo.equals("/")){ 
 			BufferedReader reader = request.getReader();
-			GymMember m = parseJsonGymMember(reader); 
-			try { 
-				m = facade.createGymMember(m); 
-			}catch(Exception e) {
-				System.out.println("facade error creating member");
-			} 
-			sendAsJson(response, m); 
+			Booking b = parseJsonBooking(reader);
+			if(b.getTrainingSession()==null||b.getGymMember()==null) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND, "session or gymMember doesnt exist");
+
+			}else {
+				try { 
+					b = facade.createBooking(b); 
+					System.out.println(b.getBookingId()+ " created");
+				}catch(Exception e) {
+					System.out.println("duplicate key"); 
+					} 
+				sendAsJson(response,b ); 
 			}
 		}
-	
-
+		}
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pathInfo = request.getPathInfo(); 
-		if(pathInfo == null || pathInfo.equals("/")){ 
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST); 
-			return; 
-			}
-		String[] splits = pathInfo.split("/"); 
-		if(splits.length != 2) { 
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST); 
-			return; 
-			} 
-		String id = splits[1]; 
-		BufferedReader reader = request.getReader(); 
-		GymMember m = parseJsonGymMember(reader); 
-		if(facade.findByMemberId(Long.parseLong(id))!=null) {
-			try { 
-				m = facade.updateGymMember(m); 
-				sendAsJson(response, m); 
-			}catch(Exception e) { 
-				System.out.println("facade Update Error"); 
-			} 
-		}else {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND, "member doesnrt exist");
-			return;
-		}
+		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String pathInfo = request.getPathInfo(); 
 		if(pathInfo == null || pathInfo.equals("/")){
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
@@ -137,54 +118,48 @@ public class GymMemberServlet extends HttpServlet {
 			return; 
 			} 
 		String id = splits[1]; 
-		GymMember m = facade.findByMemberId(Integer.parseInt(id)); 
-		if (m == null) { 
+		Booking b = facade.findByBookingId(Integer.parseInt(id)); 
+		if (b == null) { 
 			response.sendError(HttpServletResponse.SC_NOT_FOUND ); 
 			return;
 		}else {
 			try {
-				facade.deleteGymMember(Integer.parseInt(id));   
-				sendAsJson(response, m); 
+				facade.deleteBooking(Integer.parseInt(id));   
+				sendAsJson(response, b); 
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 				response.sendError(HttpServletResponse.SC_CONFLICT ); 
 				return;
-			}
-			
+			}	
 		}
 	}
-	private void sendAsJson(HttpServletResponse response, GymMember m)throws IOException{
+
+	private void sendAsJson(HttpServletResponse response, Booking b)throws IOException{
 		PrintWriter out = response.getWriter(); 
 		response.setContentType("application/json"); 
-		if (m != null) { 
+		if (b != null) { 
 		
-			out.print("{\"name\":"); 
-			out.print("\"" + m.getName() + "\"");
-			out.print(",\"address\":"); 
-			out.print("\"" +m.getAddress()+"\"");
-			out.print(",\"email\":"); 
-			out.print("\"" +m.getEmail()+"\"");
+			out.print("{\"bookingId\":"); 
+			out.print("\"" + b.getBookingId() + "\"");
 			out.print(",\"memberId\":"); 
-			out.print("\"" +m.getMemberId()+"\"");
-			out.print(",\"phoneNumber\":"); 
-			out.print("\"" +m.getPhoneNumber()+"\"}"); 
+			out.print("\"" +b.getGymMember().getMemberId()+"\"");
+			out.print(",\"sessionId\":"); 
+			out.print("\"" +b.getTrainingSession().getSessionId()+"\"}"); 
 			} else { 
 				out.print("[ ]"); 
 				} 
 		out.flush(); } 
-	private void sendAsJson(HttpServletResponse response, List<GymMember> members) throws IOException { 
+	private void sendAsJson(HttpServletResponse response, List<Booking> bookings) throws IOException { 
 		
 		PrintWriter out = response.getWriter(); 
 		response.setContentType("application/json"); 
-		if (members != null) { 
+		if (bookings != null) { 
 			JsonArrayBuilder array = Json.createArrayBuilder(); 
-			for (GymMember m : members) { 
+			for (Booking b : bookings) { 
 				JsonObjectBuilder o = Json.createObjectBuilder(); 
-				o.add("memberId", m.getMemberId()); 
-				o.add("name", m.getName()); 
-				o.add("address", m.getAddress()); 
-				o.add("phoneNumber", m.getPhoneNumber()); 
-				o.add("email", m.getEmail()); 
+				o.add("bookingId", b.getBookingId()); 
+				o.add("sessionId", b.getTrainingSession().getSessionId()); 
+				o.add("memberId", b.getGymMember().getMemberId()); 
 				array.add(o); 
 				} 
 			JsonArray jsonArray = array.build(); 
@@ -193,19 +168,18 @@ public class GymMemberServlet extends HttpServlet {
 				out.print("[]"); 
 				} 
 			out.flush(); } 
-	private GymMember parseJsonGymMember(BufferedReader br) { 
+	private Booking parseJsonBooking(BufferedReader br) { 
 		JsonReader jsonReader = null;    
 		JsonObject jsonRoot = null;    
 		jsonReader = Json.createReader(br);    
 		jsonRoot = jsonReader.readObject();    
-		GymMember gymMember = new GymMember();    
-		gymMember.setName(jsonRoot.getString("name")); 
-		gymMember.setAddress(jsonRoot.getString("address"));    
-		gymMember.setEmail(jsonRoot.getString("email"));    
-		gymMember.setPhoneNumber(jsonRoot.getString("phoneNumber"));    
-
-		return gymMember; 
+		Booking b = new Booking();    
+		TrainingSession t = facade.findBySessionId(Integer.parseInt((jsonRoot.getString("sessionId"))));
+		GymMember g = facade.findByMemberId(Integer.parseInt((jsonRoot.getString("memberId"))));    
+		b.setTrainingSession(t); 
+		b.setGymMember(g);    
+		return b; 
 		} 
-	
 
+		
 }
