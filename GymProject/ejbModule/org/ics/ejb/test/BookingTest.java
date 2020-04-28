@@ -33,6 +33,7 @@ public class BookingTest extends TestCase {
 	private GymMember g1(int i, String string, String string2, int j, String string3, String string4) {
 		// TODO Auto-generated method stub
 		return null;
+
 	}
 
 	protected void tearDown() throws Exception {

@@ -2,17 +2,22 @@ package org.ics.ejb.test;
 
 import junit.framework.TestCase;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 
 import org.ics.ejb.Booking;
 import org.ics.ejb.TrainingSession;
 
+
 public class TrainingSessionTest extends TestCase {
+	
 	
 	long expectedSessionId;
 	String expectedInstructor;
-	Date expectedStartTime;
+	Date expectedStartTime; //<= new Date(int year, int month, int date, int hrs, int min, int sec);
 	String expectedType;
 	Integer expectedLength; 
 	String expectedRoomNumber;
@@ -20,21 +25,31 @@ public class TrainingSessionTest extends TestCase {
 	TrainingSession session1;
 	TrainingSession session2;
 
+
 	public TrainingSessionTest(String name) {
 		super(name);
 	}
 
 	protected void setUp() throws Exception {
 		super.setUp();
+		
 		expectedSessionId = 1111;
 		expectedInstructor = "Tove";
-		//expectedStartTime = 2020-02-03;
+		String sdate = "2020-06-08 10:00:00.000";
+		DateFormat d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+				expectedStartTime = null;
+				try {
+					expectedStartTime = d.parse(sdate);
+				} catch (ParseException e) {
+					
+				}
 		expectedType = "Spinning";
 		expectedLength = 1; 
 		expectedRoomNumber ="Room 1";
 		expectedBookings = null;
 		session1 = new TrainingSession();
 		session2 = new TrainingSession();
+	
 		
 	}
 
@@ -71,7 +86,7 @@ public class TrainingSessionTest extends TestCase {
 
 	public void testSetStartTime() {
 		Date expectedStartTime2 = 
-		session1.setStartTime(expectedStartTime2);
+		session1.setStartTime(expectedStartTime);
 		assertEquals(expectedStartTime, session1.getStartTime());
 	}
 
