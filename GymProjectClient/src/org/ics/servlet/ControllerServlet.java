@@ -79,8 +79,8 @@ public class ControllerServlet extends HttpServlet {
         	t.setRoomNumber(request.getParameter("roomNumber"));
         	String time= request.getParameter("startTime");
         	String startDate = request.getParameter("startDate");
-        	String date = startDate +" "+ time+":00.00";
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SS");
+        	String date = startDate +" "+ time+":00.000";
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
             Date d = null;
 			try {
 				d=dateFormat.parse(date);
