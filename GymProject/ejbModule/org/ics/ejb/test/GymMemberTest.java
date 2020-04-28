@@ -103,5 +103,12 @@ public class GymMemberTest extends TestCase {
 		member1.setBookings(expectedBookings2);
 		assertEquals(expectedBookings2, member1.getBookings());
 	}
+	
+	public void testEquals() {
+		assertTrue(!member1.equals(null));
+		assertEquals(member1, member1);
+		assertEquals(member1, new GymMember(expectedMemberId, expectedName, expectedEmail, expectedPhoneNumber, expectedAddress, expectedBookings));      
+		assertTrue(!member1.equals(member2));   }
+	}
 
-}
+

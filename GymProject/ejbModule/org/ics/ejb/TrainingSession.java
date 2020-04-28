@@ -48,6 +48,10 @@ public class TrainingSession implements Serializable{
 		this.bookings = bookings;
 	}
 	
+	public TrainingSession() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="sessionId")
