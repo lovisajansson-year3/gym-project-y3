@@ -59,7 +59,7 @@ public class TrainingSessionServlet extends HttpServlet {
 			sendAsJson(response, sessions); 
 			System.out.println(pathInfo);
 			
-			return; //FIXA FIND ALL METOD	
+			return;	
 		}
 		String[] splits = pathInfo.split("/");
 		if(splits.length!=2) {

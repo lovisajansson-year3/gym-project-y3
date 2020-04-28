@@ -102,7 +102,7 @@
 		</form>
 		</section>
 <br> <input type="button" value="Create Training Session" name="CreateTrainingSession" id="CreateTrainingSession">
-<br><input type="text" name="sessionId" id="sessionId">
+<br><select name="sessionId" id="sessionId"></select>
 <br> <input type="button" value="Find Training Session" name="FindTrainingSession" id="FindTrainingSession">
 <br> <input type="button" value="Update Training Session" name="UpdateTrainingSession" id="UpdateTrainingSession">
 <br> <input type="button" value="Delete Training Session" name="DeleteTrainingSession" id="DeleteTrainingSession">
@@ -119,7 +119,7 @@
 			</fieldset>
 			</form>
 <input type="button" id="CreateBooking" name="CreateBooking"value="Create Booking" >
-<br><input type="text" name="bookingId" id="bookingId">
+<br><select name="memberId" id="memberId"></select>
 <br> <input type="button" value="Find Booking" name="FindBooking" id="FindBooking">
 <br> <input type="button" value="Delete Booking" name="DeleteBooking" id="DeleteBooking">
 

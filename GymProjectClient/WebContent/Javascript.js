@@ -1,5 +1,7 @@
 $(document).ready(function () {
-populate();
+populateGymMembers();
+populateTrainingSessions();
+populateBookings();
 getWeather();
 const inputs = document.querySelectorAll('input, select, textarea');
 	for(let input of inputs) {
@@ -17,7 +19,7 @@ const inputs = document.querySelectorAll('input, select, textarea');
 	  })
 
 	}  
-function populate(){
+function populateGymMembers(){
 	$.ajax({
         	type: 'GET', 
 			url: "http://localhost:8080/GymProjectClient/GymMemberServlet/",  
@@ -39,7 +41,49 @@ function populate(){
 			console.log("couldn't load members");
 	} 	
   }
-	
+function populateTrainingSessions(){
+	$.ajax({
+        	type: 'GET', 
+			url: "http://localhost:8080/GymProjectClient/TrainingSessionServlet/",  
+			error: ajaxFindReturnError,  
+			success: ajaxFindReturnSuccess 
+		});
+			
+		function ajaxFindReturnSuccess(result, status, xhr) {
+			  console.log("sessions found")
+			  var len = result.length;
+              $("#sessionId").empty();
+              for( var i = 0; i<len; i++){
+                    var id = result[i].sessionId;
+                $("#sessionId").append("<option value='"+id+"'>"+id+"</option>");
+             }
+         } 
+		function ajaxFindReturnError(result, status, xhr) { 
+			console.log("couldn't load sessions");
+	} 	
+  }
+function populateBookings(){
+	$.ajax({
+        	type: 'GET', 
+			url: "http://localhost:8080/GymProjectClient/BookingServlet/",  
+			error: ajaxFindReturnError,  
+			success: ajaxFindReturnSuccess 
+		});
+			
+		function ajaxFindReturnSuccess(result, status, xhr) {
+			  console.log("bookings found")
+			  var len = result.length;
+              $("#bookingId").empty();
+              for( var i = 0; i<len; i++){
+                    var id = result[i].bookingId;
+               
+                $("#bookingId").append("<option value='"+id+"'>"+id+"</option>");
+             }
+         } 
+		function ajaxFindReturnError(result, status, xhr) { 
+			console.log("couldn't load bookings");
+	} 	
+  }
 function getWeather(){	
 	var lat;
 	var long;
@@ -487,7 +531,7 @@ function getWeather(){
 
 
 	}
-	function clearBookingSessionFields(){
+	function clearBookingFields(){
 		$("#bookingMemberId").val("");
 		$("#bookingSessionId").val("");
 		$("bookingId").val("");
