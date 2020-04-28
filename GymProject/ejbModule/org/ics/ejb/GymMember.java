@@ -45,6 +45,10 @@ public class GymMember implements Serializable{
 		this.bookings = bookings;
 	}
 	
+	public GymMember() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="memberId")
