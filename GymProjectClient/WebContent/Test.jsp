@@ -23,7 +23,7 @@
 	</header>
 	<nav>
 		<a href="Home.jsp">Home</a> <a  href="About.jsp">About</a> <a
-			href="Crud">Crud</a><a class="active" href="Test.jsp">Home</a>
+			href="Crud.jsp">Crud</a><a class="active" href="Test.jsp">Test</a>
 
 	</nav>
 	<section id="test">

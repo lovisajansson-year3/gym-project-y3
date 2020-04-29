@@ -1,5 +1,9 @@
 $(document).ready(function () {
-	const inputs = document.querySelectorAll('input, select, textarea');
+populateGymMembers();
+populateTrainingSessions();
+populateBookings();
+getWeather();
+const inputs = document.querySelectorAll('input, select, textarea');
 	for(let input of inputs) {
 	  // Just before submit, the invalid event will fire, let's apply our class there.
 	  input.addEventListener('invalid', (event) => {
@@ -14,32 +18,109 @@ $(document).ready(function () {
 	    input.checkValidity();
 	  })
 
-	}
+	}  
+function populateGymMembers(){
+	$.ajax({
+        	type: 'GET', 
+			url: "http://localhost:8080/GymProjectClient/GymMemberServlet/",  
+			error: ajaxFindReturnError,  
+			success: ajaxFindReturnSuccess 
+		});
+			
+		function ajaxFindReturnSuccess(result, status, xhr) {
+			  console.log("members found")
+			  var len = result.length;
+              $("#memberId").empty();
+              for( var i = 0; i<len; i++){
+                    var id = result[i].memberId;
+                    console.log(id+name);
+                $("#memberId").append("<option value='"+id+"'>"+id+"</option>");
+             }
+         } 
+		function ajaxFindReturnError(result, status, xhr) { 
+			console.log("couldn't load members");
+	} 	
+  }
+function populateTrainingSessions(){
+	$.ajax({
+        	type: 'GET', 
+			url: "http://localhost:8080/GymProjectClient/TrainingSessionServlet/",  
+			error: ajaxFindReturnError,  
+			success: ajaxFindReturnSuccess 
+		});
+			
+		function ajaxFindReturnSuccess(result, status, xhr) {
+			  console.log("sessions found")
+			  var len = result.length;
+              $("#sessionId").empty();
+              for( var i = 0; i<len; i++){
+                    var id = result[i].sessionId;
+                $("#sessionId").append("<option value='"+id+"'>"+id+"</option>");
+             }
+         } 
+		function ajaxFindReturnError(result, status, xhr) { 
+			console.log("couldn't load sessions");
+	} 	
+  }
+function populateBookings(){
+	$.ajax({
+        	type: 'GET', 
+			url: "http://localhost:8080/GymProjectClient/BookingServlet/",  
+			error: ajaxFindReturnError,  
+			success: ajaxFindReturnSuccess 
+		});
+			
+		function ajaxFindReturnSuccess(result, status, xhr) {
+			  console.log("bookings found")
+			  var len = result.length;
+              $("#bookingId").empty();
+              for( var i = 0; i<len; i++){
+                    var id = result[i].bookingId;
+               
+                $("#bookingId").append("<option value='"+id+"'>"+id+"</option>");
+             }
+         } 
+		function ajaxFindReturnError(result, status, xhr) { 
+			console.log("couldn't load bookings");
+	} 	
+  }
+function getWeather(){	
+	var lat;
+	var long;
 	$.ajax({
 		method: "GET",
-		url: "http://api.ipstack.com/194.47.249.17?access_key=d88d508efc896b6eb4b24f06724b8930", error: ajaxReturn_Error,
+		url: "http://api.ipstack.com/194.47.249.17?access_key=d88d508efc896b6eb4b24f06724b8930", 
+		error: ajaxReturn_Error,
 		success: ajaxReturn_Success
-		})
-		function ajaxReturn_Success(result, status, xhr) { ParseJsonFileWeather(result); }
-		function ajaxReturn_Error(result, status, xhr) { console.log("Find ip-address: "+status);
-		}
 		});
-
-		function ParseJsonFile(result) { 
-		var lat = result.latitude;
-		var long = result.longitude; 
+	function ajaxReturn_Success(result, status, xhr) { 
+			ParseJsonFileWeather(result); 
+			getLocation();
+			}
+	function ajaxReturn_Error(result, status, xhr) { 
+			console.log("Find ip-address: "+status);
+	}
+	function ParseJsonFileWeather(result) { 
+		lat = result.latitude;
+		long = result.longitude; 
 		var city = result.city;
 		var ipNbr = result.ip
 		$("#city").text(city);
 		$("#ipNbr").text(ipNbr);
-		 }
-
+	 }
+	function getLocation(){
 		$.ajax({
 		method: "GET", 
 		url: "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&units= metric"+ "&APPID=f6acadbe8101f56f69b6f616a99403fa",
 		error: ajaxWeatherReturn_Error,
-		success: ajaxWeatherReturn_Success })
-		function ajaxWeatherReturn_Success(result, status, xhr) { 
+		success: ajaxWeatherReturn_Success 
+		});
+	}
+	
+
+	
+			
+	function ajaxWeatherReturn_Success(result, status, xhr) { 
 		var sunrise = result.sys.sunrise;
 		var sunset = result.sys.sunset;
 		var sunriseDate = new Date(sunrise*1000);
@@ -48,13 +129,17 @@ $(document).ready(function () {
 		var timeStrSunset = sunsetDate.toLocaleTimeString();
 		$("#sunrise").text("Sunrise: "+timeStrSunrise); $("#sunset").text("Sunset: "+timeStrSunset);
 		$("#weather").text(result.weather[0].main);
-		$("#degree").text(result.main.temp+" \u2103"); }
-		function ajaxWeatherReturn_Error(result, status, xhr) { alert("Error i OpenWeaterMap Ajax"); console.log("Ajax-find movie: "+status);
+		$("#degree").text(result.main.temp+" \u2103"); 
 		}
-		 
+	function ajaxWeatherReturn_Error(result, status, xhr) {
+		alert("Error i OpenWeaterMap Ajax"); 
+		console.log("Ajax-find movie: "+status);
+		}
+		
+	}		 
 	$("#FindTrainingSession").click( function() {
 		var strValue = $("#sessionId").val(); 
-		if (strValue == ""|| strValue.isNaN()||strValue==null) { 
+		if (strValue == ""|| isNaN(strValue)||strValue==null) { 
 			$("#sessionId").attr("placeholder","enter valid sessionId" ); 
 		}else{
 			$.ajax({
@@ -83,7 +168,7 @@ $(document).ready(function () {
 		    var strInstructor = $("#instructor").val();
 			var strStartDate = $("#startDate").val();
 			var strStartTime = $("#startTime").val();
-			var strType = $("#type").val();
+			var	strType = $("#type").val();
 			var strRoomNumber = $("#roomNumber").val();
 			var date = strStartDate+" "+strStartTime;
 			var obj = { instructor: strInstructor, startTime: date, type: strType, roomNumber: strRoomNumber}; 
@@ -125,7 +210,7 @@ $(document).ready(function () {
 			var strType = $("#type").val();
 			var strRoomNumber = $("#roomNumber").val();
 			var date = strStartDate+strStartTime
-		if(sessionId==null||sessionId==""||sessionId.isNaN()){
+		if(sessionId==null||sessionId==""||isNaN(sessionId)){
 			$("#sessionId").val("");
 			$("#sessionId").attr("placeholder","fill in a valid sessionid" ); 
 		}else{
@@ -158,7 +243,7 @@ $(document).ready(function () {
 	})//updatebtn
 	$("#DeleteTrainingSession").click( function() {
 		var sessionId = $("#sessionId").val();
-		if(sessionId==null||sessionId==""||sessionId.isNaN()){
+		if(sessionId==null||sessionId==""||isNaN(sessionId)){
 			$("#sessionId").val("");
 			$("#sessionId").attr("placeholder","fill in a valid sessionid" ); 
 		}else{
@@ -190,8 +275,8 @@ $(document).ready(function () {
 	});//dltbtn
 		$("#FindByMemberId").click( function() { 
 			var strValue = $("#memberId").val(); 
-			if (strValue == ""||strValue.isNaN()) { 
-				$("#memberId").attr("placeholder","enter memberid"); 	
+			if (strValue == ""||isNaN(strValue)) { 
+				$("#memberId").attr("placeholder","enter valid memberid"); 	
 
 			}else{
 				$.ajax({
@@ -244,7 +329,7 @@ $(document).ready(function () {
 		alert("hej");
 		var strValue = $("#memberId").val();
 		alert(strValue);
-		if (strValue ==""||strValue==null||strValue.isNaN()) { 
+		if (strValue ==""||strValue==null||isNaN(strValue)) { 
 			$("#memberId").attr("placeholder","enter valid numeric memberId of member you would like to delete");
 
 		}else{
@@ -312,14 +397,14 @@ $(document).ready(function () {
 			var strAddress = $("#address").val();
 			var strEmail = $("#email").val();
 			var strPhoneNumber = $("#phoneNumber").val();
+			console.log(strMemberId);
 			if(strMemberId==null||strMemberId==""){
 				$("#memberId").attr("placeholder","enter memberId of member you'd like to update")
 			}else{
-			var obj = { name: strName, address: strAddress, email: strEmail, phoneNumber: strPhoneNumber}; 
+			var obj = { memberId: strMemberId ,name: strName, address: strAddress, email: strEmail, phoneNumber: strPhoneNumber}; 
 			var jsonString = JSON.stringify(obj); 
-			if (strMemberId != "") { 
 				$.ajax({  
-					type: "PUT", 
+					type: 'PUT', 
 					url: "http://localhost:8080/GymProjectClient/GymMemberServlet/"+strMemberId,   
 					data: jsonString,  
 					dataType:'json',  
@@ -335,14 +420,14 @@ $(document).ready(function () {
 					if(result.status=="404"){
 					$("#memberId").attr("placeholder","GymMember doesnt exist" ); 
 
-					}
+					
 				}
 				}
 			}
 			});//btnclick
 		$("#FindBooking").click( function() {
 			var strValue = $("#bookingId").val(); 
-			if (strValue == ""||strValue==null||strValue.isNaN()) { 
+			if (strValue == ""||strValue==null||isNaN(strValue)) { 
 				clearBookingFields();
 				$("#bookingId").attr("placeholder","enter numeric bookingId" ); 
 			}else{
@@ -372,7 +457,6 @@ $(document).ready(function () {
 			});//findbtn	
 
 	$("#CreateBooking").click( function() {
-		alert("create booking");
 	    var strBookingSessionId = $("#bookingSessionId").val();
 		var strBookingMemberId = $("#bookingMemberId").val();
 		var obj = { sessionId: strBookingSessionId, memberId: strBookingMemberId}; 
@@ -405,7 +489,7 @@ $(document).ready(function () {
 	});//createbtn
 	$("#DeleteBooking").click( function() {
 		var bookingId = $("#bookingId").val();
-		if(bookingId==null||bookingId==""||!bookingId.isNaN()){
+		if(bookingId==null||bookingId==""||isNaN(bookingId)){
 			clearBookingFields();
 			$("#bookingId").attr("placeholder","fill in a valid bookingId" ); 
 		}else{
@@ -437,6 +521,7 @@ $(document).ready(function () {
 					}
 				}	
 	});//dltbtn
+});
 	function ParseJsonFileMovie(result) { 
 		$("#name").val(result.name); 
 		$("#address").val(result.address);
@@ -446,7 +531,7 @@ $(document).ready(function () {
 
 
 	}
-	function clearBookingSessionFields(){
+	function clearBookingFields(){
 		$("#bookingMemberId").val("");
 		$("#bookingSessionId").val("");
 		$("bookingId").val("");
@@ -478,6 +563,7 @@ $(document).ready(function () {
 			strBookingSessionId.placeholder=strBookingSessionId.validationMessage;
 			b=false;
 		}
+		return b;
 		
 	}
 

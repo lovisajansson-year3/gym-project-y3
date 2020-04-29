@@ -54,19 +54,22 @@ public class BookingServlet extends HttpServlet {
 		if
 		(pathInfo==null||pathInfo.equals("/")) {
 			List<Booking> bookings = facade.findAllBookings();
+			System.out.println(bookings.size());
 			sendAsJson(response, bookings); 
-			System.out.println(pathInfo);
+			System.out.println("findallbookings");
 			
-			return; //FIXA FIND ALL METOD	
+			return; 
 		}
 		String[] splits = pathInfo.split("/");
 		if(splits.length!=2) {
+			System.out.println("splitlength2");
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
 		String id = splits[1];
 		Booking booking = facade.findByBookingId(Integer.parseInt(id));
 		if(booking==null) {
+			System.out.println("bookingisnull");
 			response.sendError(HttpServletResponse.SC_NOT_FOUND, "session doesnt exist");
 			
 		}else {
@@ -150,7 +153,7 @@ public class BookingServlet extends HttpServlet {
 				} 
 		out.flush(); } 
 	private void sendAsJson(HttpServletResponse response, List<Booking> bookings) throws IOException { 
-		
+		System.out.println("sendasjson");
 		PrintWriter out = response.getWriter(); 
 		response.setContentType("application/json"); 
 		if (bookings != null) { 
