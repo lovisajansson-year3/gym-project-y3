@@ -8,19 +8,16 @@
 <head>
 <meta charset="ISO-8859-1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-<script src="Javascript.js"></script>
-<link rel="stylesheet" type="text/css" href="mystyle.css">
+<script src="../Script/WeatherScript.js"></script>
+<link rel="stylesheet" type="text/css" href="../Styles/mystyle.css">
 
 <head>
 <meta charset="ISO-8859-1">
 </head>
 <body>
-<header>
-		<h1>Header</h1>
-		<p>My supercool header</p>
-	</header>
+<%@ include file="../Styles/Header.html" %>
 	<nav>
 		<a class="active" href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
 			href="Crud.jsp">Crud</a><a href="Test.jsp">Test</a>
@@ -39,5 +36,6 @@
 <td colspan="4"><span id="sunset"></span></td>
 </tr>
 </table> </aside>
+<%@ include file="../Styles/Footer.html" %>
 </body>
 </html>

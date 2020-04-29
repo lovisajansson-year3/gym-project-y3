@@ -7,21 +7,20 @@
 <head>
 <meta charset="ISO-8859-1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> 
-<script src="Javascript.js"></script>
-<link rel="stylesheet" type="text/css" href="mystyle.css">
-<script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> </script>
+<script src="../Script/MainScript.js"></script>
+<script src="../Script/GymMemberScript.js"></script>
+<script src="../Script/TrainingSessionScript.js"></script>
+<script src="../Script/BookingScript.js"></script>
 
+<link rel="stylesheet" type="text/css" href="../Styles/mystyle.css">
 
-</script>
 </head>
-<body>
-<script src="Javascript.js"></script>
+<body style="height: 1792px; ">
 
-	<header>
-		<h1>Header</h1>
-		<p>My supercool header</p>
-	</header>
+
+<%@ include file="../Styles/Header.html" %>
+
 	<nav>
 		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
 			class="active" href="Crud.jsp">Test</a>
@@ -52,7 +51,7 @@
 			<br> <input type="button" value="Update Gym Member" name="UpdateGymMember" id="UpdateGymMember">
 
 			<br><select name="memberId" id="memberId"></select>
-
+			<span id="memberError" ></span>
 			<br><input type="button" name="FindByMemberId"  id="FindByMemberId" value="find by memberId" />
 		    <br><input type="button" name="DeleteByMemberId" id="DeleteByMemberId" value="delete by memberid" />
 		    <br><textarea id="show" rows="4" cols="50">
@@ -103,6 +102,8 @@
 		</section>
 <br> <input type="button" value="Create Training Session" name="CreateTrainingSession" id="CreateTrainingSession">
 <br><select name="sessionId" id="sessionId"></select>
+			<span id="sessionError" ></span>
+
 <br> <input type="button" value="Find Training Session" name="FindTrainingSession" id="FindTrainingSession">
 <br> <input type="button" value="Update Training Session" name="UpdateTrainingSession" id="UpdateTrainingSession">
 <br> <input type="button" value="Delete Training Session" name="DeleteTrainingSession" id="DeleteTrainingSession">
@@ -113,18 +114,45 @@
 				>
 			<fieldset id="BookingFS">
 				<legend>Add Booking:</legend>
-				MemberId:<br> <input type="number" name="bookingMemberId" id="bookingMemberId" required >
-				<br> TrainingSessionId number:<br> <input type="number"
-					name="bookingSessionId" id="bookingSessionId" required> <br> 
+				MemberId:<br> <select name="bookingMemberId" id="bookingMemberId" required></select>
+				<br> TrainingSessionId number:<br> <select name="bookingSessionId" id="bookingSessionId"required></select> <br> 
 			</fieldset>
 			</form>
 <input type="button" id="CreateBooking" name="CreateBooking"value="Create Booking" >
-<br><select name="memberId" id="memberId"></select>
+<br><select name="bookingId" id="bookingId"></select>
+			<span id="bookingError" ></span>
+
 <br> <input type="button" value="Find Booking" name="FindBooking" id="FindBooking">
 <br> <input type="button" value="Delete Booking" name="DeleteBooking" id="DeleteBooking">
 
 </section>
 	</section>
+	
+<table id="gymMemberTable">
+<thead>
+    <th>memberId</th>
+    <th>name</th> 
+    </thead>
+    <tbody id="gymMemberBody">
+    </tbody>
+ 
+</table>	
+<table id="trainingSessionTable">
+<thead>
+    <th>instructor</th>
+    <th>sessionId</th> 
+    </thead>
+    <tbody id="trainingSessionBody">
+    </tbody>
+    <table id="bookingTable">
+<thead>
+    <th>sessionId</th>
+    <th>memberId</th> 
+    </thead>
+    <tbody id="bookingBody">
+    </tbody>
+ 
+</table>	
 
-</body>
+</table><%@include file="../Styles/Footer.html"%></body>
 </html>

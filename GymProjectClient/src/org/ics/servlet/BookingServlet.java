@@ -30,7 +30,7 @@ import org.ics.facade.FacadeLocal;
 /**
  * Servlet implementation class BookingServlet
  */
-@WebServlet("/BookingServlet")
+@WebServlet("/BookingServlet/")
 public class BookingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -128,7 +128,7 @@ public class BookingServlet extends HttpServlet {
 		}else {
 			try {
 				facade.deleteBooking(Integer.parseInt(id));   
-				sendAsJson(response, b); 
+				System.out.println("booking deleted");
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 				response.sendError(HttpServletResponse.SC_CONFLICT ); 
@@ -153,7 +153,7 @@ public class BookingServlet extends HttpServlet {
 				} 
 		out.flush(); } 
 	private void sendAsJson(HttpServletResponse response, List<Booking> bookings) throws IOException { 
-		System.out.println("sendasjson");
+		System.out.println("sendasjsonlist");
 		PrintWriter out = response.getWriter(); 
 		response.setContentType("application/json"); 
 		if (bookings != null) { 
