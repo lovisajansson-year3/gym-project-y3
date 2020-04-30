@@ -1,8 +1,8 @@
 $(document).ready(function () {
-	console.log("bks")
+	console.log("bks");
 
 	
-		$("#FindBooking").click( function() {
+		$("#bookingId").change( function() {
 			var strValue = $("#bookingId").val(); 
 			if (strValue == ""||strValue==null||isNaN(strValue)) { 
 				clearBookingFields();
@@ -25,6 +25,10 @@ $(document).ready(function () {
 					if(result.status=="404"){
 						console.log("doesnt exist")
 						$("#bookingError").text("booking doesnt exist" ); 
+					}
+					if(result.status=="409"){
+						console.log("this member is already booked for this session")
+						$("#bookingError").text("this member is already booked for this session" ); 
 					}
 				}
 			}
@@ -49,8 +53,8 @@ $(document).ready(function () {
 				}); 
 			function ajaxAddReturnSuccess(result, status, xhr) {
 				clearBookingFields();
-				console.log("booking created")
-				$("#bookingError").text("booking added" );
+				console.log("booking added")
+				$("#bookingSuccess").text("booking added" );
 				buildTable();
 				populateBookings();
 				} 
@@ -58,11 +62,12 @@ $(document).ready(function () {
 				clearBookingFields();
 				if(result.status=="404"){
 					$("#bookingError").text("instructor or memberId doesnt exist" ); 
-					console.log("member or session doesnt exist")
+					console.log("member or session doesnt exist");
 				}else{
-					alert("Error post");  
-					console.log("Ajax-createsession: "+status); 
+					$("#bookingError").text("couldn't add booking"); 
+					console.log("error when adding booking" +result.status); 
 				}
+			
 			}
 		}
 	});//createbtn
@@ -80,7 +85,7 @@ $(document).ready(function () {
 				})
 				function ajaxDelReturnSuccess(result, status, xhr) { 
 					clearBookingFields();
-					$("#bookingError").text("Session deleted" );
+					$("#bookingSuccess").text("booking deleted" );
 					buildTable();
 					populateBookings();
 				} 
@@ -88,16 +93,12 @@ $(document).ready(function () {
 					clearBookingFields();
 
 					if(result.status=="404"){
-						$("#bookingError").text("Session doesnt exist" );   
-						console.log(result.status);
-
-					}else if(result.status="409"){
-						$("#bookingError").text("cannot delete sessions that has bookings" );
-						console.log(result.status);
+						$("#bookingError").text("booking doesnt exist" );   
+						console.log("session doesn't exist"+result.status);
 
 					}else{
-					alert("Error"); 
-					console.log(result.status);
+						$("#bookingError").text("error when deleting");
+					console.log("error when deleting booking "+result.status);
 					}
 					}
 				}	

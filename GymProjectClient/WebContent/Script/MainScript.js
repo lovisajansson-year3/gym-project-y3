@@ -20,7 +20,9 @@ const inputs = document.querySelectorAll('input, select, textarea');
 	    input.checkValidity();
 	  })
 
-	}  
+	}
+	
+
 })
 
 function buildTable(){
@@ -38,7 +40,7 @@ function buildTable(){
 	$.getJSON("http://localhost:8080/GymProjectClient/TrainingSessionServlet/",
 			function(result){ 
 		
-	$(result).each(function(i,session){
+				$(result).each(function(i,session){
               	  $("#trainingSessionBody").append($("<tr>")
               			  .append($("<td>").append(session.instructor))
               			  .append($("<td>").append(session.sessionId)))

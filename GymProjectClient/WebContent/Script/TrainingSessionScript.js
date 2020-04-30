@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	console.log("ts")
 
-	$("#FindTrainingSession").click( function() {
+	$("#sessionId").change( function() {
 		var strValue = $("#sessionId").val(); 
 		if (strValue == ""|| isNaN(strValue)||strValue==null) { 
 			$("#sessionError").text("enter valid sessionId" ); 
@@ -23,7 +23,9 @@ $(document).ready(function () {
 			if(result.status=="404"){
 				console.log("doesnt exist")
 				$("#sessionError").text("Session doesnt exist" ); 
-		}
+			}else{
+				$("#sessionError").text("error when retrieving session");
+			}
 		}
 		}
 		
@@ -49,7 +51,7 @@ $(document).ready(function () {
 				function ajaxAddReturnSuccess(result, status, xhr) {
 					clearTrainingSessionFields();
 					console.log("session created")
-					$("#sessionError").text("session added" ); 
+					$("#sessionSuccess").text("session added" ); 
 					buildTable();
 					populateTrainingSessions();
 					} 
@@ -58,7 +60,9 @@ $(document).ready(function () {
 						console.log("this instructor already has a trainingsession at this time")
 						$("#sessionError").text("this instructor already has a trainingsession at this time" ); 
 					}else{
-						console.log("Ajax-createsession: "+status); 
+						$("#sessionError").text("error when trying to add session" ); 
+
+						console.log("error when addind session: "+result.status); 
 					}
 					
 
@@ -70,7 +74,6 @@ $(document).ready(function () {
 		    var sessionId = $("#sessionId").val();
 		    var strInstructor = $("#instructor").val();
 			var strStartDate = $("#startDate").val();
-			console.log(strStartDate + strStartTime);
 			var strStartTime = $("#startTime").val();
 			var strType = $("#type").val();
 			var strRoomNumber = $("#roomNumber").val();
@@ -92,7 +95,8 @@ $(document).ready(function () {
 				})
 			function ajaxUpdateReturnSuccess(result, status, xhr) { 
 				clearTrainingSessionFields(); 
-				$("#sessionError").text("session updated" ); 
+				console.log("session updated");
+				$("#sessionSuccess").text("session updated" ); 
 				buildTable();
 				populateTrainingSessions();
 				}
@@ -101,7 +105,8 @@ $(document).ready(function () {
 					console.log("session doesnt exist");
 					$("#sessionError").text("session doesnt exist" ); 
 				}else{
-					console.log(result.status);
+					$("#sessionError").text("error when trying to update session" );
+					console.log("error when trying to update session"+result.status);
 				}
 				
 		}
@@ -120,8 +125,7 @@ $(document).ready(function () {
 				success: ajaxDelReturnSuccess         
 				})
 				function ajaxDelReturnSuccess(result, status, xhr) { 
-					$("#sessionId").val("");
-					$("#sessionError").text("Session deleted" );
+					$("#sessionSuccess").text("Session deleted" );
 					buildTable();
 					populateTrainingSessions();
 				} 
@@ -135,8 +139,8 @@ $(document).ready(function () {
 						console.log(result.status);
 
 					}else{
-					alert("Error"); 
-					console.log(result.status);
+					$("#sessionError").text("error when trying to delete session" );
+					console.log("error when trying to delete session" +result.status);
 					}
 					}
 				}	

@@ -1,8 +1,9 @@
 $(document).ready(function () {
-	console.log("gms")
-	$("#FindByMemberId").click( function() { 
-		var strValue = $("#memberId").val(); 
-		if (strValue == ""||isNaN(strValue)) { 
+	console.log("gms");
+	
+$("#memberId").change(function(){
+	var strValue =$(this).val(); 
+	if (strValue == ""||isNaN(strValue)) { 
 			$("#memberId").attr("placeholder","enter valid memberid"); 	
 
 		}else{
@@ -46,7 +47,7 @@ $("#DeleteByMemberId").click( function() {
 				success: ajaxDelReturnSuccess         
 				})
 				function ajaxDelReturnSuccess(result, status, xhr) { 
-				$("#memberError").text("Movie deleted" ); 
+				$("#memberSuccess").text("GymMember deleted" ); 
 				buildTable();
 				populateGymMembers();
 				} 
@@ -88,14 +89,14 @@ $("#DeleteByMemberId").click( function() {
 					}); 
 				function ajaxAddReturnSuccess(result, status, xhr) {
 					clearFields();
-					$("#name").attr("placeholder","GymMember added" ); 
+					$("#memberSuccess").text("GymMember added" ); 
 					console.log("gymmember added");
 					buildTable();
 					populateGymMembers();
 					} 
 				function ajaxAddReturnError(result, status, xhr) {
-					alert("Error Add"); 
-					console.log("Ajax-find movie: "+status); 
+					$("#memberError").text("GymMember couldn't be added" ); 
+					console.log("error when adding gym member: "+result.status); 
 					}
 			}
 			
@@ -123,16 +124,20 @@ $("#DeleteByMemberId").click( function() {
 					})
 				function ajaxUpdateReturnSuccess(result, status, xhr) { 
 					clearFields(); 
-					$("#memberError").text("GymMember updated" );
+					$("#memberSuccess").text("GymMember updated" );
 					buildTable();
 					populateGymMembers();
 					}
 				function ajaxUpdateReturnError(result, status, xhr) {
 					if(result.status=="404"){
 						$("#memberError").text("GymMember doesnt exist" ); 
-
-					
+						console.log("gymmember doesn't exist");
+					}
+					else{
+						$("#memberError").text("GymMember couldn't be updated" ); 
+						console.log("error when updating gym member: "+result.status); 
 				}
+				
 				}
 			}
 			});//btnclick

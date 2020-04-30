@@ -148,7 +148,7 @@ public class GymMemberServlet extends HttpServlet {
 			try {
 				facade.deleteGymMember(Integer.parseInt(id));   
 			}catch(Exception e){
-				System.out.println(e.getMessage());
+				
 				response.sendError(HttpServletResponse.SC_CONFLICT ); 
 				return;
 			}

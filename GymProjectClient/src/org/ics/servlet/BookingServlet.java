@@ -87,7 +87,10 @@ public class BookingServlet extends HttpServlet {
 			Booking b = parseJsonBooking(reader);
 			if(b.getTrainingSession()==null||b.getGymMember()==null) {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, "session or gymMember doesnt exist");
-
+				
+			}else if(facade.alreadyExists(Long.toString(b.getGymMember().getMemberId()), Long.toString(b.getTrainingSession().getSessionId()))==true){
+				response.sendError(HttpServletResponse.SC_CONFLICT); 
+				return;
 			}else {
 				try { 
 					b = facade.createBooking(b); 
@@ -95,7 +98,7 @@ public class BookingServlet extends HttpServlet {
 				}catch(Exception e) {
 					System.out.println("duplicate key"); 
 					} 
-				sendAsJson(response,b ); 
+				sendAsJson(response,b );
 			}
 		}
 		}
@@ -131,7 +134,7 @@ public class BookingServlet extends HttpServlet {
 				System.out.println("booking deleted");
 			}catch(Exception e){
 				System.out.println(e.getMessage());
-				response.sendError(HttpServletResponse.SC_CONFLICT ); 
+				
 				return;
 			}	
 		}

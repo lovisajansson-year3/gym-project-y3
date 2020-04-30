@@ -19,8 +19,8 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Booking.findAllBookingsForGymMember",
-	query="SELECT b FROM Booking b WHERE b.gymMember.memberId = :memberId"),
+	@NamedQuery(name="Booking.alreadyExists",
+	query="SELECT b FROM Booking b WHERE b.gymMember.memberId = :memberId and b.trainingSession.sessionId = :sessionid"),
 	@NamedQuery(name="Booking.findAllBookings",
 	query="SELECT g FROM Booking g"),
 })

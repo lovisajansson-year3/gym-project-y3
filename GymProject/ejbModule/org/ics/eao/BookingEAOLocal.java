@@ -15,7 +15,7 @@ public interface BookingEAOLocal {
     public Booking createBooking(Booking g);
     public Booking updateBooking(Booking g);
     public void deleteBooking(long bookingId);
-    public ArrayList<Booking> findAllBookingsForGymMember(GymMember gymMember);
+    public boolean alreadyExists(String memberId,String sessionId);
     public List<Booking> findAllBookings();
 
 }
