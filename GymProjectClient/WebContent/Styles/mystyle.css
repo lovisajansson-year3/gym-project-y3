@@ -9,6 +9,31 @@ textarea.error {
   
   // Use CSS to visually restore valid fields
   }
+table{
+
+display:inline-block;
+margin:20px;
+ border-color: white;
+  border-width: 1px;
+  border-style: dotted;
+}
+
+div#forms{
+display: inline-block
+}
+div#GymMember{
+float:left;
+}
+div#TrainingSession{
+float:left;
+}
+div#Booking{
+float:left;
+}
+
+p{
+font-size:12;
+}
 
 input.valid,
 select.valid,
@@ -87,36 +112,64 @@ nav a.active {
 
 }
 fieldset { 
-  display: inline-block;
-  margin-left: 10px;
-  margin-right: 2px;
-  padding-top: 0.35em;
-  padding-bottom: 0.625em;
-  padding-left: 0.75em;
-  padding-right: 0.75em;
+display: inline-block;
+float:left;
+padding:15px;
+ margin: 1opx;
   border: 1px dotted white;
   text-align: left;
+ font-size:13px;	
+height:325px
+
+}
+legend{
+background-color: #000;
+color:white;
 
 
 }
+label{
+display: inline-block;
+margin:4px;
+}
+
+input[type="text"],[type="number"]{
+float:right;
+border-radius: 25px;
+}
+input#CreateGymMember,#CreateBooking,#CreateTrainingSession{
+width:200px;
+background-color:green;
+color:white;
+}
+#memberId{
+margin:5px;
+width:50px;
+}
+#memberId.option[value=""][disabled] {
+  display: none;
+}
+input[type="button"]{
+float:left;
+width:150px;
+background-color:black;
+color:white;
+}
+#deleteByMemberId{
+background-color:red;
+}
+
+}
+
 section#main{
 padding:30px;
 
 }
 section#main p{
+font-size:15px;
 color:white;
 border-bottom: 1px dotted white;
 
-}
-
-section#subsection{ 
- display: inline-block;
- margin-left: 10px;
-}
-
-table{
-	display: inline-block;
-	padding-bottom:100px;
 }
 
 aside {
@@ -127,7 +180,7 @@ width: 30%; background-color: #f1f1f1;
 footer{
 bottom:0px;
   height: 100px;
-  background: mediumseagreen;
+  background: lightblue;
   font-family: "Lucida Console", Courier, monospace;
  
 
