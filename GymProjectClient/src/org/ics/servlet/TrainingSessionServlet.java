@@ -157,7 +157,6 @@ public class TrainingSessionServlet extends HttpServlet {
 		}else {
 			try {
 				facade.deleteTrainingSession(Integer.parseInt(id));   
-				sendAsJson(response, t); 
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 				response.sendError(HttpServletResponse.SC_CONFLICT ); 

@@ -51,8 +51,12 @@ public class ControllerServlet extends HttpServlet {
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    	request.setAttribute("allMembers", facade.findAll()); 
+        request.setAttribute("allTrainingSessions", facade.findAllTrainingSessions());
+        request.setAttribute("allBookings", facade.findAllBookings());
+        RequestDispatcher rd =  
+            request.getRequestDispatcher("testing.jsp");  
+         rd.forward(request, response); 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -61,53 +65,11 @@ public class ControllerServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		boolean ajax = false;
-		String button_clicked = request.getParameter("button_clicked");
-		if (button_clicked==null) {
-			//no form submitted
-		}else if("Create Gym Member".equals(button_clicked)) {
-            GymMember g = new GymMember();
-			g.setName(request.getParameter("name"));
-			g.setEmail(request.getParameter("email"));
-			g.setAddress(request.getParameter("address"));
-			g.setPhoneNumber(request.getParameter("phoneNumber"));
-			facade.createGymMember(g);
-        } else if("Create Training Session".equals(button_clicked)) {
-        	TrainingSession t = new TrainingSession();
-        	t.setInstructor(request.getParameter("instructor"));
-        	t.setLength(1);
-        	t.setRoomNumber(request.getParameter("roomNumber"));
-        	String time= request.getParameter("startTime");
-        	String startDate = request.getParameter("startDate");
-        	String date = startDate +" "+ time+":00.000";
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-            Date d = null;
-			try {
-				d=dateFormat.parse(date);
-
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			t.setStartTime(d);
-        	t.setType("type");
-        	Map<String, String> messages = new HashMap<String, String>();
-		    request.setAttribute("messages", messages); // Now it's available by ${messages}
-			if(facade.alreadyExists(t.getInstructor(),t.getStartTime())==false) {
-				facade.createTrainingSession(t);
-			}else {
-				messages.put("alreadyExists", "There is already a training session at this time for this instructor");
-
-			}
+			
         	
         	
-        }
-	         request.setAttribute("allMembers", facade.findAll()); 
-	         request.setAttribute("allTrainingSessions", facade.findAllTrainingSessions());
-	         request.setAttribute("allBookings", facade.findAllBookings());
-	         RequestDispatcher rd =  
-	             request.getRequestDispatcher("testing.jsp");  
-	          rd.forward(request, response); 
+        
+	         
 	           
 	        
 	}

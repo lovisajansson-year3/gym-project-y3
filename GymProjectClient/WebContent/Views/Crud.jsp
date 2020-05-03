@@ -7,21 +7,20 @@
 <head>
 <meta charset="ISO-8859-1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> 
-<script src="Javascript.js"></script>
-<link rel="stylesheet" type="text/css" href="mystyle.css">
-<script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> </script>
+<script src="../Script/MainScript.js"></script>
+<script src="../Script/GymMemberScript.js"></script>
+<script src="../Script/TrainingSessionScript.js"></script>
+<script src="../Script/BookingScript.js"></script>
 
+<link rel="stylesheet" type="text/css" href="../Styles/mystyle.css">
 
-</script>
 </head>
-<body>
-<script src="Javascript.js"></script>
+<body style="height: 1792px; ">
 
-	<header>
-		<h1>Header</h1>
-		<p>My supercool header</p>
-	</header>
+
+<%@ include file="../Styles/Header.html" %>
+
 	<nav>
 		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
 			class="active" href="Crud.jsp">Test</a>
@@ -36,12 +35,12 @@
 				>
 				<fieldset id="GymMemberFS">
 					<legend>Add Gym Member:</legend>
-					Full name:<br> <input type="text" name="name" id="name" required onblur="this.checkValidity();" >
-					<br> Email:<br> <input type="text" name="email"
+					Full name:*<br> <input type="text" name="name" id="name" required onblur="this.checkValidity();" >
+					<br> Email:*<br> <input type="text" name="email"
 						id="email" required>
-					<br> Phone number:<br> <input
+					<br> Phone number:*<br> <input
 						type="number" name="phoneNumber" id="phoneNumber" required> <br>
-					Address:<br> <input type="text" name="address" id="address" required>
+					Address:*<br> <input type="text" name="address" id="address" required>
 					
 				</fieldset>
 			</form>					
@@ -51,9 +50,9 @@
 
 			<br> <input type="button" value="Update Gym Member" name="UpdateGymMember" id="UpdateGymMember">
 
-			<br><select name="memberId" id="memberId"></select>
-
-			<br><input type="button" name="FindByMemberId"  id="FindByMemberId" value="find by memberId" />
+			<br>Pick GymMember to display values for, update or delete:<select name="memberId" id="memberId"></select>
+			<span id="memberError" class="error" ></span>
+			<span id="memberSuccess" class="success"></span>
 		    <br><input type="button" name="DeleteByMemberId" id="DeleteByMemberId" value="delete by memberid" />
 		    <br><textarea id="show" rows="4" cols="50">
 					</textarea>
@@ -63,19 +62,19 @@
 				>
 			<fieldset id="TrainingSessionFS">
 				<legend>Add TrainingSession:</legend>
-				<label for="instructor">Choose an instructor:</label> <select
+				<label for="instructor">Choose an instructor:*</label> <select
 					id="instructor" name="instructor"required>
 					<option value="Lovisa">Lovisa</option>
 					<option value="Lena">Lena</option>
 					<option value="Tove">Tove</option>
 					<option value="Lisa">Lisa</option>
 				</select><br>
-				<br> <label for="startDate">Start time:</label> 
+				<br> <label for="startDate">Start time:*</label> 
 				<input type="date"
 					id="startDate" name="startDate" value="2018-07-22" min="2018-01-01"
 					max="2021-01-01" required>
  				<legend>Select hour to start:</legend>
- 				<label for="startTime">Choose a time:</label> 
+ 				<label for="startTime">Choose a time:*</label> 
  				<select id="startTime" required name="startTime">
 					<option value="10:00">10:00</option>
 					<option value="11:00">11:00</option>
@@ -86,24 +85,24 @@
 					<option value="16:00">16:00</option>
 					<option value="17:00">17:00</option>
 				</select><br>
-				<br> <label for="type">Choose an session type:</label> <select
+				<br> <label for="type">Choose an session type:*</label> <select
 					id="type" name="type"required>
 					<option value="spinning">spinning</option>
 					<option value="crossfit">crossfit</option>
 				</select><br>
-				<br> <label for="roomNumber">Choose an room number:</label> <select
+				<br> <label for="roomNumber">Choose a room number:*</label> <select
 					id="roomNumber" name="roomNumber"required>
 					<option value="EC01">EC01</option>
 					<option value="EC101">EC101</option>
 				</select><br>
-				<%! String s1 = ""; %>
-    <span class="error">${messages.alreadyExists}</span>
 		</fieldset>
 		</form>
 		</section>
 <br> <input type="button" value="Create Training Session" name="CreateTrainingSession" id="CreateTrainingSession">
-<br><select name="sessionId" id="sessionId"></select>
-<br> <input type="button" value="Find Training Session" name="FindTrainingSession" id="FindTrainingSession">
+<br>Pick Session to display values for, update or delete:<select name="sessionId" id="sessionId"></select>
+			<span id="sessionError" class="error"></span>
+			<span id="sessionSuccess" class="success"></span>
+
 <br> <input type="button" value="Update Training Session" name="UpdateTrainingSession" id="UpdateTrainingSession">
 <br> <input type="button" value="Delete Training Session" name="DeleteTrainingSession" id="DeleteTrainingSession">
 		
@@ -113,18 +112,45 @@
 				>
 			<fieldset id="BookingFS">
 				<legend>Add Booking:</legend>
-				MemberId:<br> <input type="number" name="bookingMemberId" id="bookingMemberId" required >
-				<br> TrainingSessionId number:<br> <input type="number"
-					name="bookingSessionId" id="bookingSessionId" required> <br> 
+				MemberId:*<br> <select name="bookingMemberId" id="bookingMemberId" required></select>
+				<br> TrainingSessionId number:*<br> <select name="bookingSessionId" id="bookingSessionId"required></select> <br> 
 			</fieldset>
 			</form>
 <input type="button" id="CreateBooking" name="CreateBooking"value="Create Booking" >
-<br><select name="memberId" id="memberId"></select>
-<br> <input type="button" value="Find Booking" name="FindBooking" id="FindBooking">
+<br>Pick Booking to display values for or delete:<select name="bookingId" id="bookingId"></select>
+			<span id="bookingError" class="error" ></span>
+			<span id="bookingSuccess" class="success"></span>
+
 <br> <input type="button" value="Delete Booking" name="DeleteBooking" id="DeleteBooking">
 
 </section>
 	</section>
+	
+<table id="gymMemberTable">
+<thead>
+    <th>memberId</th>
+    <th>name</th> 
+    </thead>
+    <tbody id="gymMemberBody">
+    </tbody>
+ 
+</table>	
+<table id="trainingSessionTable">
+<thead>
+    <th>instructor</th>
+    <th>sessionId</th> 
+    </thead>
+    <tbody id="trainingSessionBody">
+    </tbody>
+    <table id="bookingTable">
+<thead>
+    <th>sessionId</th>
+    <th>memberId</th> 
+    </thead>
+    <tbody id="bookingBody">
+    </tbody>
+ 
+</table>	
 
-</body>
+</table><%@include file="../Styles/Footer.html"%></body>
 </html>
