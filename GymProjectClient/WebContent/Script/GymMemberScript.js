@@ -89,15 +89,18 @@ $("#DeleteByMemberId").click( function() {
 					}); 
 				function ajaxAddReturnSuccess(result, status, xhr) {
 					clearFields();
-					$("#memberSuccess").text("GymMember added" ); 
+					$("#memberCreateSuccess").text("GymMember added" ); 
 					console.log("gymmember added");
 					buildTable();
 					populateGymMembers();
 					} 
 				function ajaxAddReturnError(result, status, xhr) {
-					$("#memberError").text("GymMember couldn't be added" ); 
+					$("#memberCreateError").text("GymMember couldn't be added" ); 
 					console.log("error when adding gym member: "+result.status); 
 					}
+			}else{
+				$("#memberCreateError").text("please fill in fields" ); 
+
 			}
 			
 			
@@ -152,20 +155,21 @@ function  isGymMemberFormValid(){
 		var b = true; 
 		
 		if (!strName.checkValidity()) { //value blank?
-			strName.placeholder=strName.validationMessage;
+			$("#name").addClass("inputError");
 			b=false;
 			}
 		if (!strAddress.checkValidity()) { //value blank?
-			strAddress.placeholder=strAddress.validationMessage;
+			$("#address").addClass("inputError");
+
 			b=false;
 			}
 		if (!strEmail.checkValidity()) { //value blank?
-			strEmail.placeholder=strEmail.validationMessage;
+			$("#email").addClass("inputError");
 			b=false;
 			}
 		if (!strPhoneNumber.checkValidity()) { //value blank?
-			strPhoneNumber.value="";
-			strPhoneNumber.placeholder=strPhoneNumber.validationMessage;
+			$("#phoneNumber").addClass("inputError");
+
 			b=false;
 			 }
 		return b;
@@ -177,6 +181,12 @@ function clearFields() {
 	$("#email").val(""); 
 	$("#phoneNumber").val("");
 	$("#memberId").val("");
+	$("#memberError").text("");
+	$("#memberSuccess").text("");
+	$("#memberCreateError").text("");
+	$("#memberCreateSuccess").text("");
+
+	
 } 
 function ParseJsonFileMovie(result) { 
 	$("#name").val(result.name); 

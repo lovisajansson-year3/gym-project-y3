@@ -1,15 +1,19 @@
 @charset "ISO-8859-1";
-$beige: #f0e6d7;
-input.error,
-select.error,
-textarea.error {
+
+
+.inputError {
   outline: none;
-  border-color: red;
+  border-color: red !important;
   border-width: 1px;
   border-style: solid;
   
   // Use CSS to visually restore valid fields
 
+}
+
+.inputSuccess{
+	border-color:green!important;
+	
 }
 .header{
   box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
@@ -97,12 +101,28 @@ padding-bottom:16px;
 
 
 table{
+vertical-align:top;
 display:inline-block;
 width: 30%;
-margin-bottom: 16px;
-padding: 0 8px;
-padding-bottom:16px;
-
+padding:0;
+margin:10px;
+ border: 1px solid black;
+}
+th, td {
+  padding: 15px;
+  text-align: center;
+  border:1px solid;
+}
+th{
+background-color:	
+	font: 15px/24px "Lato", Arial, sans-serif; 
+background:#ded3c3;
+font-weight:bold;
+color:	#3b3834;
+text-align:center;
+border: 1px solid black;
+width:100%;
+	
 }
 
 .pick{
@@ -110,13 +130,7 @@ padding:0px;
 margin: 0px;
 position:absolute;
 bottom:0;
-width:95%;
-}
-.pick legend{
-font: 15px/24px "Lato", Arial, sans-serif; 
-background:#ded3c3;
-font-weight:bold;
-color:	#3b3834;
+width:90%;
 }
 
 .add{
@@ -212,7 +226,7 @@ letter-spacing:1px;
 
 legend{
 text-align:center;
-border-bottom: 1px dotted white;
+	 border: 1px dotted black;
 color:#3b3834;
 font-weight:bold;
 padding-top:20px;
@@ -367,16 +381,12 @@ width:97%;
 
 
 
-aside {
-float: right;
-width: 30%; background-color: #f1f1f1;
-}
 
 .footer {
  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
  background-image: url("../Styles/4462.jpg");
 
-  height:150px; /* You must set a specified height */
+  height:175px; /* You must set a specified height */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
@@ -391,10 +401,12 @@ padding-top:30px;
 
 	
 }
-span.error{
-	colour:red;
+.error{
+	color:red;
+	
 }
 .success{
 	color:green;
+	
 }
 

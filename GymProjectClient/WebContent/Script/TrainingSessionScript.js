@@ -51,22 +51,25 @@ $(document).ready(function () {
 				function ajaxAddReturnSuccess(result, status, xhr) {
 					clearTrainingSessionFields();
 					console.log("session created")
-					$("#sessionSuccess").text("session added" ); 
+					$("#sessionCreateSuccess").text("session added" ); 
 					buildTable();
 					populateTrainingSessions();
 					} 
 				function ajaxAddReturnError(result, status, xhr) {
+					clearTrainingSessionFields();
+
 					if(result.status=="409"){
 						console.log("this instructor already has a trainingsession at this time")
-						$("#sessionError").text("this instructor already has a trainingsession at this time" ); 
+						$("#sessionCreateError").text("this instructor already has a trainingsession at this time" ); 
 					}else{
-						$("#sessionError").text("error when trying to add session" ); 
+						$("#sessionCreateError").text("error when trying to add session" ); 
 
 						console.log("error when addind session: "+result.status); 
 					}
 					
 
 					}
+			}else{$("#sessionCreateError").text("please fill out fields" ); 
 			}
 		
 	});//createbtn
@@ -125,11 +128,13 @@ $(document).ready(function () {
 				success: ajaxDelReturnSuccess         
 				})
 				function ajaxDelReturnSuccess(result, status, xhr) { 
+					clearTrainingSessionFields();
 					$("#sessionSuccess").text("Session deleted" );
 					buildTable();
 					populateTrainingSessions();
 				} 
-				function ajaxDelReturnError(result, status, xhr) { 
+				function ajaxDelReturnError(result, status, xhr) {
+					clearTrainingSessionFields();
 					if(result.status=="404"){
 						$("#sessionError").text("Session doesnt exist" );   
 						console.log(result.status);
@@ -161,27 +166,35 @@ function ParseJsonFileTrainingSession(result) {
 
 }
 function  isTrainingSessionFormValid(){
-	var strInstructor = $("#instructor").val();
-	var strStartDate = $("#startDate").val();
-	var strStartTime = $("#startTime").val();
-	var strType = $("#type").val();
-	var strRoomNumber = $("#roomNumber").val();
-
+	var strInstructor = document.getElementById("instructor");
+	var strStartDate = document.getElementById("startDate");
+	var strRoomNumber = document.getElementById("roomNumber");
+	var strStartTime = document.getElementById("startTime");
+	var strType = document.getElementById("type");
 	var b = true; 
 	
-	if (strInstructor == null || strInstructor == "") { //value blank?
+	if (!strInstructor.checkValidity()) { //value blank?
+		$("#instructor").addClass("inputError");
 		b=false;
 		}
-	if (strStartDate == null || strStartDate == "") { //value blank?
+	if (!strStartDate.checkValidity()) { //value blank?
+		$("#startDate").addClass("inputError");
+
 		b=false;
 		}
-	if (strStartTime == null || strStartTime == "") { //value blank?
+	if (!strStartTime.checkValidity()) { //value blank?
+		$("#startTime").addClass("inputError");
+
 		b=false;
 		}
-	if (strType == null || strType == "") { //value blank?
+	if (!strType.checkValidity()) { //value blank?
+		$("#type").addClass("inputError");
+
 		b=false;
 		 }
-	if (strRoomNumber == null || strRoomNumber == "") { //value blank?
+	if (!strRoomNumber.checkValidity()) { //value blank?
+		$("#roomNumber").addClass("inputError");
+
 		b=false;
 		 }
 	return b;
@@ -192,4 +205,8 @@ function clearTrainingSessionFields(){
 	$("#startTime").val("");
 	$("#type").val("");
 	$("#roomNumber").val("");
+	$("#sessionError").text("");
+	$("#sessionSuccess").text("");
+	$("#sessionCreateError").text("");
+	$("#sessionCreateSuccess").text("");
 }

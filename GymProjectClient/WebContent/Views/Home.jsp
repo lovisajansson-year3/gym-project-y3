@@ -11,7 +11,7 @@
 <head>
 <meta charset="ISO-8859-1">
 </head>
-<body>
+<body style="heighr:1600px;">
 <div class="navbar">
 		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
 		class="active" href="Crud.jsp">Test</a>
@@ -39,22 +39,6 @@
   <p>Test our website</p>
 </div>
 </div>
-
-<aside>
-<table id="asideTable">
-<tr>
-<th><span id="city"></span></th> <th><span></span></th> <th><span></span></th>
-<th><span id="ipNbr"></span></th>
-</tr> <tr>
-<td><span id="degree"></span></td> <td><span id="weather"></span></td> <td><span></span></td> <td><span></span></td>
-</tr> <tr>
-<td colspan="4"><span id="sunrise"></span></td> </tr>
-<tr>
-<td colspan="4"><span id="sunset"></span></td>
-</tr>
-</table> </aside>
-
-
 
 <%@ include file="../Styles/Footer.html" %>
 

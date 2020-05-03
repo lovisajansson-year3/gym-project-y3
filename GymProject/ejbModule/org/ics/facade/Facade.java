@@ -92,7 +92,7 @@ public class Facade implements FacadeLocal {
 		// TODO Auto-generated method stub
 		return gymMemberEAO.findAll();
 	}
-    public boolean alreadyExists(String memberId,String sessionId) {
+    public boolean alreadyExists(long memberId,long sessionId) {
     	return bookingEAO.alreadyExists(memberId,sessionId);
     }
     public ArrayList<GymMember> getAllGymMembersWithBookingsForTrainingSession(long sessionId) {

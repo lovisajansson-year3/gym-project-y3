@@ -15,7 +15,7 @@
 </head>
 
 
-<body style="height: 1802px; ">
+<body style="height: 2302px; ">
 <div class="navbar">
 		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
 		class="active" href="Crud.jsp">Test</a>
@@ -43,8 +43,12 @@
 	<br>
 
 	<div class="create">
+	<span id="memberCreateError" class="error" ></span>
+	 <span id="memberCreateSuccess" class="success"></span> 
+  <br>
 	<input type="button" value="CREATE" name="CreateGymMember" id="CreateGymMember">
 	</div>
+	
 		    <br>
 	
  	<div class="pick">
@@ -63,7 +67,8 @@
 </div>
 	<div class="add">
 	<legend>Add TrainingSession:</legend>
-	<label for="instructor">Instructor:*</label> <select id="instructor" name="instructor"required>
+	<label for="instructor">Instructor:*</label> <select id="instructor" name="instructor" required>
+	<option value="" disabled selected></option>
 	<option value="Lovisa">Lovisa</option>
 	<option value="Lena">Lena</option>
 	<option value="Tove">Tove</option>
@@ -71,9 +76,11 @@
 	</select><br>
 
 	<label for="startDate">Startdate:*</label> 
-	<input type="date" id="startDate" name="startDate" value="2018-07-22" min="2018-01-01"max="2021-01-01" required>	
+	<input type="date" id="startDate" name="startDate" value="0000-00-00" min="2018-01-01"max="2021-01-01" required>	
  	<br><label for="startTime">Starttime:*</label> 
  	<select id="startTime" required name="startTime">
+ 	<option value="" disabled 
+         selected></option>
 	<option value="10:00">10:00</option>
 	<option value="11:00">11:00</option>
 	<option value="12:00">12:00</option>
@@ -84,18 +91,28 @@
 	<option value="17:00">17:00</option>
 	</select><br><label for="type">Type:*</label>
 <select id="type" name="type"required>
+<option value="" disabled 
+         selected></option>
 	<option value="spinning">spinning</option>
 	<option value="crossfit">crossfit</option>
 	</select><br>
 	<label for="roomNumber">Room number:*</label> <select id="roomNumber" name="roomNumber"required>
+					<option value="" disabled 
+         selected></option>
 					<option value="EC01">EC01</option>
 					<option value="EC101">EC101</option>
-				</select><br><br>
+				</select><br>
+				<span id="sessionCreateError" class="error" ></span>
+	 <span id="sessionCreateSuccess" class="success"></span> 
+  
+				<br>
+				
 	<div class="create">
 	 	<input type="button" value="Create Training Session" name="CreateTrainingSession" 		id="CreateTrainingSession">
 	</div>
 	<div class="pick">
-<legend for="sessionId">Pick Session to display values for, update or delete:</legend><br><br><select name="sessionId" id="sessionId"></select><br>
+<legend for="sessionId">Pick Session to display values for, update or delete:</legend><br><br><select name="sessionId" id="sessionId"><option value="" disabled 
+         selected>Select sessionId</option></select><br>
 
 <br> <input type="button" value="Update Session" name="UpdateTrainingSession" id="UpdateTrainingSession">
  <input type="button" value="Delete Session" name="DeleteTrainingSession" id="DeleteTrainingSession">
@@ -107,15 +124,22 @@
 		</div>
 		<div id="Booking" class="add">
 				<legend>Add Booking:</legend><label for="bookingMemberId">
-				MemberId:*</label><select class="id" name="bookingMemberId" id="bookingMemberId" required></select>
-				<br><label for="bookingSessionId"> TrainingSessionId:*</label> <select class="id"name="bookingSessionId" id="bookingSessionId"required></select> <br> 
+				MemberId:*</label><select class="id" name="bookingMemberId" id="bookingMemberId" required><option value="" disabled 
+         selected></option></select>
+				<br><label for="bookingSessionId"> TrainingSessionId:*</label> <select class="id"name="bookingSessionId" id="bookingSessionId"required><option value="" disabled 
+         selected></option></select> <br> 
 
-	<br>	<div class="create">
+	<br>	
+	<span id="bookingCreateError" class="error" ></span>
+	 <span id="bookingCreateSuccess" class="success"></span> 
+  
+	<div class="create">
 <input type="button" id="CreateBooking" name="CreateBooking"value="Create Booking" >
 </div>
 
 <div class="pick">
-<legend for="bookingId">Pick Booking to display values for or delete:</legend><br><br><select name="bookingId" id="bookingId"></select>
+<legend for="bookingId">Pick Booking to display values for or delete:</legend><br><br><select name="bookingId" id="bookingId"><option value="" disabled 
+         selected>Select bookingId</option></select>
 <br>
 <br> 
 <input type="button" value="Delete Booking" name="DeleteBooking" id="DeleteBooking">
@@ -140,15 +164,19 @@
 </table>	
 <table id="trainingSessionTable">
 <thead>
+ <th>sessionId</th> 
     <th>instructor</th>
-    <th>sessionId</th> 
+   
     </thead>
     <tbody id="trainingSessionBody">
     </tbody>
     <table id="bookingTable">
 <thead>
+        <th>bookingId</th> 
+
     <th>sessionId</th>
     <th>memberId</th> 
+    
     </thead>
     <tbody id="bookingBody">
     </tbody>

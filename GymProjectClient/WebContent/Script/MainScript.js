@@ -5,20 +5,16 @@ populateTrainingSessions();
 populateBookings();
 buildTable();
 
-const inputs = document.querySelectorAll('input, select, textarea');
-	for(let input of inputs) {
-	  // Just before submit, the invalid event will fire, let's apply our class there.
-	  input.addEventListener('invalid', (event) => {
-	    input.classList.add('error');    
-	  }, false);
-	  input.addEventListener('change', (event) => {
-		    input.classList.add('valid');    
-		  }, false);
-	  
-	  // Optional: Check validity onblur
-	  input.addEventListener('blur', (event) => {
-	    input.checkValidity();
-	  })
+var inputs = document.querySelectorAll('input, textarea,select');
+for(var i=0;i<inputs.length;i++) {
+ inputs[i].addEventListener('blur', function(){
+   if(!this.checkValidity()) {
+     this.classList.add("inputError");  
+   } else {
+     this.classList.remove("inputError");
+     this.classList.add("inputSuccess");  
+   }
+ }); 
 
 	}
 	
@@ -33,8 +29,8 @@ function buildTable(){
 			function(result){ 
 			  $(result).each(function(i,member){
           	  $("#gymMemberBody").append($("<tr>")
-        			  .append($("<td>").append(member.name))
-        			  .append($("<td>").append(member.memberId)))
+        			  .append($("<td>").append(member.memberId))
+        			  .append($("<td>").append(member.name)))
           })		
 	})
 	$.getJSON("http://localhost:8080/GymProjectClient/TrainingSessionServlet/",
@@ -42,14 +38,15 @@ function buildTable(){
 		
 				$(result).each(function(i,session){
               	  $("#trainingSessionBody").append($("<tr>")
-              			  .append($("<td>").append(session.instructor))
-              			  .append($("<td>").append(session.sessionId)))
+              			  .append($("<td>").append(session.sessionId))
+              			  .append($("<td>").append(session.instructor)))
                 })
 	})
 	$.getJSON("http://localhost:8080/GymProjectClient/BookingServlet/",
 			function(result){ 
                 $(result).each(function(i,booking){
               	  $("#bookingBody").append($("<tr>")
+              			  .append($("<td>").append(booking.bookingId))
               			  .append($("<td>").append(booking.sessionId))
               			  .append($("<td>").append(booking.memberId)))
                 })
@@ -66,7 +63,7 @@ function populateGymMembers(){
 		function ajaxFindReturnSuccess(result, status, xhr) {
 			  console.log("members found")
 			  var len = result.length;
-              $("#memberId").empty();
+			  $('#memberId option:not(:first)').remove();
               for( var i = 0; i<len; i++){
                     var id = result[i].memberId;
                     console.log(id+name);
@@ -91,7 +88,7 @@ function populateTrainingSessions(){
 		function ajaxFindReturnSuccess(result, status, xhr) {
 			  console.log("sessions found")
 			  var len = result.length;
-              $("#sessionId").empty();
+			  $('#sessionId option:not(:first)').remove();              
               for( var i = 0; i<len; i++){
                     var id = result[i].sessionId;
                 $("#sessionId").append("<option value='"+id+"'>"+id+"</option>");
@@ -117,8 +114,7 @@ function populateBookings(){
 		function ajaxFindReturnSuccess(result, status, xhr) {
 			  console.log("bookings found")
 			  var len = result.length;
-              $("#bookingId").empty();
-              for( var i = 0; i<len; i++){
+			  $('#bookingId option:not(:first)').remove();              for( var i = 0; i<len; i++){
                     var id = result[i].bookingId;
                 $("#bookingId").append("<option value='"+id+"'>"+id+"</option>");
                 
