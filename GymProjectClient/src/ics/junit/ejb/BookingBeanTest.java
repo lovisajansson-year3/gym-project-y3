@@ -44,7 +44,7 @@ public class BookingBeanTest extends TestCase {
 		booking.createBooking(g);
 		booking.deleteBooking(1111);
 		booking.findAllBookings();
-		booking.findAllBookingsForGymMember(gymMember);
+	//	booking.findAllBookingsForGymMember(gymMember);
 		booking.findByBookingId(1111);
 	
 	}

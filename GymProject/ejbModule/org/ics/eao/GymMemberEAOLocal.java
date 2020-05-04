@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import org.ics.ejb.Booking;
 import org.ics.ejb.GymMember;
 
 @Local
@@ -17,6 +16,7 @@ public interface GymMemberEAOLocal {
     public List<GymMember> findByAddress(String address);
     public List<GymMember> findAll();
     public ArrayList<GymMember> getAllGymMembersWithBookingsForTrainingSession(long sessionId);
+
 
 
   	

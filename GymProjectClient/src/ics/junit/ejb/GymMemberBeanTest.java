@@ -46,8 +46,8 @@ public class GymMemberBeanTest extends TestCase {
 		facade.findByMemberId(4567);
 		facade.deleteGymMember(4567);
 		facade.updateGymMember(gymMember);
-		facade.findAllBookingsForGymMember(gymMember);
-		facade.findAllBookingsForGymMember(gymMember);
+	//	facade.findAllBookingsForGymMember(gymMember);
+	//	facade.findAllBookingsForGymMember(gymMember);
 		
 	}
 	

@@ -3,6 +3,7 @@ package org.ics.facade;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -10,6 +11,7 @@ import javax.ejb.Stateless;
 
 import org.ics.eao.BookingEAOLocal;
 import org.ics.eao.GymMemberEAOLocal;
+import org.ics.eao.GymMemberEAO;
 import org.ics.eao.TrainingSessionEAOLocal;
 import org.ics.ejb.Booking;
 import org.ics.ejb.GymMember;
@@ -22,18 +24,77 @@ import org.ics.ejb.TrainingSession;
 @LocalBean
 public class Facade implements FacadeLocal {
 
+	private long memberId;
+	public long getMemberId() {
+		memberId = memberEAO.getMemberId();
+		return memberId;
+	}
+	public void setMemberId(long memberId) {
+		this.memberId = memberId;
+	}
+	public String getName() {
+		name = memberEAO.getName();
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getEmail() {
+		email = memberEAO.getEmail();
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhoneNumber() {
+		phoneNumber = memberEAO.getPhoneNumber();
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public String getAddress() {
+		address = memberEAO.getAddress();
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Set<Booking> getBookings() {
+		bookings = memberEAO.getBookings();
+		return bookings;
+	}
+	public void setBookings(Set<Booking> bookings) {
+		this.bookings = bookings;
+	}
+	private String name;
+	private String email;
+	private String phoneNumber;
+	private String address;
+	private Set<Booking> bookings;
+	GymMember member;
+	
 	@EJB
 	GymMemberEAOLocal gymMemberEAO;
 	@EJB
 	TrainingSessionEAOLocal trainingSessionEAO;
 	@EJB
 	BookingEAOLocal bookingEAO;
+	@EJB
+	GymMemberEAO memberEAO;
+	
     /**
      * Default constructor. 
      */
     public Facade() {
         // TODO Auto-generated constructor stub
     }
+    public GymMember createGymMember() {
+    	member = new GymMember(this.memberId, this.name, this.email, this.phoneNumber, this.address, this.bookings);
+		return member;
+    }
+    
+    
     public GymMember findByMemberId(long memberId) {
     	return gymMemberEAO.findByMemberId(memberId);
     }

@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 
 import java.util.Set;
 
+import org.ics.eao.GymMemberEAO;
 import org.ics.ejb.Booking;
 import org.ics.ejb.GymMember;
 
@@ -15,6 +16,7 @@ public class GymMemberTest extends TestCase {
 	String expectedPhoneNumber;
 	String expectedAddress;
 	Set<Booking> expectedBookings;
+	//GymMemberEAO eao;
 	GymMember member1;
 	GymMember member2;
 
@@ -56,7 +58,7 @@ public class GymMemberTest extends TestCase {
 	
 	public void testGetPhoneNumber() {
 
-		//assertEquals(expectedPhoneNumber, member1.getPhoneNumber());
+		assertEquals(expectedPhoneNumber, member1.getPhoneNumber());
 
 	}
 	
@@ -91,7 +93,7 @@ public class GymMemberTest extends TestCase {
 		String expectedPhoneNumber2 = "0701111";
 		member1.setName(expectedPhoneNumber2);
 
-		//assertEquals(expectedPhoneNumber2, member1.getPhoneNumber());
+//		assertEquals(expectedPhoneNumber2, member1.getPhoneNumber());
 
 	}
 
@@ -114,7 +116,7 @@ public class GymMemberTest extends TestCase {
 		assertTrue(!member1.equals(null));
 		assertEquals(member1, member1);
 
-		//assertEquals(member1, new GymMember(expectedMemberId, expectedName, expectedEmail, expectedPhoneNumber, expectedAddress, expectedBookings));      
+//		assertEquals(member1, new GymMember(expectedMemberId, expectedName, expectedEmail, expectedPhoneNumber, expectedAddress, expectedBookings));      
 
 		assertTrue(!member1.equals(member2));   }
 	}

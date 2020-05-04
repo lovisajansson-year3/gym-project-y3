@@ -38,7 +38,7 @@ public class GymMember implements Serializable{
 	public GymMember () {
 	}
 	
-	public GymMember(long memberId, String name, String email, String phonenumber, String address, Set<Booking> bookings) {
+	public GymMember(long memberId, String name, String email, String phoneNumber, String address, Set<Booking> bookings) {
 		this.memberId = memberId;
 		this.name = name;
 		this.email = email;
