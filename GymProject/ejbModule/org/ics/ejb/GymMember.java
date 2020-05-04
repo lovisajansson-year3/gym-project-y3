@@ -36,6 +36,12 @@ public class GymMember implements Serializable{
 	private String address;
 	private Set<Booking> bookings;
 	
+	public GymMember() {}
+	public GymMember(String expectedName, String expectedAddress, String expectedPhoneNumber) {
+		name=expectedName;
+		address=expectedAddress;
+		phoneNumber=expectedPhoneNumber;
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="memberId")
