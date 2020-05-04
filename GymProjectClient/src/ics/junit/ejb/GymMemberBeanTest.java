@@ -11,7 +11,7 @@ import junit.framework.TestCase;
 public class GymMemberBeanTest extends TestCase {
 
 	//GymMemberEAOLocal member;
-	Facade facade;
+	Facade memberFacade;
 	
 	public GymMemberBeanTest(String name) {
 		super(name);
@@ -23,13 +23,13 @@ public class GymMemberBeanTest extends TestCase {
 		
 		//member = (GymMemberEAOLocal)context.lookup("java:app/GymProject/GymMember!org.ics.GymMeberEAOLocal");
 		//member1 = (GymMember)context.lookup("java:app/GymProject/GymMemberEAO!org.ics.eao.GymMemberEAOLocal"); //("java:app/GymProject/GymMember!org.ics.GymMember");
-		facade = (Facade)context.lookup("java:app/GymProject/Facade!org.ics.facade.FacadeLocal");
+		memberFacade = (Facade)context.lookup("java:app/GymProject/Facade!org.ics.facade.Facade");
 	
 	}
 
 	protected void tearDown() throws Exception {
 		super.tearDown();
-		facade = null;
+		memberFacade = null;
 	}
 	
 	public void testFacadeMethods() throws Exception {
@@ -42,19 +42,15 @@ public class GymMemberBeanTest extends TestCase {
 		
 		GymMember gymMember = new GymMember(4567, "Lena", "lena@lena.com", "0704567", "Lenagatan 1", null);
 		
-		facade.createGymMember(gymMember);
-		facade.findByMemberId(4567);
-		facade.deleteGymMember(4567);
-		facade.updateGymMember(gymMember);
-	//	facade.findAllBookingsForGymMember(gymMember);
-	//	facade.findAllBookingsForGymMember(gymMember);
+		memberFacade.createGymMember(gymMember);
+		
 		
 	}
 	
 	public void testFacadeMethods2() throws Exception{
 		GymMember gymMember2 = new GymMember(1234, "Lisa", "lisa@lisa.com", "0704567", "Lisagatan 1", null);
-		facade.createGymMember(gymMember2);
-		assertEquals(facade.createGymMember(gymMember2), gymMember2);
+		memberFacade.createGymMember(gymMember2);
+		assertEquals(memberFacade.createGymMember(gymMember2), gymMember2);
 	}
 
 }

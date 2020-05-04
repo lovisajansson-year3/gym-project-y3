@@ -26,7 +26,21 @@
 	</nav>
 
 	<%@ include file="../Styles/Footer.html" %>
-	
+	<p>Här kan du skriva in ditt TestCase eller TestSuite:<br></p>
+	<form action="TestServlet" method="get" name="youTypeItForm">
+	<input type="text"name="suite"size=60 value=/>
+	<input type="submit" value="Run"/>
+	</form>
+	<hr>
+	<p>Här kan du välja en eller flera av följande test:<br></p>
+	<form action="TestServlet" method="get" name="youPickItForm">
+	<select name="suite"size="2"multiple>
+	<option value="ics.junit.ejb.GymMemberBeanTest">
+	ics.junit.ejb.GymMemberBeanTest</option>
+	<option value="ics.junit...">ett.annat.TestCase</option>
+	</select>
+	<inputtype="submit"value="Run"/>
+</form>
 
 </body>
 </html>
