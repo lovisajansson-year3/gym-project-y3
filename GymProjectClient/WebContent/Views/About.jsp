@@ -17,8 +17,8 @@
 </head>
 <body style="height: 1802px;">
 <div class="navbar">
-		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
-		class="active" href="Crud.jsp">Test</a>
+		<a href="Home.jsp">Home</a> <a class="active"href="About.jsp">About</a> <a
+		 href="Crud.jsp">Crud</a>
 
 	</div>
 <%@ include file="../Styles/Header.html" %>
@@ -39,11 +39,13 @@
     <div class="card">
       <img src="team-member.gif" alt="Jane" style="width:100%">
       <div class="container">
-        <h2>Jane Doe</h2>
+        <h2>Lovisa Jansson</h2>
         <p class="title">CEO & Founder</p>
-        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-        <p>jane@example.com</p>
-       <input type="button"value="Contact" id="contact"><br><br>
+        <p>blablabl</p>
+        <p>lo6788ja-s@student.lu.se</p>
+       <a href="mailto:lo6788ja-s@student.lu.se?subject=your title&body=TThe message">
+<input type="button"value="Contact" id="contact"></a>
+      <br><br>
       </div>
     </div>
   </div>
@@ -55,7 +57,8 @@
         <p class="title">CEO & Founder</p>
         <p>Some text that describes me lorem ipsum ipsum lorem.</p>
         <p>jane@example.com</p>
-         <input type="button"value="Contact" id="contact"><br><br>
+         <a href="mailto:lo6788ja-s@student.lu.se?subject=your title&body=TThe message">
+<input type="button"value="Contact" id="contact"></a><br><br>
       </div>
     </div>
   </div>
@@ -67,7 +70,8 @@
         <p class="title">CEO & Founder</p>
         <p>Some text that describes me lorem ipsum ipsum lorem.</p>
         <p>jane@example.com</p>
-       <input type="button"value="Contact" id="contact"><br><br>
+        <a href="mailto:lo6788ja-s@student.lu.se?subject=your title&body=TThe message">
+<input type="button"value="Contact" id="contact"></a><br><br>
 
       </div>
     </div>

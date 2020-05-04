@@ -16,14 +16,12 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonReader;
-import javax.json.JsonValue;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.ics.ejb.GymMember;
 import org.ics.ejb.TrainingSession;
 import org.ics.facade.FacadeLocal;
 
@@ -51,19 +49,14 @@ public class TrainingSessionServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		String pathInfo = request.getPathInfo();
-		System.out.println(pathInfo);
 		if
 		(pathInfo==null||pathInfo.equals("/")) {
-			System.out.println("alla");
 			List<TrainingSession> sessions = facade.findAllTrainingSessions();
-			sendAsJson(response, sessions); 
-			System.out.println(pathInfo);
-			
+			sendAsJson(response, sessions); 			
 			return;	
 		}
 		String[] splits = pathInfo.split("/");
 		if(splits.length!=2) {
-			System.out.println("alla2");
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
@@ -84,7 +77,6 @@ public class TrainingSessionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String pathInfo = request.getPathInfo(); 
-		System.out.println(pathInfo);
 		if(pathInfo == null || pathInfo.equals("/")){ 
 			BufferedReader reader = request.getReader();
 			TrainingSession t = parseJsonTrainingSession(reader);
@@ -94,7 +86,6 @@ public class TrainingSessionServlet extends HttpServlet {
 			}
 			try { 
 				t = facade.createTrainingSession(t); 
-				System.out.println(t.getSessionId()+ " created");
 			}catch(Exception e) {
 				System.out.println("duplicate key"); 
 				} 

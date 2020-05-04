@@ -78,7 +78,7 @@ $("#DeleteByMemberId").click( function() {
 			var strPhoneNumber = $("#phoneNumber").val();
 			var obj = { name: strName, address: strAddress, email: strEmail, phoneNumber: strPhoneNumber}; 
 			var jsonString = JSON.stringify(obj); 
-			if(isGymMemberFormValid()){
+			if(isGymMemberFormValid(null)){
 				$.ajax({
 					type: "POST", 
 					url: "http://localhost:8080/GymProjectClient/GymMemberServlet/",  
@@ -146,14 +146,43 @@ $("#DeleteByMemberId").click( function() {
 			});//btnclick
 		
 })
+function  isGymMemberFormValid2(){
+	console.log("ej");
+	var strName = document.getElementById("name2");
+	var strAddress = document.getElementById("address2");
+	var strEmail = document.getElementById("email2");
+	var strPhoneNumber = document.getElementById("phoneNumber2");
+	var b = true; 		
+	if (!strName.checkValidity()) { //value blank?
+		$("#name2").addClass("inputError");
+		b=false;
+		}
+	if (!strAddress.checkValidity()) { //value blank?
+		$("#address2").addClass("inputError");
 
+		b=false;
+		}
+	if (!strEmail.checkValidity()) { //value blank?
+		$("#email2").addClass("inputError");
+		b=false;
+		}
+	if (!strPhoneNumber.checkValidity()) { //value blank?
+		$("#phoneNumber2").addClass("inputError");
+
+		b=false;
+		 }
+
+	return b;
+}
 function  isGymMemberFormValid(){
+	
+	
 		var strName = document.getElementById("name");
 		var strAddress = document.getElementById("address");
 		var strEmail = document.getElementById("email");
 		var strPhoneNumber = document.getElementById("phoneNumber");
 		var b = true; 
-		
+				
 		if (!strName.checkValidity()) { //value blank?
 			$("#name").addClass("inputError");
 			b=false;
@@ -171,9 +200,11 @@ function  isGymMemberFormValid(){
 			$("#phoneNumber").addClass("inputError");
 
 			b=false;
-			 }
-		return b;
-	}
+		}
+	
+		
+	
+}
 
 function clearFields() { 
 	$("#name").val(""); 

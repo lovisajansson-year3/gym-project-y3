@@ -45,19 +45,14 @@ public class GymMemberServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		String pathInfo = request.getPathInfo();
-		System.out.println(pathInfo);
 		if
 		(pathInfo==null||pathInfo.equals("/")) {
-			System.out.println("alla");
 			List<GymMember> members = facade.findAll(); 
-			sendAsJson(response, members); 
-			System.out.println(pathInfo);
-			
+			sendAsJson(response, members); 			
 			return;
 		}
 		String[] splits = pathInfo.split("/");
 		if(splits.length!=2) {
-			System.out.println("alla2");
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
@@ -77,7 +72,6 @@ public class GymMemberServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String pathInfo = request.getPathInfo(); 
-		System.out.println("doPost");
 		if(pathInfo == null || pathInfo.equals("/")){ 
 			BufferedReader reader = request.getReader();
 			GymMember m = parseJsonGymMember(reader); 
@@ -96,7 +90,6 @@ public class GymMemberServlet extends HttpServlet {
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pathInfo = request.getPathInfo(); 
-		System.out.println("doPut");
 		if(pathInfo == null || pathInfo.equals("/")){ 
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST); 
 			return; 
@@ -109,7 +102,6 @@ public class GymMemberServlet extends HttpServlet {
 		String id = splits[1]; 
 		BufferedReader reader = request.getReader(); 
 		GymMember m = parseJsonGymMember(reader); 
-		System.out.println(m.getMemberId()+m.getName());
 		if(facade.findByMemberId(Long.parseLong(id))!=null) {
 			try { 
 				m.setMemberId(Long.parseLong(id));

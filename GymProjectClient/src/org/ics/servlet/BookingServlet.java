@@ -3,10 +3,7 @@ package org.ics.servlet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -50,28 +47,21 @@ public class BookingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String pathInfo = request.getPathInfo();
-		System.out.println(pathInfo);
 		if
 		(pathInfo==null||pathInfo.equals("/")) {
 			List<Booking> bookings = facade.findAllBookings();
-			System.out.println(bookings.size());
 			sendAsJson(response, bookings); 
-			System.out.println("findallbookings");
 			
 			return; 
 		}
 		String[] splits = pathInfo.split("/");
 		if(splits.length!=2) {
-			System.out.println("splitlength2");
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
 		String id = splits[1];
-		System.out.println(id);
 		Booking booking = facade.findByBookingId(Integer.parseInt(id));
-		System.out.println(booking.getBookingId());
 		if(booking==null) {
-			System.out.println("bookingisnull");
 			response.sendError(HttpServletResponse.SC_NOT_FOUND, "session doesnt exist");
 			
 		}else {
@@ -84,7 +74,7 @@ public class BookingServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pathInfo = request.getPathInfo(); 
-		System.out.println(pathInfo);
+
 		if(pathInfo == null || pathInfo.equals("/")){ 
 			BufferedReader reader = request.getReader();
 			Booking b = parseJsonBooking(reader);
@@ -97,7 +87,6 @@ public class BookingServlet extends HttpServlet {
 			}else {
 				try { 
 					b = facade.createBooking(b); 
-					System.out.println(b.getBookingId()+ " created");
 				}catch(Exception e) {
 					System.out.println("duplicate key"); 
 					} 
@@ -134,7 +123,6 @@ public class BookingServlet extends HttpServlet {
 		}else {
 			try {
 				facade.deleteBooking(Integer.parseInt(id));   
-				System.out.println("booking deleted");
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 				
@@ -159,7 +147,6 @@ public class BookingServlet extends HttpServlet {
 				} 
 		out.flush(); } 
 	private void sendAsJson(HttpServletResponse response, List<Booking> bookings) throws IOException { 
-		System.out.println("sendasjsonlist");
 		PrintWriter out = response.getWriter(); 
 		response.setContentType("application/json"); 
 		if (bookings != null) { 
