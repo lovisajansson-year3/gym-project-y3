@@ -30,7 +30,7 @@ import org.ics.facade.FacadeLocal;
 /**
  * Servlet implementation class BookingServlet
  */
-@WebServlet("/BookingServlet")
+@WebServlet("/BookingServlet/*")
 public class BookingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -54,24 +54,30 @@ public class BookingServlet extends HttpServlet {
 		if
 		(pathInfo==null||pathInfo.equals("/")) {
 			List<Booking> bookings = facade.findAllBookings();
+			System.out.println(bookings.size());
 			sendAsJson(response, bookings); 
-			System.out.println(pathInfo);
+			System.out.println("findallbookings");
 			
-			return; //FIXA FIND ALL METOD	
+			return; 
 		}
 		String[] splits = pathInfo.split("/");
 		if(splits.length!=2) {
+			System.out.println("splitlength2");
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
 		String id = splits[1];
+		System.out.println(id);
 		Booking booking = facade.findByBookingId(Integer.parseInt(id));
+		System.out.println(booking.getBookingId());
 		if(booking==null) {
+			System.out.println("bookingisnull");
 			response.sendError(HttpServletResponse.SC_NOT_FOUND, "session doesnt exist");
 			
 		}else {
 		sendAsJson(response,booking);
-		}	}
+		}	
+		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -84,7 +90,10 @@ public class BookingServlet extends HttpServlet {
 			Booking b = parseJsonBooking(reader);
 			if(b.getTrainingSession()==null||b.getGymMember()==null) {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, "session or gymMember doesnt exist");
-
+				
+			}else if(facade.alreadyExists(b.getGymMember().getMemberId(),b.getTrainingSession().getSessionId())==true){
+				response.sendError(HttpServletResponse.SC_CONFLICT); 
+				return;
 			}else {
 				try { 
 					b = facade.createBooking(b); 
@@ -92,7 +101,7 @@ public class BookingServlet extends HttpServlet {
 				}catch(Exception e) {
 					System.out.println("duplicate key"); 
 					} 
-				sendAsJson(response,b ); 
+				sendAsJson(response,b );
 			}
 		}
 		}
@@ -125,10 +134,10 @@ public class BookingServlet extends HttpServlet {
 		}else {
 			try {
 				facade.deleteBooking(Integer.parseInt(id));   
-				sendAsJson(response, b); 
+				System.out.println("booking deleted");
 			}catch(Exception e){
 				System.out.println(e.getMessage());
-				response.sendError(HttpServletResponse.SC_CONFLICT ); 
+				
 				return;
 			}	
 		}
@@ -150,7 +159,7 @@ public class BookingServlet extends HttpServlet {
 				} 
 		out.flush(); } 
 	private void sendAsJson(HttpServletResponse response, List<Booking> bookings) throws IOException { 
-		
+		System.out.println("sendasjsonlist");
 		PrintWriter out = response.getWriter(); 
 		response.setContentType("application/json"); 
 		if (bookings != null) { 

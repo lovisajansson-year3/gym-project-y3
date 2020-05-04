@@ -92,8 +92,8 @@ public class Facade implements FacadeLocal {
 		// TODO Auto-generated method stub
 		return gymMemberEAO.findAll();
 	}
-    public ArrayList<Booking> findAllBookingsForGymMember(GymMember memberId){
-    	return bookingEAO.findAllBookingsForGymMember(memberId);
+    public boolean alreadyExists(long memberId,long sessionId) {
+    	return bookingEAO.alreadyExists(memberId,sessionId);
     }
     public ArrayList<GymMember> getAllGymMembersWithBookingsForTrainingSession(long sessionId) {
     	return gymMemberEAO.getAllGymMembersWithBookingsForTrainingSession(sessionId);

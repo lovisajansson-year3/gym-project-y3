@@ -45,15 +45,21 @@ public class BookingEAO implements BookingEAOLocal {
     		em.remove(g);
     	}
     }
-    public ArrayList<Booking> findAllBookingsForGymMember(GymMember member){
+    public boolean alreadyExists(long memberId, long sessionId){
     	TypedQuery<Booking> query = 
-    			em.createNamedQuery("Booking.findAllBookingsForGymMember", Booking.class);
-    	ArrayList<Booking> list = new ArrayList();
-    	if(member!=null) {
-    		query.setParameter("memberId", member.getMemberId());
-    		list = (ArrayList<Booking>) query.getResultList();
-    	}
-    	return list;
+    			em.createNamedQuery("Booking.alreadyExists", Booking.class);
+    	ArrayList<Booking> results = new ArrayList();
+    		
+    		query.setParameter("memberId", memberId);
+    		query.setParameter("sessionId", sessionId);
+    		results = (ArrayList<Booking>) query.getResultList();
+
+    		if(results.isEmpty()) {
+    			return false;
+    		}else {
+    		return true;
+    		}
+    	
     }
     public List<Booking> findAllBookings(){
 		TypedQuery<Booking> query=

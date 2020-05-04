@@ -59,7 +59,7 @@ public class TrainingSessionServlet extends HttpServlet {
 			sendAsJson(response, sessions); 
 			System.out.println(pathInfo);
 			
-			return; //FIXA FIND ALL METOD	
+			return;	
 		}
 		String[] splits = pathInfo.split("/");
 		if(splits.length!=2) {
@@ -157,7 +157,6 @@ public class TrainingSessionServlet extends HttpServlet {
 		}else {
 			try {
 				facade.deleteTrainingSession(Integer.parseInt(id));   
-				sendAsJson(response, t); 
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 				response.sendError(HttpServletResponse.SC_CONFLICT ); 
