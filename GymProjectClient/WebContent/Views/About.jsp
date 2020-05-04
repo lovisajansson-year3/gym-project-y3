@@ -35,7 +35,7 @@
 <div class="row">
   <div class="column">
     <div class="card">
-      <img src="team-member.gif" alt="Jane" style="width:100%">
+      <img src="https://images.pexels.com/photos/3768593/pexels-photo-3768593.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="Jane" style="width:100%">
       <div class="container">
         <h2>Jane Doe</h2>
         <p class="title">CEO & Founder</p>
@@ -47,7 +47,8 @@
   </div>
   <div class="column">
     <div class="card">
-      <img src="team-member.gif" alt="Jane" style="width:100%">
+    	<img src="https://images.pexels.com/photos/863977/pexels-photo-863977.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="Jane" style="width:100%">
+      
       <div class="container">
         <h2>Jane Doe</h2>
         <p class="title">CEO & Founder</p>
@@ -59,7 +60,7 @@
   </div>
   <div class="column">
     <div class="card">
-      <img src="team-member.gif" alt="Jane" style="width:100%">
+      <img src="https://images.pexels.com/photos/863926/pexels-photo-863926.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=9500" alt="Jane" style="width:100%">
       <div class="container">
         <h2>Jane Doe</h2>
         <p class="title">CEO & Founder</p>

@@ -5,13 +5,13 @@
     <welcome-file>test.html</welcome-file>
   </welcome-file-list>
    <servlet>
-  <servlet-name>GymProjectServlet</servlet-name>
-  <servlet-class>org.ics.servlet.GymProjectServlet</servlet-class>
+  <servlet-name>JUnitEETestServlet</servlet-name>
+  <servlet-class>org.junitee.servlet.JUnitEEServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
-  <servlet-name>GymProjectServlet</servlet-name>
-  <url-pattern>/GymProjectServlet/*</url-pattern>
+  <servlet-name>JUnitEETestServlet</servlet-name>
+  <url-pattern>/TestServlet/*</url-pattern>
   </servlet-mapping>
       
 </web-app>
