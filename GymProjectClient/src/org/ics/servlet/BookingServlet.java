@@ -30,7 +30,7 @@ import org.ics.facade.FacadeLocal;
 /**
  * Servlet implementation class BookingServlet
  */
-@WebServlet("/BookingServlet/")
+@WebServlet("/BookingServlet/*")
 public class BookingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -67,14 +67,17 @@ public class BookingServlet extends HttpServlet {
 			return;
 		}
 		String id = splits[1];
+		System.out.println(id);
 		Booking booking = facade.findByBookingId(Integer.parseInt(id));
+		System.out.println(booking.getBookingId());
 		if(booking==null) {
 			System.out.println("bookingisnull");
 			response.sendError(HttpServletResponse.SC_NOT_FOUND, "session doesnt exist");
 			
 		}else {
 		sendAsJson(response,booking);
-		}	}
+		}	
+		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -88,7 +91,7 @@ public class BookingServlet extends HttpServlet {
 			if(b.getTrainingSession()==null||b.getGymMember()==null) {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, "session or gymMember doesnt exist");
 				
-			}else if(facade.alreadyExists(Long.toString(b.getGymMember().getMemberId()), Long.toString(b.getTrainingSession().getSessionId()))==true){
+			}else if(facade.alreadyExists(b.getGymMember().getMemberId(),b.getTrainingSession().getSessionId())==true){
 				response.sendError(HttpServletResponse.SC_CONFLICT); 
 				return;
 			}else {

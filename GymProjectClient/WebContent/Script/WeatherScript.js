@@ -44,7 +44,8 @@ $(document).ready(function () {
 			var timeStrSunrise = sunriseDate.toLocaleTimeString(); 
 			var sunsetDate = new Date(sunset*1000);
 			var timeStrSunset = sunsetDate.toLocaleTimeString();
-			$("#sunrise").text("Sunrise: "+timeStrSunrise); $("#sunset").text("Sunset: "+timeStrSunset);
+			$("#sunrise").text("Sunrise: "+timeStrSunrise); 
+			$("#sunset").text("Sunset: "+timeStrSunset);
 			$("#weather").text(result.weather[0].main);
 			$("#degree").text(result.main.temp+" \u2103"); 
 			}

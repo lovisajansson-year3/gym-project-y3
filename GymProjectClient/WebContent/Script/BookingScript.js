@@ -3,7 +3,7 @@ $(document).ready(function () {
 
 	
 		$("#bookingId").change( function() {
-			var strValue = $("#bookingId").val(); 
+			var strValue = $(this).val(); 
 			if (strValue == ""||strValue==null||isNaN(strValue)) { 
 				clearBookingFields();
 				$("#bookingError").text("enter numeric bookingId" ); 
@@ -54,21 +54,26 @@ $(document).ready(function () {
 			function ajaxAddReturnSuccess(result, status, xhr) {
 				clearBookingFields();
 				console.log("booking added")
-				$("#bookingSuccess").text("booking added" );
+				$("#bookingCreateSuccess").text("booking added" );
 				buildTable();
 				populateBookings();
 				} 
 			function ajaxAddReturnError(result, status, xhr) {
 				clearBookingFields();
 				if(result.status=="404"){
-					$("#bookingError").text("instructor or memberId doesnt exist" ); 
+					$("#bookingCreateError").text("instructor or memberId doesnt exist" ); 
+					console.log("member or session doesnt exist");
+				}if(result.status=="409"){
+					$("#bookingCreateError").text("this booking already exist" ); 
 					console.log("member or session doesnt exist");
 				}else{
-					$("#bookingError").text("couldn't add booking"); 
+					$("#bookingCreateError").text("couldn't add booking"); 
 					console.log("error when adding booking" +result.status); 
 				}
 			
 			}
+		}else{
+		$("#bookingCreateError").text("select an instructor and member" ); 
 		}
 	});//createbtn
 	$("#DeleteBooking").click( function() {
@@ -106,10 +111,14 @@ $(document).ready(function () {
 });
 	
 	function clearBookingFields(){
-		$("#bookingMemberId").val("");
-		$("#bookingSessionId").val("");
+		$('#bookingMemberId option:first').text();
+		$('#bookingSessionId option:first').text();
 		$("bookingId").val("");
-	
+		$("#bookingError").text("");
+		$("#bookingSuccess").text("");
+		$("#bookingCreateError").text("");
+		$("#bookingCreateSuccess").text("");
+		
 	}
 	
 
@@ -118,11 +127,14 @@ $(document).ready(function () {
 		var strBookingSessionId = document.getElementById("bookingSessionId");
 		var b = true; 
 		if (!strBookingMemberId.checkValidity()) { //value blank?
-			strBookingMemberId.placeholder=strBookingMemberId.validationMessage;
+			$("#bookingMemberId").addClass("inputError");
+
 			b=false;
+		
 			}
 		if (!strBookingSessionId.checkValidity()) { //value blank?
-			strBookingSessionId.placeholder=strBookingSessionId.validationMessage;
+			$("#bookingSessionId").addClass("inputError");
+
 			b=false;
 		}
 		return b;

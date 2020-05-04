@@ -1,7 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@page import="org.ics.ejb.GymMember"%>
-<%@page import="java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,116 +13,146 @@
 <link rel="stylesheet" type="text/css" href="../Styles/mystyle.css">
 
 </head>
-<body style="height: 1792px; ">
 
+
+<body style="height: 2302px; ">
+<div class="navbar">
+		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
+		class="active" href="Crud.jsp">Test</a>
+
+	</div>
 
 <%@ include file="../Styles/Header.html" %>
 
-	<nav>
-		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
-			class="active" href="Crud.jsp">Test</a>
+	
+	</div>
+<br>
+<div class="row">
+ <div class="add">
+	<legend>Add Gym Member:</legend>
+	<label for="name">Full Name</label>    	
+	<input class="effect-1" type="text" name="name" id="name" placeholder=""required >
+ 
+	<br> <label for="email">Email:* </label><input class="effect-1"type="text" 		name="email" id="email" required>
 
-	</nav>
-	<section id="main">
-		<p>Create, Read, Update or Delete</p>
+	<br> <label for="phoneNumber">Phone number:* </label>
+	<input class="effect-1"type="number" name="phoneNumber" id="phoneNumber" required> 	<br>
+	<label for="address">Address:* </label>
+	<input type="text" class="effect-1"name="address" id="address" required>
 
-		<section id="subsection">
-			<form name="GymMemberRegistration"
-				id="GymMemberRegistration"
-				>
-				<fieldset id="GymMemberFS">
-					<legend>Add Gym Member:</legend>
-					Full name:*<br> <input type="text" name="name" id="name" required onblur="this.checkValidity();" >
-					<br> Email:*<br> <input type="text" name="email"
-						id="email" required>
-					<br> Phone number:*<br> <input
-						type="number" name="phoneNumber" id="phoneNumber" required> <br>
-					Address:*<br> <input type="text" name="address" id="address" required>
-					
-				</fieldset>
-			</form>					
+	<br>
 
-		</section>					
-		<input type="button" value="Create Gym Member" name="CreateGymMember" id="CreateGymMember">
+	<div class="create">
+	<span id="memberCreateError" class="error" ></span>
+	 <span id="memberCreateSuccess" class="success"></span> 
+  <br>
+	<input type="button" value="CREATE" name="CreateGymMember" id="CreateGymMember">
+	</div>
+	
+		    <br>
+	
+ 	<div class="pick">
+	 <legend for="memberId">Pick GymMember to display values for, update or delete: </legend><br><br><select name="memberId" id="memberId"><option value="" disabled 
+         selected>Select memberId</option></select>
+	 <br> 
+	 <br>
+	 <input type="button" value="Update Member"     name="Up dateGymMember"id="UpdateGymMember">
+	 <input type="button" name="DeleteByMemberId" id="DeleteByMemberId" value="Delete 	 Member" />
+	 <br>
+	 <span id="memberError" class="error" ></span>
+	 <span id="memberSuccess" class="success"></span> 
+  	 <br>
+	</div>
+			
+</div>
+	<div class="add">
+	<legend>Add TrainingSession:</legend>
+	<label for="instructor">Instructor:*</label> <select id="instructor" name="instructor" required>
+	<option value="" disabled selected></option>
+	<option value="Lovisa">Lovisa</option>
+	<option value="Lena">Lena</option>
+	<option value="Tove">Tove</option>
+	<option value="Lisa">Lisa</option>
+	</select><br>
 
-			<br> <input type="button" value="Update Gym Member" name="UpdateGymMember" id="UpdateGymMember">
-
-			<br>Pick GymMember to display values for, update or delete:<select name="memberId" id="memberId"></select>
-			<span id="memberError" class="error" ></span>
-			<span id="memberSuccess" class="success"></span>
-		    <br><input type="button" name="DeleteByMemberId" id="DeleteByMemberId" value="delete by memberid" />
-		    <br><textarea id="show" rows="4" cols="50">
-					</textarea>
-		<section id="subsection">
-		<form name="trainingSessionRegistration"
-				id="TrainingSessionRegistration"
-				>
-			<fieldset id="TrainingSessionFS">
-				<legend>Add TrainingSession:</legend>
-				<label for="instructor">Choose an instructor:*</label> <select
-					id="instructor" name="instructor"required>
-					<option value="Lovisa">Lovisa</option>
-					<option value="Lena">Lena</option>
-					<option value="Tove">Tove</option>
-					<option value="Lisa">Lisa</option>
-				</select><br>
-				<br> <label for="startDate">Start time:*</label> 
-				<input type="date"
-					id="startDate" name="startDate" value="2018-07-22" min="2018-01-01"
-					max="2021-01-01" required>
- 				<legend>Select hour to start:</legend>
- 				<label for="startTime">Choose a time:*</label> 
- 				<select id="startTime" required name="startTime">
-					<option value="10:00">10:00</option>
-					<option value="11:00">11:00</option>
-					<option value="12:00">12:00</option>
-					<option value="13:00">13:00</option>
-					<option value="14:00">14:00</option>
-					<option value="15:00">15:00</option>
-					<option value="16:00">16:00</option>
-					<option value="17:00">17:00</option>
-				</select><br>
-				<br> <label for="type">Choose an session type:*</label> <select
-					id="type" name="type"required>
-					<option value="spinning">spinning</option>
-					<option value="crossfit">crossfit</option>
-				</select><br>
-				<br> <label for="roomNumber">Choose a room number:*</label> <select
-					id="roomNumber" name="roomNumber"required>
+	<label for="startDate">Startdate:*</label> 
+	<input type="date" id="startDate" name="startDate" value="0000-00-00" min="2018-01-01"max="2021-01-01" required>	
+ 	<br><label for="startTime">Starttime:*</label> 
+ 	<select id="startTime" required name="startTime">
+ 	<option value="" disabled 
+         selected></option>
+	<option value="10:00">10:00</option>
+	<option value="11:00">11:00</option>
+	<option value="12:00">12:00</option>
+	<option value="13:00">13:00</option>
+	<option value="14:00">14:00</option>
+	<option value="15:00">15:00</option>
+	<option value="16:00">16:00</option>
+	<option value="17:00">17:00</option>
+	</select><br><label for="type">Type:*</label>
+<select id="type" name="type"required>
+<option value="" disabled 
+         selected></option>
+	<option value="spinning">spinning</option>
+	<option value="crossfit">crossfit</option>
+	</select><br>
+	<label for="roomNumber">Room number:*</label> <select id="roomNumber" name="roomNumber"required>
+					<option value="" disabled 
+         selected></option>
 					<option value="EC01">EC01</option>
 					<option value="EC101">EC101</option>
 				</select><br>
-		</fieldset>
-		</form>
-		</section>
-<br> <input type="button" value="Create Training Session" name="CreateTrainingSession" id="CreateTrainingSession">
-<br>Pick Session to display values for, update or delete:<select name="sessionId" id="sessionId"></select>
-			<span id="sessionError" class="error"></span>
-			<span id="sessionSuccess" class="success"></span>
+				<span id="sessionCreateError" class="error" ></span>
+	 <span id="sessionCreateSuccess" class="success"></span> 
+  
+				<br>
+				
+	<div class="create">
+	 	<input type="button" value="Create Training Session" name="CreateTrainingSession" 		id="CreateTrainingSession">
+	</div>
+	<div class="pick">
+<legend for="sessionId">Pick Session to display values for, update or delete:</legend><br><br><select name="sessionId" id="sessionId"><option value="" disabled 
+         selected>Select sessionId</option></select><br>
 
-<br> <input type="button" value="Update Training Session" name="UpdateTrainingSession" id="UpdateTrainingSession">
-<br> <input type="button" value="Delete Training Session" name="DeleteTrainingSession" id="DeleteTrainingSession">
-		
-		<section id="subsection">
-		<form name="BookingRegistration"
-				id="BookingRegistration"
-				>
-			<fieldset id="BookingFS">
-				<legend>Add Booking:</legend>
-				MemberId:*<br> <select name="bookingMemberId" id="bookingMemberId" required></select>
-				<br> TrainingSessionId number:*<br> <select name="bookingSessionId" id="bookingSessionId"required></select> <br> 
-			</fieldset>
-			</form>
+<br> <input type="button" value="Update Session" name="UpdateTrainingSession" id="UpdateTrainingSession">
+ <input type="button" value="Delete Session" name="DeleteTrainingSession" id="DeleteTrainingSession">
+<br>
+<span id="sessionError" class="error"></span>
+<span id="sessionSuccess" class="success"></span>
+<br>
+</div>
+		</div>
+		<div id="Booking" class="add">
+				<legend>Add Booking:</legend><label for="bookingMemberId">
+				MemberId:*</label><select class="id" name="bookingMemberId" id="bookingMemberId" required><option value="" disabled 
+         selected></option></select>
+				<br><label for="bookingSessionId"> TrainingSessionId:*</label> <select class="id"name="bookingSessionId" id="bookingSessionId"required><option value="" disabled 
+         selected></option></select> <br> 
+
+	<br>	
+	<span id="bookingCreateError" class="error" ></span>
+	 <span id="bookingCreateSuccess" class="success"></span> 
+  
+	<div class="create">
 <input type="button" id="CreateBooking" name="CreateBooking"value="Create Booking" >
-<br>Pick Booking to display values for or delete:<select name="bookingId" id="bookingId"></select>
-			<span id="bookingError" class="error" ></span>
-			<span id="bookingSuccess" class="success"></span>
+</div>
 
-<br> <input type="button" value="Delete Booking" name="DeleteBooking" id="DeleteBooking">
+<div class="pick">
+<legend for="bookingId">Pick Booking to display values for or delete:</legend><br><br><select name="bookingId" id="bookingId"><option value="" disabled 
+         selected>Select bookingId</option></select>
+<br>
+<br> 
+<input type="button" value="Delete Booking" name="DeleteBooking" id="DeleteBooking">
+<br>
+<span id="bookingError" class="error" ></span>
+<span id="bookingSuccess" class="success"></span>
+<br>
+</div>
+</div>
+</div>
+<br>
 
-</section>
-	</section>
-	
+<br><div id="tables">	
 <table id="gymMemberTable">
 <thead>
     <th>memberId</th>
@@ -137,20 +164,23 @@
 </table>	
 <table id="trainingSessionTable">
 <thead>
+ <th>sessionId</th> 
     <th>instructor</th>
-    <th>sessionId</th> 
+   
     </thead>
     <tbody id="trainingSessionBody">
     </tbody>
     <table id="bookingTable">
 <thead>
+        <th>bookingId</th> 
+
     <th>sessionId</th>
     <th>memberId</th> 
+    
     </thead>
     <tbody id="bookingBody">
     </tbody>
  
 </table>	
-
-</table><%@include file="../Styles/Footer.html"%></body>
+<%@include file="../Styles/Footer.html"%></body>
 </html>

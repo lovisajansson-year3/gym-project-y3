@@ -1,7 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@page import="org.ics.ejb.GymMember"%>
-<%@page import="java.util.ArrayList"%>
 
 <!DOCTYPE html>
 <html>
@@ -16,26 +12,37 @@
 <head>
 <meta charset="ISO-8859-1">
 </head>
-<body>
+<body style="heighr:1600px;">
+<div class="navbar">
+		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
+		class="active" href="Crud.jsp">Test</a>
+
+	</div>
+
 <%@ include file="../Styles/Header.html" %>
-	<nav>
-		<a class="active" href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
-			href="Crud.jsp">Crud</a><a href="Test.jsp">Test</a>
-</nav>	
-<body> 
-<aside>
-<table id="asideTable">
-<tr>
-<th><span id="city"></span></th> <th><span></span></th> <th><span></span></th>
-<th><span id="ipNbr"></span></th>
-</tr> <tr>
-<td><span id="degree"></span></td> <td><span id="weather"></span></td> <td><span></span></td> <td><span></span></td>
-</tr> <tr>
-<td colspan="4"><span id="sunrise"></span></td> </tr>
-<tr>
-<td colspan="4"><span id="sunset"></span></td>
-</tr>
-</table> </aside>
+
+
+</div>
+	
+<div class="buttonRow">
+ <div class="img">
+  <a href="https://www.w3schools.com"><img src="../Styles/holidays.png" width="60" height="60"></a>
+  <p>Start booking</p>
+</div>
+<div class="vl"></div>
+<div class="img">
+  <a href="https://www.w3schools.com"><img src="../Styles/web-programming.png" width="60" height="60"></a>
+  <p>Learn more about us</p>
+</div>
+<div class="vll"></div>
+<div class="img">
+  <a href="https://www.w3schools.com"><img src="../Styles/flasks.png" width="60" height="60"></a>
+  <p>Test our website</p>
+</div>
+</div>
+
 <%@ include file="../Styles/Footer.html" %>
+
+
 </body>
 </html>

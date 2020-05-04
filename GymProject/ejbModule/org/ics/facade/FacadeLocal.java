@@ -32,7 +32,7 @@ public interface FacadeLocal {
 	    public Booking createBooking(Booking g);
 	    public Booking updateBooking(Booking g);
 	    public void deleteBooking(long bookingId);
-	    public boolean alreadyExists(String memberId,String sessionId);
+	    public boolean alreadyExists(long memberId,long sessionId);
 	    public ArrayList<GymMember> getAllGymMembersWithBookingsForTrainingSession(long sessionId);
 	    public List<Booking> findAllBookings();
 

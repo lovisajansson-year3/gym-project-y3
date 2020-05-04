@@ -1,14 +1,156 @@
 @charset "ISO-8859-1";
-input.error,
-select.error,
-textarea.error {
+
+
+.inputError {
   outline: none;
-  border-color: red;
+  border-color: red !important;
   border-width: 1px;
   border-style: solid;
   
   // Use CSS to visually restore valid fields
-  }
+
+}
+
+.inputSuccess{
+	border-color:green!important;
+	
+}
+.header{
+  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+ background-image: url("../Styles/4462.jpg");
+
+  height:200px; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+font-size:30px;
+padding:30px;
+display: flex;
+align-items: center;
+justify-content: center;
+
+}
+.imggg{
+display:inline-block;
+padding-right:30%;
+vertical-align:top;
+}
+
+.imgg{
+display:inline-block;
+padding-left:30%;
+vertical-align:top;
+}
+
+.buttonRow{
+
+position:relative;
+width:100%;
+height:400px;
+margin-right:20px;
+margin-left:2opx;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.buttonRow img{
+color:black;
+display:inline-block;
+padding:45px;
+padding-bottom:0px;
+margin:45px;
+
+}
+.vl {
+  border-left: 2px dotted #c4bbad;
+  height: 180px;
+  margin-left:30px;
+  margin-right:30px;
+  padding:0px;
+
+}
+.vll{
+ border-left: 2px dotted #c4bbad;
+  height: 180px;
+  margin-left:30px;
+  margin-right:30px;
+  padding:0px;
+}
+.about-section {
+  padding: 50px;
+  text-align: center;
+  background-color: #f0e6d7;
+  color: black;
+  padding-left:20px;
+
+}
+
+.column {
+display:inline-block;
+width: 30%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+padding-bottom:16px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 8px;
+}
+
+
+table{
+vertical-align:top;
+display:inline-block;
+width: 30%;
+padding:0;
+margin:10px;
+ border: 1px solid black;
+}
+th, td {
+  padding: 15px;
+  text-align: center;
+  border:1px solid;
+}
+th{
+background-color:	
+	font: 15px/24px "Lato", Arial, sans-serif; 
+background:#ded3c3;
+font-weight:bold;
+color:	#3b3834;
+text-align:center;
+border: 1px solid black;
+width:100%;
+	
+}
+
+.pick{
+padding:0px;
+margin: 0px;
+position:absolute;
+bottom:0;
+width:90%;
+}
+
+.add{
+vertical-align:top;
+text-align:left;
+display:inline-block;
+position:relative;
+padding:10px;
+margin:10px;
+border: 1px dotted white;
+height:950px;
+width:25%;
+
+}
+row{
+position:absolute;
+width:100%;
+display:inline-block;
+float:left;
+}
 
 input.valid,
 select.valid,
@@ -20,9 +162,9 @@ textarea.valid {
   
   // Use CSS to visually restore valid fields
   }
-
 body {
-  background-color: lightblue;
+height:1100px;
+background-color:#f0e6d7;
   text-align:center;
   position:relative;
   font-family: "Lucida Console", Courier, monospace;
@@ -31,114 +173,240 @@ body {
 
   
 }
-header {
-	height: 200px;
-  padding: 30px;
-  text-align: center;
-  background: lightblue;
-  color: white;
-  font-size: 15px;
-  border-bottom: 1px solid white;
-overflow:auto;
-  font-family: "Lucida Console", Courier, monospace;
-}
-h1{
-  font-family: "Lucida Console", Courier, monospace;
-display: block;
-  font-size: 5em;
-  margin-top: 1em;
-  margin-bottom: 0.67em;
-  margin-left: 1;
-  margin-right: 1;
-  font-weight: normal;
-text-decoration:underline;
-
-}
-
 /* Add a black background color to the top navigation */
-nav {
-  background-color: light blue;
-  text-align: center;
-  overflow: hidden;
-  float: center;
-}
+
 
 /* Style the links inside the navigation bar */
-nav a {
+.navbar {
   display: inline-block;
   color: white;
   text-align: center;
-  padding: 15px 15px ;
+ position: relaive;
   text-decoration: none;
   font-size: 17px;
+border-style:1 px dotted;
+width:100%;
 
 
 }
+.navbar a {
+  float: none;
+  display: inline-block;
+  color: black;
+  text-align: center;
+font-weight:bold;
+  padding: 14px 20px;
+margin:10px;
+  text-decoration: none;
+transition: letter-spacing 0.2s;
+
+letter-spacing:1px;
+transition-timing-function: ease-out;
+
+}
+
 
 /* Change the color of links on hover */
-nav a:hover {
-  background-color: lightblue;
+.navbar a:hover {
   color: black;
+border-bottom:solid 1px;
+letter-spacing:3px;
+
+
 }
 
 /* Add a color to the active/current link */
-nav a.active {
-    border-bottom: 1px solid white;
-
-}
-fieldset { 
-  display: inline-block;
-  margin-left: 10px;
-  margin-right: 2px;
-  padding-top: 0.35em;
-  padding-bottom: 0.625em;
-  padding-left: 0.75em;
-  padding-right: 0.75em;
-  border: 1px dotted white;
-  text-align: left;
-
-
-}
-section#main{
-padding:30px;
-
-}
-section#main p{
-color:white;
-border-bottom: 1px dotted white;
-
+.navbar a.active {
+    border-bottom: 1px solid black;
+transition: 0.6s;
+letter-spacing:1px;
 }
 
-section#subsection{ 
- display: inline-block;
- margin-left: 10px;
+
+
+legend{
+text-align:center;
+	 border: 1px dotted black;
+color:#3b3834;
+font-weight:bold;
+padding-top:20px;
+padding-bottom:20px;
+margin 0px;
+background:#ded3c3;
+width:100%
+
+}
+label{
+display: inline-block;
+font: 15px/24px "Lato", Arial, sans-serif; 
+padding-top:17px;
+color:	#8B4513;
 }
 
-table{
-	display: inline-block;
-	padding-bottom:100px;
+input[type="text"],[type="number"],[type="date"]{
+width: 100%;
+font: 15px/24px "Lato", Arial, sans-serif; 
+letter-spacing: 1px;
+outline: none;
+margin:0px;
+padding-top:17px;
+border-width:0px;
+border:none;
+border-bottom: 1px dotted grey;
+background:#f0e6d7;
+ }
+ *:focus{
+outline: none;
+}
+input[type="text"]:hover,[type="number"]:hover,[type="date"]:hover
+,select:hover{
+ border-bottom: 1px solid black;
+transition: 0.8s;
 }
 
-aside {
-float: right;
-width: 30%; background-color: #f1f1f1;
+input[type="text"]:focus,[type="number"]:focus,[type="date"]:focus{
+ border-bottom: 2px solid black;
+transition: 0.8s;
+
+
 }
 
-footer{
-bottom:0px;
-  height: 100px;
-  background: mediumseagreen;
-  font-family: "Lucida Console", Courier, monospace;
+
+
+select{
+ width: 100%;
+font: 15px/24px "Lato", Arial, sans-serif; 
+letter-spacing: 1px;
+padding-top:17px;
+margin:0px;
+outline: none;
+border-style:dotted;
+border-color:grey;
+border-width:1px;
+  color: black;
+  padding: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 10px;;
+transition: 0.8s;
+background:#f0e6d7;
+
+
  
+}
+select:focus{
+border-style:solid;
+border-width:1px;
+border-color:black;
+transition: 0.8s;
+}
 
+
+input#CreateGymMember,#CreateBooking,#CreateTrainingSession{
+
+  background: #AADD77;
+  color:black;
+position:absolute;
+bottom:360;
+width:94%;
+}
+
+#CreateGymMember:hover,#CreateBooking:hover,#CreateTrainingSession:hover {
+
+    background: green;
+
+
+}
+input#UpdateGymMember,#UpdateTrainingSession{
+  background: #00969e;
+  width: 50%;
+
+}
+
+
+input#UpdateGymMember:hover,input#UpdateTrainingSession:hover {
+   
+    background: blue;
+}
+input#DeleteByMemberId,#DeleteTrainingSession,#DeleteBooking{
+
+  width: 48%;
+  background: #ff6961;
+ }
+
+input[type="button"]{
+
+outline:none;
+  height: 40px;
+  text-align: center;
+  width: 50%;
+  border-radius:40px;
+  color:black;
+  letter-spacing:1px;
+border-style: double;
+border-color:white;
+  font:{
+    size:12px;
+    weight:bold;
+}
+  cursor: pointer;
+  transition: all 0.25s ease;
+  
+}
+input[type="button"]:hover{
+letter-spacing:2px;
+    color:white;
+}
+
+input#DeleteBooking{
+width:97%;
+}
+#DeleteByMemberId:hover,#DeleteTrainingSession:hover,#DeleteBooking:hover {
+   letter-spacing:2px;
+    color:white;
+    background: red;
+    letter-spacing: 2px ;
+}
+
+
+#memberId.option[value=""][disabled] {
+  display: none;
+}
+#sessionId.option[value=""][disabled] {
+  display: none;
+}#bookingId.option[value=""][disabled] {
+  display: none;
+}
+
+
+
+
+.footer {
+ box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+ background-image: url("../Styles/4462.jpg");
+
+  height:175px; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+padding-top:30px;
+ position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 *{
-	  font-family: "Lucida Console", Courier, monospace;
+ font: 15px/24px "Lato", Arial, sans-serif; 
+
+
 	
 }
-span.error{
-	colour:red;
+.error{
+	color:red;
+	
 }
 .success{
 	color:green;
+	
 }
+
