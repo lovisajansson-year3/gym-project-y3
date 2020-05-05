@@ -15,6 +15,9 @@ import junit.framework.TestCase;
 public class FacadeTest extends TestCase {
 
 	FacadeLocal facade;
+	GymMember g;
+	long expectedMemberId;
+	
 	public FacadeTest(String name) {
 		super(name);
 	}
@@ -22,12 +25,12 @@ public class FacadeTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		System.getProperty(Context.PROVIDER_URL);
-		Context ctx = new InitialContext( ); 
-		
-			
-			
+		Context ctx = new InitialContext( ); 		
 		
 		facade=(FacadeLocal)ctx.lookup("java:app/GymProject/Facade"+"!org.ics.facade.FacadeLocal");
+		g = facade.createGymMember(g);
+		expectedMemberId = 1234;
+		g.setMemberId(expectedMemberId);
 		
 	}
 	
@@ -37,9 +40,11 @@ public class FacadeTest extends TestCase {
 		g.setAddress("malmo");
 		GymMember g2 = facade.createGymMember(g);
 		assertEquals(g.getAddress(),g2.getAddress());
+//		assertEquals(g2,facade.findByMemberId(g2.getMemberId()));
 		
 		}
 	public void testGymMemberMethods2() throws Exception {
+		facade.findByMemberId(expectedMemberId);
 		
 	}
 
