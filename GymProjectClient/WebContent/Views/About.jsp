@@ -17,8 +17,8 @@
 </head>
 <body style="height: 1802px;">
 <div class="navbar">
-		<a href="Home.jsp">Home</a> <a class="active"href="About.jsp">About</a><a href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
-		  href="Crud.jsp">Rest</a><a  href="Test.jsp">Test</a>
+		<a href="/Views/Home.jsp">Home</a> <a class="active"href="/Views/About.jsp">About</a><a href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
+		  href="/Views/Crud.jsp">Rest</a><a  href="/Views/Test.jsp">Test</a>
 
 	</div>
 <%@ include file="../Styles/Header.html" %>

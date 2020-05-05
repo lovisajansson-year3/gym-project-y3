@@ -13,8 +13,8 @@
 </head>
 <body style="heighr:1600px;">
 <div class="navbar">
-		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a><a href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
-		class="active" href="Crud.jsp">Rest</a><a href="Test.jsp">Test</a>
+		<a href="${pageContext.request.contextPath}/Views/Home.jsp">Home</a> <a href="${pageContext.request.contextPath}/Views/About.jsp">About</a><a href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
+		class="active" href="${pageContext.request.contextPath}Views//Crud.jsp">Rest</a><a href="${pageContext.request.contextPath}Views//Test.jsp">Test</a>
 
 	</div>
 
@@ -25,17 +25,17 @@
 	
 <div class="buttonRow">
  <div class="img">
-  <a href="https://www.w3schools.com"><img src="../Styles/holidays.png" width="60" height="60"></a>
+  <a href="${pageContext.request.contextPath}/ControllerServlet"><img src="../Styles/holidays.png" width="60" height="60"></a>
   <p>Start booking</p>
 </div>
 <div class="vl"></div>
 <div class="img">
-  <a href="https://www.w3schools.com"><img src="../Styles/web-programming.png" width="60" height="60"></a>
+  <a href="About.jsp"><img src="../Styles/web-programming.png" width="60" height="60"></a>
   <p>Learn more about us</p>
 </div>
 <div class="vll"></div>
 <div class="img">
-  <a href="https://www.w3schools.com"><img src="../Styles/flasks.png" width="60" height="60"></a>
+  <a href="Test.jsp"><img src="../Styles/flasks.png" width="60" height="60"></a>
   <p>Test our website</p>
 </div>
 </div>
