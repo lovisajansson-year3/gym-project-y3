@@ -175,6 +175,7 @@
     </thead>
     <tbody id="trainingSessionBody">
     </tbody>
+    </table>
     <table id="bookingTable">
 <thead>
         <th>bookingId</th> 
@@ -187,5 +188,6 @@
     </tbody>
  
 </table>	
+
 <%@include file="../Styles/Footer.html"%></body>
 </html>

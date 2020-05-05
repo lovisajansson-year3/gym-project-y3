@@ -102,7 +102,9 @@ padding-bottom:16px;
 
 table{
 vertical-align:top;
-display:inline-block;
+overflow-y:scroll;
+   height:400px;
+   display:inline-block;
 width: 30%;
 padding:0;
 margin:10px;
@@ -129,8 +131,11 @@ width:100%;
 padding:0px;
 margin: 0px;
 position:absolute;
-bottom:0;
+bottom:80px;
 width:90%;
+text-align:center;
+vertical-align:top;
+
 }
 
 .add{
@@ -149,7 +154,7 @@ row{
 position:absolute;
 width:100%;
 display:inline-block;
-float:left;
+float:none;
 }
 
 input.valid,
@@ -243,6 +248,7 @@ padding-top:17px;
 color:	#8B4513;
 }
 
+
 input[type="text"],[type="number"],[type="date"]{
 width: 100%;
 font: 15px/24px "Lato", Arial, sans-serif; 
@@ -264,7 +270,7 @@ input[type="text"]:hover,[type="number"]:hover,[type="date"]:hover
 transition: 0.8s;
 }
 
-input[type="text"]:focus,[type="number"]:focus,[type="date"]:focus{
+input[type="text"]:focus,[name="button"]:focus,[type="number"]:focus,[type="date"]:focus{
  border-bottom: 2px solid black;
 transition: 0.8s;
 
@@ -311,16 +317,29 @@ position:absolute;
 bottom:360;
 width:94%;
 }
+input[value="Create GymMember"],[value="Create TrainingSession"],[value="Create Booking"]{
+ background: #AADD77;
+  color:black;
+    width:100% !important;
+    display:inline-block;
+  
+  
+  }
+  input[value="Update GymMember"],[value="Update TrainingSession"],[value="Update Booking"]{
+ background: #00969e;
+  color:black;
+  width:100% !important;
+  
+  }input[value="Delete GymMember"],[value="Delete TrainingSession"],[value="Delete Booking"]{
+ background: #ff6961;
+  color:black;
+    width:100% !important;
+  
+  }
 
-#CreateGymMember:hover,#CreateBooking:hover,#CreateTrainingSession:hover {
-
-    background: green;
-
-
-}
 input#UpdateGymMember,#UpdateTrainingSession{
   background: #00969e;
-  width: 50%;
+  width: 46%;
 
 }
 
@@ -334,8 +353,9 @@ input#DeleteByMemberId,#DeleteTrainingSession,#DeleteBooking{
   width: 48%;
   background: #ff6961;
  }
+ 
 
-input[type="button"]{
+input[type="button"],[name="button"]{
 
 outline:none;
   height: 40px;
@@ -354,7 +374,7 @@ border-color:white;
   transition: all 0.25s ease;
   
 }
-input[type="button"]:hover{
+input[type="button"]:hover,[name="button"]:hover{
 letter-spacing:2px;
     color:white;
 }
