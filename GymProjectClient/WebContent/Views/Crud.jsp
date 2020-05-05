@@ -20,8 +20,8 @@
 
 <body style="height: 2302px; ">
 <div class="navbar">
-		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a><a href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
-		 class="active" href="Crud.jsp">Rest</a><a  href="Test.jsp">Test</a>
+		<a href="/Views/Home.jsp">Home</a> <a href="/Views/About.jsp">About</a><a href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
+		 class="active" href="/Views/Crud.jsp">Rest</a><a  href="/Views/Test.jsp">Test</a>
 
 	</div>
 

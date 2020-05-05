@@ -21,8 +21,8 @@
 <%@ include file="../Styles/Header.html" %>
 
 	<div class="navbar">
-		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a><a href="Gym.jsp">Book</a> <a
-		 href="Crud.jsp">Rest</a><a class="active" href="Test.jsp">Test</a>
+		<a href="/Views/Home.jsp">Home</a> <a href="/Views/About.jsp">About</a><a href="/Views/Gym.jsp">Book</a> <a
+		 href="/Views/Crud.jsp">Rest</a><a class="active" href="/Views/Test.jsp">Test</a>
 
 	</div>
 	<%@ include file="../Styles/Footer.html" %>
