@@ -191,7 +191,7 @@ public class TrainingSessionServlet extends HttpServlet {
 				o.add("instructor", t.getInstructor()); 
 				o.add("roomNumber", t.getRoomNumber()); 
 				o.add("type", t.getType()); 
-				System.out.println(t.getStartTime().toString());
+
 				o.add("startTime", t.getStartTime().toString()); 
 				array.add(o); 
 				} 

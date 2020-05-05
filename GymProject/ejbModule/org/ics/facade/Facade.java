@@ -105,4 +105,14 @@ public class Facade implements FacadeLocal {
 		// TODO Auto-generated method stub
 		return bookingEAO.findAllBookings();
 	}
+	@Override
+	public boolean findBookingByMemberId(long memberId) {
+		// TODO Auto-generated method stub
+		return bookingEAO.findBookingByMemberId(memberId);
+	}
+	@Override
+	public boolean findBookingBySessionId(long sessionId) {
+		// TODO Auto-generated method stub
+		return bookingEAO.findBookingBySessionId(sessionId);
+	}
 }

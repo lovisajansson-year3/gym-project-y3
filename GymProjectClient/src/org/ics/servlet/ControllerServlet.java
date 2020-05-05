@@ -89,7 +89,7 @@ public class ControllerServlet extends HttpServlet {
 			t.setInstructor(req.getParameter("instructor"));
 			String sdate= req.getParameter("startDate");
 			String stime = req.getParameter("startTime");
-			String sDate=sdate+stime;
+			String sDate=sdate+ " "+stime;
 			sDate = sDate+":00.000";
 			DateFormat d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 			Date d2 = null;
@@ -122,8 +122,19 @@ public class ControllerServlet extends HttpServlet {
 			msg="gym member "+g.getMemberId()+" updated";
 			req.setAttribute("gsuccess",  msg);
 		}else if (button.equals("Delete GymMember"))  {
-			long id = Long.parseLong(req.getParameter("allMembers"));
-			facade.deleteGymMember(id);
+			
+			long id = Long.parseLong(req.getParameter("allGymMembers"));
+			try {
+				facade.deleteGymMember(id);
+				msg="gym member " + id+" deleted";
+				req.setAttribute("gsuccess", msg );
+				System.out.println("delete worked");
+			}catch(Exception e) {
+				errormsg="cannot delete member that is booked for session";
+				req.setAttribute("gerror", errormsg);
+				System.out.println("catch statement");
+			}
+			
 			msg="gym member " + id+" deleted";
 			req.setAttribute("gsuccess", msg );
 		}else if(button.equals("Update TrainingSession")){
@@ -154,12 +165,17 @@ public class ControllerServlet extends HttpServlet {
 			}
 		}else if(button.equals("Delete TrainingSession")){
 			long id = Long.parseLong(req.getParameter("allTrainingSessions"));
-			facade.deleteTrainingSession(id);
-			msg="session "+id+" deleted";
-			req.setAttribute("tsuccess", id );
+			try{
+				facade.deleteTrainingSession(id);
+				msg="session "+id+" deleted";
+				req.setAttribute("tsuccess", id );
+			}catch(Exception e){
+			errormsg="cannot delete session that members are booked for";
+			req.setAttribute("terror", errormsg);
+			}
 		}else if(button.equals("Create Booking")){
-			long sid = Long.parseLong(req.getParameter("bookingTrainingSessions"));
-			long mid = Long.parseLong(req.getParameter("bookingGymMembers"));
+			long sid = Long.parseLong(req.getParameter("bookingSessionId"));
+			long mid = Long.parseLong(req.getParameter("bookingMemberId"));
 			if(facade.alreadyExists(mid, sid)==true) {
 				errormsg="this member is already booked on this session";
 				req.setAttribute("berror", errormsg);

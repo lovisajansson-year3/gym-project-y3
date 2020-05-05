@@ -11,7 +11,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 <script src="${pageContext.request.contextPath}/Script/GymMemberScript.js"></script>
 <script src="${pageContext.request.contextPath}/Script/MainScript.js"></script>
+<script>
 
+
+</script>
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/Styles/mystyle.css">
@@ -20,11 +23,10 @@
 
 <body style="height: 2302px; ">
 <div class="navbar">
-		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
-		class="active" href="Crud.jsp">Test</a>
+		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a><a class="active" href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
+		 href="Crud.jsp">Rest</a><a  href="Test.jsp">Test</a>
 
 	</div>
-
 <%@ include file="../Styles/Header.html" %>
 
 	
@@ -34,7 +36,7 @@
 
  <div class="add">
 	
-<form action="${pageContext.request.contextPath}/ControllerServlet"method="post" onSubmit="submit()")>
+<form name="form"action="${pageContext.request.contextPath}/ControllerServlet"method="post" )>
 
 <legend>Add Gym Member:</legend>
 <label for="name">Full Name</label>  <br>
@@ -52,43 +54,24 @@
 
 
 <span id="memberCreateError2" class="error" >
-<c:choose>
-<c:when test=" ${!empty param.gerror}">
-    <p><c:out value = "${error}"/></p>
-  </c:when>
-  <c:when test=" ${empty gerror}">
-    <p><c:out value = "is empty"/></p>
-  </c:when>
-  <c:otherwise>
-            no error
-         </c:otherwise>
-      </c:choose>  
-      </span>
-<span id="memberCreateSuccess2" class="success">
-<c:choose>
-<c:when test=" ${gsuccess!=''}">
- <%= ((String)request.getAttribute("gsuccess"))%>  </c:when>
-  <c:when test=" ${empty gsuccess}">
- <%= ((String)request.getAttribute("gsuccess"))%>  </c:when>
-  <c:when test=" ${not empty gsuccess}">
- <%= ((String)request.getAttribute("gsuccess"))%>  </c:when>
-  <c:when test=" ${!empty gsuccess}">
-    <%= ((String)request.getAttribute("gsuccess"))%> 
-  </c:when>
-  <c:otherwise>
-            no success
-         </c:otherwise>
-      </c:choose>  
-      </span>
-</span> 
-<% String up = (String)request.getAttribute("gsuccess"); %>
-
-<% if (up == null) 
+<% String gerrormsg = (String)request.getAttribute("gerror"); %>
+<% if (gerrormsg == null) 
 { %>
 <% } else { 
 %>
-<%= up %><br>
+<%= gerrormsg %><br>
 <% } %>
+      </span>
+<span id="memberCreateSuccess2" class="success">
+<% String gsuccessmsg = (String)request.getAttribute("gsuccess"); %>
+<% if (gsuccessmsg == null) 
+{ %>
+<% } else { 
+%>
+<%= gsuccessmsg %><br>
+<% } %>
+      </span>
+
 </div>
 <div class="pick">
 	 <legend for="memberId">Pick GymMember to update or delete: </legend><br><br>
@@ -99,8 +82,9 @@
         <option value="${GymMember.memberId}">${GymMember.memberId}</option>
     </c:forEach>
 </select>
-<input type="submit" name="button" value="Update GymMember"/>
-<input type="submit" name="button" value="Delete GymMember"/>
+<button type="submit" name="button" formnovalidate value="Update GymMember">Update GymMember</button>
+<button type="submit" name="button" formnovalidate value="Delete GymMember">Delete GymMember</button>
+
 </div>
  </form>	
 </div>	
@@ -142,28 +126,23 @@
 				<div class="create">
 	
 <span id="sessionCreateError2" class="error" >
-<c:choose>
-<c:when test=" ${!empty param.terror}">
-    <p><c:out value = "${terror}"/></p>
-  </c:when>
-  <c:when test=" ${empty terror}">
-    <p><c:out value = "is empty"/></p>
-  </c:when>
-  <c:otherwise>
-            no error
-         </c:otherwise>
-      </c:choose>  
+<% String terrormsg = (String)request.getAttribute("terror"); %>
+<% if (terrormsg == null) 
+{ %>
+<% } else { 
+%>
+<%= terrormsg %><br>
+<% } %> 
       </span>
 <span id="sessionCreateSuccess2" class="success">
-<c:choose>
-<c:when test=" ${tsuccess!=''}">
-    <p><c:out value = "${tsuccess}"/></p>
-  </c:when>
-  <c:otherwise>
-            no success
-         </c:otherwise>
-      </c:choose>  
-      </span>
+<% String tsuccessmsg = (String)request.getAttribute("tsuccess"); %>
+<% if (tsuccessmsg == null) 
+{ %>
+<% } else { 
+%>
+<%= tsuccessmsg %><br>
+<% } %>
+     
 </span> 
 <input type="submit" name="button" value="Create TrainingSession" id="CreateTrainingSessionJ"/>
 <br>
@@ -176,9 +155,9 @@
         <option value="${TrainingSession.sessionId}">${TrainingSession.sessionId}</option>
     </c:forEach>
     </select>
-<input type="submit" name="button" value="Update TrainingSession"/>
-<input type="submit" name="button" value="Delete TrainingSession"/>
-</div>
+    <button type="submit" name="button" formnovalidate value="Update TrainingSession">Update TrainingSession</button>
+<button type="submit" name="button" formnovalidate value="Delete TrainingSession">Delete TrainingSession</button>
+    </div>
 </form>
 
 </div>
@@ -194,7 +173,7 @@
         <option value="${GymMember.memberId}">${GymMember.memberId}</option>
     </c:forEach></select>
 				<br><label for="bookingSessionId"> TrainingSessionId:*</label> 
-				<select name="allTrainingSessions" required>
+				<select name="bookingSessionId" required>
     <c:forEach items="${allTrainingSessions}" var="TrainingSession">
     
         <option value="${TrainingSession.sessionId}">${TrainingSession.sessionId}</option>
@@ -203,31 +182,25 @@
 	<br>	
 	
 <span id="bookingCreateError2" class="error" >
-<c:choose>
-<c:when test=" ${!empty param.berror}">
-    <p><c:out value = "${berror}"/></p>
-  </c:when>
-  <c:when test=" ${empty berror}">
-    <p><c:out value = "is empty"/></p>
-  </c:when>
-  <c:otherwise>
-            no error
-         </c:otherwise>
-      </c:choose>  
+<% String berrormsg = (String)request.getAttribute("berror"); %>
+<% if (berrormsg == null) 
+{ %>
+<% } else { 
+%>
+<%= berrormsg %><br>
+<% } %>
       </span>
 <span id="bookingCreateSuccess2" class="success">
-<c:choose>
-<c:when test=" ${bsuccess!=''}">
-    <p><c:out value = "${bsuccess}"/></p>
-  </c:when>
-  <c:otherwise>
-            no success
-         </c:otherwise>
-      </c:choose>  
-      </span>
+ <% String bsuccessmsg = (String)request.getAttribute("bsuccess"); %>
+<% if (bsuccessmsg == null) 
+{ %>
+<% } else { 
+%>
+<%= bsuccessmsg %><br>
+<% } %>
 </span> 
+<input type="submit" name="button" value="Create Booking"/>
 
-<input type="submit" name="createBooking" value="Create Booking" id="CreateBookingJ"/>
 	
 	<div class="pick">
 <legend for="bookingId">Pick Booking to display values for or delete:</legend><br>
@@ -237,8 +210,7 @@
         <option value="${Booking.bookingId}">${Booking.bookingId}</option>
     </c:forEach>
     </select>
-<input type="submit" name="button" value="Update Booking"/>
-<input type="submit" name="button" value="Delete Booking"/>
+<button type="submit" name="button" formnovalidate value="Delete Booking">Delete Booking</button>
 </div>
 </form>
 <br>

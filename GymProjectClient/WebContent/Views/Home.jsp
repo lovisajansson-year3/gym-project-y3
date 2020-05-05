@@ -13,8 +13,8 @@
 </head>
 <body style="heighr:1600px;">
 <div class="navbar">
-		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
-		class="active" href="Crud.jsp">Test</a>
+		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a><a href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
+		class="active" href="Crud.jsp">Rest</a><a href="Test.jsp">Test</a>
 
 	</div>
 

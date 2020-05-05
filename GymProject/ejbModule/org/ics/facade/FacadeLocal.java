@@ -36,6 +36,8 @@ public interface FacadeLocal {
 	    public ArrayList<GymMember> getAllGymMembersWithBookingsForTrainingSession(long sessionId);
 	    public List<Booking> findAllBookings();
 
+	    public boolean findBookingByMemberId(long memberId);
+	    public boolean findBookingBySessionId(long sessionId);
 
 
 

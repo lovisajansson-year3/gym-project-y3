@@ -17,5 +17,8 @@ public interface BookingEAOLocal {
     public void deleteBooking(long bookingId);
     public boolean alreadyExists(long memberId,long sessionId);
     public List<Booking> findAllBookings();
+    public boolean findBookingByMemberId(long memberId);
+    public boolean findBookingBySessionId(long sessionId);
+
 
 }

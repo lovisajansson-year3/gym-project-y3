@@ -20,8 +20,8 @@
 
 <body style="height: 2302px; ">
 <div class="navbar">
-		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a> <a
-		class="active" href="Crud.jsp">Test</a>
+		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a><a href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
+		 class="active" href="Crud.jsp">Rest</a><a  href="Test.jsp">Test</a>
 
 	</div>
 
@@ -81,7 +81,7 @@
 	</select><br>
 
 	<label for="startDate">Startdate:*</label> 
-	<input type="date" id="startDate" name="startDate" value="0000-00-00" min="2018-01-01"max="2021-01-01" required>	
+	<input type="date" id="startDate" name="startDate"  min="2018-01-01"max="2021-01-01" required>	
  	<br><label for="startTime">Starttime:*</label> 
  	<select id="startTime" required name="startTime">
  	<option value="" disabled 

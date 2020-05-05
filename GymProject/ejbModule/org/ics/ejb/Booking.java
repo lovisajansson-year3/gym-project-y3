@@ -22,7 +22,11 @@ import javax.validation.constraints.NotNull;
 	@NamedQuery(name="Booking.alreadyExists",
 	query="SELECT b FROM Booking b WHERE b.gymMember.memberId = :memberId and b.trainingSession.sessionId = :sessionId"),
 	@NamedQuery(name="Booking.findAllBookings",
-	query="SELECT g FROM Booking g"),
+	query="SELECT b FROM Booking b"),
+	@NamedQuery(name="Booking.findBookingByMemberId",
+	query="SELECT b FROM Booking b WHERE b.gymMember.memberId=:memberId"),
+	@NamedQuery(name="Booking.findBookingBySessionId",
+	query="SELECT b FROM Booking b WHERE b.trainingSession.sessionId = :sessionId"),
 })
 
 @Table(name="Booking")

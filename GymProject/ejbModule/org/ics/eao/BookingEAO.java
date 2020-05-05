@@ -67,6 +67,34 @@ public class BookingEAO implements BookingEAOLocal {
 		List<Booking> results = query.getResultList();
 		return results;
     }
+    public boolean findBookingByMemberId(long memberId){
+    	TypedQuery<Booking> query = 
+    			em.createNamedQuery("Booking.findBookingByMemberId", Booking.class);
+    	ArrayList<Booking> results = new ArrayList();
+    		
+    		query.setParameter("memberId", memberId);
+    		results = (ArrayList<Booking>) query.getResultList();
+
+    		if(results.isEmpty()) {
+    			return false;
+    		}else {
+    		return true;
+    		}
+    } 
+    public boolean findBookingBySessionId(long sessionId){
+    	TypedQuery<Booking> query = 
+    			em.createNamedQuery("Booking.findBookingBySessionId", Booking.class);
+    	ArrayList<Booking> results = new ArrayList();
+    		
+    		query.setParameter("sessionId", sessionId);
+    		results = (ArrayList<Booking>) query.getResultList();
+
+    		if(results.isEmpty()) {
+    			return false;
+    		}else {
+    		return true;
+    		}
+    }
 
 
 }

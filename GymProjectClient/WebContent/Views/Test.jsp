@@ -20,11 +20,11 @@
 <body>
 <%@ include file="../Styles/Header.html" %>
 
-	<nav>
-		<a href="Home.jsp">Home</a> <a  href="About.jsp">About</a> <a
-			href="Crud.jsp">Crud</a><a class="active" href="Test.jsp">Test</a>
+	<div class="navbar">
+		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a><a href="Gym.jsp">Book</a> <a
+		 href="Crud.jsp">Rest</a><a class="active" href="Test.jsp">Test</a>
 
-	</nav>
+	</div>
 	<%@ include file="../Styles/Footer.html" %>
 	
 </body>
