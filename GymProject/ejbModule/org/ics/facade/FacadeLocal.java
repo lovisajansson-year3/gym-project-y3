@@ -12,7 +12,8 @@ import org.ics.ejb.TrainingSession;
 
 @Local
 public interface FacadeLocal {
-	 public GymMember findByMemberId(long memberId);
+	
+		public GymMember findByMemberId(long memberId);
 	    public GymMember createGymMember(GymMember g);
 	  	public GymMember updateGymMember(GymMember g);      
 	  	public void deleteGymMember(long memberId);

@@ -9,6 +9,7 @@ public class AllTests {
 		TestSuite suite = new TestSuite(AllTests.class.getName());
 		//$JUnit-BEGIN$
 		suite.addTestSuite(GymMemberTest.class);
+		suite.addTestSuite(FacadeLocalTest.class);
 		//$JUnit-END$
 		return suite;
 	}
