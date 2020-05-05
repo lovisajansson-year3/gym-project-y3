@@ -23,8 +23,8 @@
 
 <body style="height: 2302px; ">
 <div class="navbar">
-		<a href="Home.jsp">Home</a> <a href="About.jsp">About</a><a class="active" href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
-		 href="Crud.jsp">Rest</a><a  href="Test.jsp">Test</a>
+		<a href="/Views/Home.jsp">Home</a> <a href="/Views/About.jsp">About</a><a class="active" href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
+		 href="/Views/Crud.jsp">Rest</a><a  href="/Views/Test.jsp">Test</a>
 
 	</div>
 <%@ include file="../Styles/Header.html" %>
@@ -82,7 +82,7 @@
         <option value="${GymMember.memberId}">${GymMember.memberId}</option>
     </c:forEach>
 </select>
-<button type="submit" name="button" formnovalidate value="Update GymMember">Update GymMember</button>
+<button type="submit" name="button"  value="Update GymMember">Update GymMember</button>
 <button type="submit" name="button" formnovalidate value="Delete GymMember">Delete GymMember</button>
 
 </div>
@@ -155,7 +155,7 @@
         <option value="${TrainingSession.sessionId}">${TrainingSession.sessionId}</option>
     </c:forEach>
     </select>
-    <button type="submit" name="button" formnovalidate value="Update TrainingSession">Update TrainingSession</button>
+    <button type="submit" name="button"  value="Update TrainingSession">Update TrainingSession</button>
 <button type="submit" name="button" formnovalidate value="Delete TrainingSession">Delete TrainingSession</button>
     </div>
 </form>

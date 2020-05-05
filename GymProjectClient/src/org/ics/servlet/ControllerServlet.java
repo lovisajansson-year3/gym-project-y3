@@ -122,21 +122,26 @@ public class ControllerServlet extends HttpServlet {
 			msg="gym member "+g.getMemberId()+" updated";
 			req.setAttribute("gsuccess",  msg);
 		}else if (button.equals("Delete GymMember"))  {
-			
-			long id = Long.parseLong(req.getParameter("allGymMembers"));
-			try {
-				facade.deleteGymMember(id);
-				msg="gym member " + id+" deleted";
-				req.setAttribute("gsuccess", msg );
-				System.out.println("delete worked");
-			}catch(Exception e) {
-				errormsg="cannot delete member that is booked for session";
+			if(req.getParameter("allGymMembers")!=null) {
+				long id = Long.parseLong(req.getParameter("allGymMembers"));
+				try {
+					facade.deleteGymMember(id);
+					msg="gym member " + id+" deleted";
+					req.setAttribute("gsuccess", msg );
+					msg="gym member " + id+" deleted";
+					req.setAttribute("gsuccess", msg );
+				}catch(Exception e) {
+					errormsg="cannot delete member that is booked for session";
+					req.setAttribute("gerror", errormsg);
+					
+				}
+			}else {
+				errormsg="please pick a member to delete";
 				req.setAttribute("gerror", errormsg);
-				System.out.println("catch statement");
+			
 			}
 			
-			msg="gym member " + id+" deleted";
-			req.setAttribute("gsuccess", msg );
+			
 		}else if(button.equals("Update TrainingSession")){
 			long id = Long.parseLong(req.getParameter("allTrainingSessions"));
 			TrainingSession t = facade.findBySessionId(id);
@@ -164,15 +169,21 @@ public class ControllerServlet extends HttpServlet {
 				req.setAttribute("tsuccess", msg);
 			}
 		}else if(button.equals("Delete TrainingSession")){
-			long id = Long.parseLong(req.getParameter("allTrainingSessions"));
-			try{
-				facade.deleteTrainingSession(id);
-				msg="session "+id+" deleted";
-				req.setAttribute("tsuccess", id );
-			}catch(Exception e){
-			errormsg="cannot delete session that members are booked for";
-			req.setAttribute("terror", errormsg);
+			if(req.getParameter("allTrainingSessions")!=null) {
+				long id = Long.parseLong(req.getParameter("allTrainingSessions"));
+				try{
+					facade.deleteTrainingSession(id);
+					msg="session "+id+" deleted";
+					req.setAttribute("tsuccess", id );
+				}catch(Exception e){
+				errormsg="cannot delete session that members are booked for";
+				req.setAttribute("terror", errormsg);
+				}
+			}else {
+				errormsg="please pick session to delete";
+				req.setAttribute("terror", errormsg);
 			}
+			
 		}else if(button.equals("Create Booking")){
 			long sid = Long.parseLong(req.getParameter("bookingSessionId"));
 			long mid = Long.parseLong(req.getParameter("bookingMemberId"));
@@ -189,10 +200,16 @@ public class ControllerServlet extends HttpServlet {
 			}
 
 		}else if(button.equals("Delete Booking")) {
-			long bid = Long.parseLong(req.getParameter("allBookings"));
-			msg ="booking "+bid+" deleted";
-			facade.deleteBooking(bid);
-			req.setAttribute("bsuccess", msg);
+			if(req.getParameter("allBookings")!=null){
+				long bid = Long.parseLong(req.getParameter("allBookings"));
+				msg ="booking "+bid+" deleted";
+				facade.deleteBooking(bid);
+				req.setAttribute("bsuccess", msg);	
+			}else {
+				errormsg="please pick booking to delete";
+				req.setAttribute("berror", errormsg);
+			}
+			
 		}
 
 		
