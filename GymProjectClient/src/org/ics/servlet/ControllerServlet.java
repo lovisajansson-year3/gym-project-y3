@@ -112,8 +112,8 @@ public class ControllerServlet extends HttpServlet {
 			}
 			}
 		else if (button.equals("Update GymMember"))  {
-			long id = Long.parseLong(req.getParameter("allMembers"));
-			GymMember g = facade.findByMemberId(id);
+			String id = req.getParameter("allMembers");
+			GymMember g = facade.findByMemberId(Long.parseLong(id));
 			g.setName(req.getParameter("name"));
 			g.setAddress(req.getParameter("address"));
 			g.setEmail(req.getParameter("email"));
@@ -123,9 +123,9 @@ public class ControllerServlet extends HttpServlet {
 			req.setAttribute("gsuccess",  msg);
 		}else if (button.equals("Delete GymMember"))  {
 			if(req.getParameter("allGymMembers")!=null) {
-				long id = Long.parseLong(req.getParameter("allGymMembers"));
+				String id = req.getParameter("allGymMembers");
 				try {
-					facade.deleteGymMember(id);
+					facade.deleteGymMember(Long.parseLong(id));
 					msg="gym member " + id+" deleted";
 					req.setAttribute("gsuccess", msg );
 					msg="gym member " + id+" deleted";
@@ -143,8 +143,9 @@ public class ControllerServlet extends HttpServlet {
 			
 			
 		}else if(button.equals("Update TrainingSession")){
-			long id = Long.parseLong(req.getParameter("allTrainingSessions"));
-			TrainingSession t = facade.findBySessionId(id);
+			System.out.println("updatebtn");
+			String id = req.getParameter("allTrainingSessions");
+			TrainingSession t = facade.findBySessionId(Long.parseLong(id));
 			t.setInstructor(req.getParameter("instructor"));
 			String sdate= req.getParameter("startDate");
 			String stime = req.getParameter("startTime");
@@ -169,10 +170,12 @@ public class ControllerServlet extends HttpServlet {
 				req.setAttribute("tsuccess", msg);
 			}
 		}else if(button.equals("Delete TrainingSession")){
+			System.out.println("delete");
 			if(req.getParameter("allTrainingSessions")!=null) {
-				long id = Long.parseLong(req.getParameter("allTrainingSessions"));
+				String id = req.getParameter("allTrainingSessions");
+				
 				try{
-					facade.deleteTrainingSession(id);
+					facade.deleteTrainingSession(Long.parseLong(id));
 					msg="session "+id+" deleted";
 					req.setAttribute("tsuccess", id );
 				}catch(Exception e){
@@ -185,15 +188,15 @@ public class ControllerServlet extends HttpServlet {
 			}
 			
 		}else if(button.equals("Create Booking")){
-			long sid = Long.parseLong(req.getParameter("bookingSessionId"));
-			long mid = Long.parseLong(req.getParameter("bookingMemberId"));
-			if(facade.alreadyExists(mid, sid)==true) {
+			String sid = req.getParameter("bookingSessionId");
+			String mid = req.getParameter("bookingMemberId");
+			if(facade.alreadyExists(Long.parseLong(mid), Long.parseLong(sid))==true) {
 				errormsg="this member is already booked on this session";
 				req.setAttribute("berror", errormsg);
 			}else {
 				Booking b = new Booking();
-				b.setGymMember(facade.findByMemberId(mid));
-				b.setTrainingSession(facade.findBySessionId(sid));
+				b.setGymMember(facade.findByMemberId(Long.parseLong(mid)));
+				b.setTrainingSession(facade.findBySessionId(Long.parseLong(sid)));
 				facade.createBooking(b);
 				msg="booking "+b.getBookingId()+" created";
 				req.setAttribute("bsuccess", msg);
@@ -201,9 +204,9 @@ public class ControllerServlet extends HttpServlet {
 
 		}else if(button.equals("Delete Booking")) {
 			if(req.getParameter("allBookings")!=null){
-				long bid = Long.parseLong(req.getParameter("allBookings"));
+				String bid = req.getParameter("allBookings");
 				msg ="booking "+bid+" deleted";
-				facade.deleteBooking(bid);
+				facade.deleteBooking(Long.parseLong(bid));
 				req.setAttribute("bsuccess", msg);	
 			}else {
 				errormsg="please pick booking to delete";
@@ -214,7 +217,6 @@ public class ControllerServlet extends HttpServlet {
 
 		
 		
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/Views/Gym.jsp");
         doGet(req,response);
 	}
 
