@@ -28,7 +28,7 @@
 <br>
 <div class="about-section">
  <h1>About Us Page</h1>
-  <p style="font-size:18px">The gym was founded in 2020 and immediately became a success for all fitness enthusiasts in Lund. <br> Here at GympingLund we care for each other and everyone is welcome. <br>Enjoy!</p>
+  <p style="font-size:18px">The gym was founded in 2020 and immediately became a success for all fitness enthusiasts in Lund. <br> Here at GympaLund we care for each other and everyone is welcome. <br>Enjoy!</p>
   <p> </p>
 </div>
 
