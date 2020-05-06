@@ -22,7 +22,7 @@
 
 	<div class="navbar">
 		<a href="${pageContext.request.contextPath}/Views/Home.jsp">Home</a> <a href="${pageContext.request.contextPath}/Views/About.jsp">About</a><a href="${pageContext.request.contextPath}/Views/Gym.jsp">Book</a> <a
-		 href="/${pageContext.request.contextPath}/Views/Crud.jsp">Rest</a><a class="active" href="${pageContext.request.contextPath}/Views/Test.jsp">Test</a>
+		 href="${pageContext.request.contextPath}/Views/Crud.jsp">Rest</a><a class="active" href="${pageContext.request.contextPath}/Views/Test.jsp">Test</a>
 
 	</div>
 	<%@ include file="../Styles/Header.html" %>
@@ -32,7 +32,7 @@
 	
 	<div class="column">
 	<div class="test">
-<legend>Härkanduväljaenellerfleraavföljandetest:</legend>
+<legend>Välj test:</legend>
 <form action="${pageContext.request.contextPath}/TestServlet"method="get"name="youPickItForm">
 <select name="suite">
 <option value="ics.junit.ejb.FacadeTest">ics.junit.ejb.FacadeTest</option>

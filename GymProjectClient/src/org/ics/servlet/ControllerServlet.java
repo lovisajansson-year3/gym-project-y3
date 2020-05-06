@@ -112,8 +112,8 @@ public class ControllerServlet extends HttpServlet {
 			}
 			}
 		else if (button.equals("Update GymMember"))  {
-			long id = Long.parseLong(req.getParameter("allMembers"));
-			GymMember g = facade.findByMemberId(id);
+			String id = req.getParameter("allMembers");
+			GymMember g = facade.findByMemberId(Long.parseLong(id));
 			g.setName(req.getParameter("name"));
 			g.setAddress(req.getParameter("address"));
 			g.setEmail(req.getParameter("email"));
@@ -123,9 +123,9 @@ public class ControllerServlet extends HttpServlet {
 			req.setAttribute("gsuccess",  msg);
 		}else if (button.equals("Delete GymMember"))  {
 			if(req.getParameter("allGymMembers")!=null) {
-				long id = Long.parseLong(req.getParameter("allGymMembers"));
+				String id = req.getParameter("allGymMembers");
 				try {
-					facade.deleteGymMember(id);
+					facade.deleteGymMember(Long.parseLong(id));
 					msg="gym member " + id+" deleted";
 					req.setAttribute("gsuccess", msg );
 					msg="gym member " + id+" deleted";
@@ -143,8 +143,8 @@ public class ControllerServlet extends HttpServlet {
 			
 			
 		}else if(button.equals("Update TrainingSession")){
-			long id = Long.parseLong(req.getParameter("allTrainingSessions"));
-			TrainingSession t = facade.findBySessionId(id);
+			String id = req.getParameter("allTrainingSessions");
+			TrainingSession t = facade.findBySessionId(Long.parseLong(id));
 			t.setInstructor(req.getParameter("instructor"));
 			String sdate= req.getParameter("startDate");
 			String stime = req.getParameter("startTime");
@@ -152,11 +152,14 @@ public class ControllerServlet extends HttpServlet {
 			sDate = sDate+":00.000";
 			DateFormat d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 			Date d2 = null;
+			System.out.println(sDate);
 			try {
 				d2 = d.parse(sDate);
+				System.out.println(d2);
 				t.setStartTime(d2);
 			} catch (ParseException e) {
 			}
+			System.out.println(t.getStartTime());
 			t.setRoomNumber(req.getParameter("roomNumber"));
 			t.setType(req.getParameter("type"));
 			if(facade.alreadyExists(t.getInstructor(), t.getStartTime())==true) {
@@ -170,9 +173,9 @@ public class ControllerServlet extends HttpServlet {
 			}
 		}else if(button.equals("Delete TrainingSession")){
 			if(req.getParameter("allTrainingSessions")!=null) {
-				long id = Long.parseLong(req.getParameter("allTrainingSessions"));
+				String id = req.getParameter("allTrainingSessions");
 				try{
-					facade.deleteTrainingSession(id);
+					facade.deleteTrainingSession(Long.parseLong(id));
 					msg="session "+id+" deleted";
 					req.setAttribute("tsuccess", id );
 				}catch(Exception e){

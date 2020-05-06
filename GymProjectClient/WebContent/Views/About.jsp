@@ -26,14 +26,16 @@
 
 
 
+
+</div>
 <br>
 <div class="about-section">
-  <h1>About Us Page</h1>
-  <p>Some text about who we are and what we do.</p>
-  <p>Resize the browser window to see that this page is responsive by the way.</p>
+  <h1 style="text-align:center;font-weight:bold">About Us Page</h1>
+  <p>The gym was founded in 2020 and immediately became a success for all fitness enthusiats in Lund. Here at GympingLund we care for each other and everyone is welcome. Enjoy!</p>
+  <p> </p>
 </div>
 
-<h2 style="text-align:center">Our Team</h2>
+<h2 style="text-align:center;font-weight:bold">Meet our team</h2>
 <div class="row">
   <div class="column">
     <div class="card">
