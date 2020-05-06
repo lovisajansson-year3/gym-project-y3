@@ -325,13 +325,19 @@ input[value="Create GymMember"],[value="Create TrainingSession"],[value="Create 
   
   
   }
-  input[value="Update GymMember"],[value="Update TrainingSession"],[value="Update Booking"]{
- background: #00969e;
+  button{
+  border-radius:40px;
+  color:black;
+  width:100%;
+  }
+  
+  button[value="Update GymMember"],[value="Update TrainingSession"],[value="Update Booking"]{
+ background: #00969e!important;
   color:black;
   width:100% !important;
   
-  }input[value="Delete GymMember"],[value="Delete TrainingSession"],[value="Delete Booking"]{
- background: #ff6961;
+  }button[value="Delete GymMember"],[value="Delete TrainingSession"],[value="Delete Booking"]{
+ background: #ff6961!important;
   color:black;
     width:100% !important;
   
@@ -355,7 +361,7 @@ input#DeleteByMemberId,#DeleteTrainingSession,#DeleteBooking{
  }
  
 
-input[type="button"],[name="button"]{
+input[type="button"],[name="button"],button{
 
 outline:none;
   height: 40px;
@@ -374,9 +380,10 @@ border-color:white;
   transition: all 0.25s ease;
   
 }
-input[type="button"]:hover,[name="button"]:hover{
+
+input[type="button"]:hover,[name="button"]:hover,button:hover{
 letter-spacing:2px;
-    color:white;
+color:white;
 }
 
 input#DeleteBooking{
