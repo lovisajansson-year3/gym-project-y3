@@ -12,6 +12,7 @@
 <script src="../Script/GymMemberScript.js"></script>
 <script src="../Script/TrainingSessionScript.js"></script>
 <script src="../Script/BookingScript.js"></script>
+<script src="../Script/WeatherScript.js"></script>
 
 <link rel="stylesheet" type="text/css" href="../Styles/mystyle.css">
 

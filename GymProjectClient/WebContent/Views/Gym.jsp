@@ -99,7 +99,7 @@
 	<option value="Lena">Lena</option>
 	<option value="Tove">Tove</option>
 	<option value="Lisa">Lisa</option>
-	</select><br><input type="text" name="instructor" size="25" maxlength="25"></input><br>
+	</select><br>
 <label for="startDate">StartDate:* </label><br>
 <input type="date" id="startDate" name="startDate" value="0000-00-00" min="2018-01-01"max="2021-01-01" required><br>
 <br><label for="startTime">Starttime:*</label> 
@@ -274,7 +274,7 @@
    <c:forEach var="booking" items="${allBookings}">
                 <tr>
                     <td><c:out value="${booking.bookingId}" /></td>
-                    <td><c:out value="${booking.gymMember.memberId}" /></td>
+                    <td><c:out value="${booking.trainingSession.sessionId}" /></td>
                     <td><c:out value="${booking.gymMember.memberId}" /></td>
                     
                 </tr>
