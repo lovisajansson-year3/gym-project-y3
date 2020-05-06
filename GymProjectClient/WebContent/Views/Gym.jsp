@@ -23,8 +23,8 @@
 
 <body style="height: 2302px; ">
 <div class="navbar">
-		<a href="/Views/Home.jsp">Home</a> <a href="/Views/About.jsp">About</a><a class="active" href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
-		 href="/Views/Crud.jsp">Rest</a><a  href="/Views/Test.jsp">Test</a>
+		<a href="${pageContext.request.contextPath}/Views/Home.jsp">Home</a> <a href="${pageContext.request.contextPath}/Views/About.jsp">About</a><a class="active" href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
+		 href="${pageContext.request.contextPath}/Views/Crud.jsp">Rest</a><a  href="${pageContext.request.contextPath}/Views/Test.jsp">Test</a>
 
 	</div>
 <%@ include file="../Styles/Header.html" %>

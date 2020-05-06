@@ -40,6 +40,9 @@ public class FacadeTest extends TestCase {
 		g.setAddress("malmo");
 		GymMember g2 = facade.createGymMember(g);
 		assertEquals(g.getAddress(),g2.getAddress());
+
+
+
 		
 		}
 	public void testFindByMemberIdMethod() throws Exception {

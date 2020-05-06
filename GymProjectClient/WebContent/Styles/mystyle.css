@@ -92,6 +92,11 @@ margin:45px;
   padding-left:20px;
 
 }
+.test{
+	position: absolute; /* or absolute */
+  top: 40%;
+  left: 35%;
+}
 
 .test-section{
 	padding: 50px;
@@ -351,6 +356,7 @@ input[value="Create GymMember"],[value="Create TrainingSession"],[value="Create 
   
   
   }
+
   button{
   border-radius:40px;
   color:black;
@@ -364,6 +370,7 @@ input[value="Create GymMember"],[value="Create TrainingSession"],[value="Create 
   
   }button[value="Delete GymMember"],[value="Delete TrainingSession"],[value="Delete Booking"]{
  background: #ff6961!important;
+
   color:black;
     width:100% !important;
   
@@ -406,7 +413,6 @@ border-color:white;
   transition: all 0.25s ease;
   
 }
-
 input[type="button"]:hover,[name="button"]:hover,button:hover{
 letter-spacing:2px;
 color:white;
