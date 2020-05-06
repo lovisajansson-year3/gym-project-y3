@@ -16,23 +16,30 @@
 </head>
 <body style="height: 1802px;">
 <div class="navbar">
-		<a href="/Views/Home.jsp">Home</a> <a class="active"href="/Views/About.jsp">About</a><a href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
-		  href="/Views/Crud.jsp">Rest</a><a  href="/Views/Test.jsp">Test</a>
+		<a href="${pageContext.request.contextPath}/Views/Home.jsp">Home</a> <a class="active"href="${pageContext.request.contextPath}/Views/About.jsp">About</a><a href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
+		  href="${pageContext.request.contextPath}/Views/Crud.jsp">Rest</a><a  href="${pageContext.request.contextPath}/Views/Test.jsp">Test</a>
 
 	</div>
 <%@ include file="../Styles/Header.html" %>
 
 
 
+
+
 </div>
 <br>
 <div class="about-section">
- <h1>About Us Page</h1>
-  <p style="font-size:18px">The gym was founded in 2020 and immediately became a success for all fitness enthusiasts in Lund. <br> Here at GympaLund we care for each other and everyone is welcome. <br>Enjoy!</p>
+
+  <h1>About Us Page</h1>
+  <h1 style="text-align:center;font-weight:bold">About Us Page</h1>
+
+  <p>The gym was founded in 2020 and immediately became a success for all fitness enthusiats in Lund. Here at GympingLund we care for each other and everyone is welcome. Enjoy!</p>
   <p> </p>
 </div>
 
-<h2 style="font-size:24px">Meet our team</h2>
+
+<h2 style="text-align:center;font-weight:bold">Meet our team</h2>
+
 
 <div class="row">
   <div class="column">
