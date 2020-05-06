@@ -38,6 +38,7 @@ public class FacadeTest extends TestCase {
 		GymMember g2 = facade.createGymMember(g);
 		assertEquals(g.getAddress(),g2.getAddress());
 
+
 		
 		}
 	public void testGymMemberMethods2() throws Exception {

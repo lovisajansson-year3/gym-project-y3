@@ -143,7 +143,7 @@ public class ControllerServlet extends HttpServlet {
 			
 			
 		}else if(button.equals("Update TrainingSession")){
-			System.out.println("updatebtn");
+
 			String id = req.getParameter("allTrainingSessions");
 			TrainingSession t = facade.findBySessionId(Long.parseLong(id));
 			t.setInstructor(req.getParameter("instructor"));
@@ -153,11 +153,14 @@ public class ControllerServlet extends HttpServlet {
 			sDate = sDate+":00.000";
 			DateFormat d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 			Date d2 = null;
+			System.out.println(sDate);
 			try {
 				d2 = d.parse(sDate);
+				System.out.println(d2);
 				t.setStartTime(d2);
 			} catch (ParseException e) {
 			}
+			System.out.println(t.getStartTime());
 			t.setRoomNumber(req.getParameter("roomNumber"));
 			t.setType(req.getParameter("type"));
 			if(facade.alreadyExists(t.getInstructor(), t.getStartTime())==true) {
@@ -173,7 +176,7 @@ public class ControllerServlet extends HttpServlet {
 			System.out.println("delete");
 			if(req.getParameter("allTrainingSessions")!=null) {
 				String id = req.getParameter("allTrainingSessions");
-				
+
 				try{
 					facade.deleteTrainingSession(Long.parseLong(id));
 					msg="session "+id+" deleted";
