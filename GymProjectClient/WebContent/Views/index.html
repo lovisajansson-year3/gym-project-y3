@@ -1,0 +1,39 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script src="../Scripts/Javascript.js"></script>
+
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../Styles/mystyle.css">
+</head>
+<body style="height: 1802px;">
+<div class="navbar">
+		<a href="/Views/Home.jsp">Home</a> <a class="active"href="/Views/About.jsp">About</a><a href="${pageContext.request.contextPath}/ControllerServlet">Book</a> <a
+		  href="/Views/Crud.jsp">Rest</a><a  href="/Views/Test.jsp">Test</a>
+
+	</div>
+<%@ include file="../Styles/Header.html" %>
+
+
+
+</div>
+</head>
+
+
+<hr><p>Här kan du välja ett av följande test:<br></p>
+<form action="TestServlet"method="get"name="youPickItForm">
+<select name="suite"size="2"multiple>
+<option value="ics.junit.ejb.FacadeTest">ics.junit.ejb.FacadeTest</option>
+</select>
+<input type="submit"value="Run"/>
+</form>
+</body>
+</html>
