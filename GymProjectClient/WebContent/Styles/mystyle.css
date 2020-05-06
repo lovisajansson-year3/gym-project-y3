@@ -85,6 +85,11 @@ margin:45px;
   padding-left:20px;
 
 }
+.test{
+	position: absolute; /* or absolute */
+  top: 40%;
+  left: 35%;
+}
 
 .column {
 display:inline-block;
