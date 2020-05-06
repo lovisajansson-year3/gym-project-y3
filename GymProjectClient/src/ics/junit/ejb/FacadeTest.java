@@ -28,13 +28,13 @@ public class FacadeTest extends TestCase {
 		Context ctx = new InitialContext( ); 		
 		
 		facade=(FacadeLocal)ctx.lookup("java:app/GymProject/Facade"+"!org.ics.facade.FacadeLocal");
-		g = facade.createGymMember(g);
+		//g = facade.createGymMember(g);
 		expectedMemberId = 1234;
-		g.setMemberId(expectedMemberId);
+		//g.setMemberId(expectedMemberId);
 		
 	}
 	
-	public void testGymMemberMethods() throws Exception {
+	public void testCreateGymMemberMethod() throws Exception {
 		GymMember g = new GymMember();
 		g.setName("lovisa");
 		g.setAddress("malmo");
@@ -42,7 +42,7 @@ public class FacadeTest extends TestCase {
 		assertEquals(g.getAddress(),g2.getAddress());
 		
 		}
-	public void testGymMemberMethods2() throws Exception {
+	public void testFindByMemberIdMethod() throws Exception {
 		facade.findByMemberId(expectedMemberId);
 		
 	}

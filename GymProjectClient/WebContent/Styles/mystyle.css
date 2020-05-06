@@ -16,6 +16,7 @@
 	
 }
 .header{
+	font-family:Impact, fantasy;
   box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
  background-image: url("../Styles/4462.jpg");
 
@@ -23,11 +24,17 @@
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
-font-size:30px;
+
+font-size:100px;
+letter-spacing: 3px;
+font-weight: 400;
+font-style: bold;
 padding:30px;
 display: flex;
+text-align: center;
 align-items: center;
 justify-content: center;
+
 
 }
 .imggg{
@@ -86,9 +93,28 @@ margin:45px;
 
 }
 
+.test-section{
+	padding: 50px;
+	text-align: center;
+	background-color: #f0e6d7;
+  	color: black;
+  	padding-left:20px;
+}
+
+h1 {
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+
+}
+
 .column {
 display:inline-block;
-width: 30%;
+width: 20%;
   margin-bottom: 16px;
   padding: 0 8px;
 padding-bottom:16px;
@@ -420,6 +446,7 @@ width:97%;
 padding-top:30px;
  position: absolute;
   bottom: 0;
+  left: 0;
   width: 100%;
 }
 *{

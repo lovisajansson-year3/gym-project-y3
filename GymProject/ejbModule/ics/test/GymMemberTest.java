@@ -1,6 +1,7 @@
 package ics.test;
 
 import org.ics.ejb.GymMember;
+import org.ics.facade.FacadeLocal;
 
 import junit.framework.TestCase;
 
@@ -9,6 +10,7 @@ public class GymMemberTest extends TestCase {
 	String expectedAddress;   
 	String expectedPhoneNumber;
 	long expectedMemberId;
+	
 	
 	GymMember g;
 	GymMember g2;
@@ -25,8 +27,8 @@ public class GymMemberTest extends TestCase {
 	     expectedPhoneNumber =   "12345";
 	     expectedMemberId = 123;
 	     
-	     g=new GymMember(expectedName,expectedAddress,expectedPhoneNumber);      
-	     g2 =   new GymMember("Eva",  "Malmö",  "54321");
+	     g=new GymMember(expectedName,expectedAddress,expectedPhoneNumber);  
+	     g2 =  new GymMember("Eva",  "Malmö",  "54321");
 	     g.setMemberId(expectedMemberId);
 	     g2.setMemberId(111);
 	}
@@ -38,11 +40,13 @@ public class GymMemberTest extends TestCase {
 	}
 
 	public void testGetMemberId() {
-	//	fail("Not yet implemented");
+		assertEquals(expectedMemberId, g.getMemberId());
 	}
 
 	public void testSetMemberId() {
-//		fail("Not yet implemented");
+		long expectedMemberId2 = 222;
+		g.setMemberId(expectedMemberId2);
+		assertEquals(expectedMemberId2, g.getMemberId());
 	}
 
 	public void testGetName() {
@@ -53,13 +57,6 @@ public class GymMemberTest extends TestCase {
 	      g.setName(expectedName2);     
 	      assertEquals(expectedName2, g.getName());	}
 
-	public void testGetEmail() {
-//		fail("Not yet implemented");
-	}
-
-	public void testSetEmail() {
-//		fail("Not yet implemented");
-	}
 
 	public void testGetPhoneNumber() {
 		   assertEquals(expectedPhoneNumber, g.getPhoneNumber());	}
@@ -78,13 +75,6 @@ public class GymMemberTest extends TestCase {
 		   g.setAddress(expectedAddress2);    
 		   assertEquals(expectedAddress2, g.getAddress());	}
 
-	public void testGetBookings() {
-//		fail("Not yet implemented");
-	}
-
-	public void testSetBookings() {
-//		fail("Not yet implemented");
-	}
 	  public void testEquals() {      
 		  assertTrue(!g.equals(null));  
 		  assertEquals(g,g);
