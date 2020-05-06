@@ -30,7 +30,6 @@
 </div>
 <br>
 <div class="about-section">
-  <h1>About Us Page</h1>
   <h1 style="text-align:center;font-weight:bold">About Us Page</h1>
 
   <p>The gym was founded in 2020 and immediately became a success for all fitness enthusiats in Lund. Here at GympingLund we care for each other and everyone is welcome. Enjoy!</p>

@@ -93,11 +93,15 @@
 <form action="/GymProjectClient/ControllerServlet"method="post">
 
 <legend>Add Training Session:</legend>
-<label for="instructor">Instructor</label>  <br>
-<input type="text" name="instructor" size="25" maxlength="25"></input><br>
+<label for="instructor">Instructor:*</label> <select id="instructor" name="instructor" required>
+	<option value="" disabled selected></option>
+	<option value="Lovisa">Lovisa</option>
+	<option value="Lena">Lena</option>
+	<option value="Tove">Tove</option>
+	<option value="Lisa">Lisa</option>
+	</select><br><input type="text" name="instructor" size="25" maxlength="25"></input><br>
 <label for="startDate">StartDate:* </label><br>
 <input type="date" id="startDate" name="startDate" value="0000-00-00" min="2018-01-01"max="2021-01-01" required><br>
-<label for="phoneNumber">Phone number:* </label><br>
 <br><label for="startTime">Starttime:*</label> 
  	<select id="startTime" required name="startTime">
  	<option value="" disabled 

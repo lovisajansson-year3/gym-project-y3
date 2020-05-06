@@ -35,6 +35,9 @@ public class FacadeTest extends TestCase {
 		GymMember g = new GymMember();
 		g.setName("lovisa");
 		g.setAddress("malmo");
+		g.setEmail("live");
+		g.setPhoneNumber("090");
+		
 		GymMember g2 = facade.createGymMember(g);
 		assertEquals(g.getAddress(),g2.getAddress());
 
